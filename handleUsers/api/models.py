@@ -4,30 +4,31 @@ from api.modelsConstants import *
 
 # Create your models here.
 class officeMail(models.Model):
-  mail = models.CharField(max_length=100, choices = MAIL_OFFICE_CHOICES)
+  #mail = models.CharField(max_length=100, choices = MAIL_OFFICE_CHOICES)
+  mail = models.CharField(max_length=100, blank=True, default='')
   
   class Meta:
     ordering = []
 
   def __str__(self):
-    return self.title
+    return self.mail
 
 
 class customUser(models.Model):
   #_id = models.ObjectIdField()
   authorId = models.UUIDField(primary_key=False, unique=True, default=uuid.uuid4, editable=False)
-  name = models.CharField(max_length=100, blank=True, default='')
-  surname = models.CharField(max_length=100, blank=True, default='')
-  cf = models.CharField(max_length=100, blank=True, default='')
+  name = models.CharField("Nome", max_length=100, blank=True, default='')
+  surname = models.CharField("Cognome", max_length=100, blank=True, default='')
+  cf = models.CharField("Codice fiscale", max_length=100, blank=True, default='')
 
   #MAIL
-  hasMail = models.BooleanField()
-  personalMail = models.CharField(max_length=100, blank=True, default='')
+  hasMail = models.BooleanField("Ha una mail")
+  personalMail = models.CharField("Mail personale", max_length=100, blank=True, default='')
   officeMail = models.ManyToManyField(officeMail)
 
   #LAN
   hasLAN = models.BooleanField()
-  LANid = models.CharField(max_length=100, blank=True, default='A516-')
+  LANid = models.CharField("Nome utente rete locale", max_length=100, blank=True, default='A516-')
 
   #ADWEB
   hasAdweb = models.BooleanField()
@@ -72,6 +73,6 @@ class customUser(models.Model):
     ordering = []
 
   def __str__(self):
-    return self.title
+    return self.name
 
 
