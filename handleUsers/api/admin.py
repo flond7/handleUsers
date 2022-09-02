@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Railway, Question, Video, Result, customUser
+from .models import customUser
 
 # Register your models here.
 # it allows to have a user friendly interface to input data in the db
