@@ -9,7 +9,7 @@ Create a virtual environment in the folder (before adding the new django project
 - C:\Users\PESSAE\Documents\webserver\django> name-virtual-environment\Scripts\activate
 
 Install django and djangorest (pay attention to eventual proxy)
-- pip install --proxy=http://proxy-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:801 django
+- pip install --proxy=http://proxy-xxxxxxxx:801 django (whatch out http vs htpps!!!)
 - pip install djangorestframework
 
 Install cors
@@ -22,7 +22,7 @@ How CORS works https://www.stackhawk.com/blog/angular-cors-guide-examples-and-ho
   CORS_ALLOW_ALL_ORIGINS = False
 
 Install trough requirements (not mandatory step, requirements now are for frontend dashboard template)
-- pip3 install -r requirements.txt
+- pip install --proxy=http://proxy-bc-el.regione.fvg.it:801 -r requirements.txt
 
 
 Create the project
@@ -219,7 +219,13 @@ https://realpython.com/django-migrations-a-primer/
   python manage.py migrate
   *** REMEMBER: makemigration creates the file to create the tables, migrates actually creates them ***
 
-
+## CSS 
+- create a static folder in the main project (so it's accessable from every app), inside you can create the folders css, img, js...
+- in settings make sure that a static path is specified with
+  STATIC_URL = 'static/'
+  STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'), BASE_DIR / "static",
+  ]
 
 
 
@@ -243,6 +249,7 @@ https://realpython.com/django-migrations-a-primer/
 
 *** WITH CSS NOT LOADING ***
 - https://learndjango.com/tutorials/django-static-files
+- https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
 ## CONSTANTS FILE
