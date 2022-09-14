@@ -21,6 +21,9 @@ How CORS works https://www.stackhawk.com/blog/angular-cors-guide-examples-and-ho
   CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
   CORS_ALLOW_ALL_ORIGINS = False
 
+Install trough requirements (not mandatory step, requirements now are for frontend dashboard template)
+- pip3 install -r requirements.txt
+
 
 Create the project
 -  django-admin startproject project_name
@@ -238,6 +241,10 @@ https://realpython.com/django-migrations-a-primer/
 *** WITH CORS ERROR - Access to XMLHttpRequest at 'url’' from origin  has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource ***
 
 
+*** WITH CSS NOT LOADING ***
+- https://learndjango.com/tutorials/django-static-files
+
+
 ## CONSTANTS FILE
 To use constants for models,
 - Create a separate file (es modelsConstat)
@@ -265,45 +272,6 @@ https://dev.to/rawas_aditya/how-to-reset-django-migrations-169o
     . . .
     'sample',
   ]
-
-
-
-### CREATE VIEWS
-- In the app folder views.py specify the functions that link to the template in the form
-
-def pageOneFunction(request):
-    return render(request, 'pageOne.html', {})
-
-- In the app folder create a folder named templates and inside the pageOne.html. It's important to create templates because django will look for it
-
-    sample/templates/pageOne.html
-
-
-
-## GITHUB
-git init
-git add README.md
-git config --global http.proxy http[s]://username:password@proxyipaddress:portnumber
-git config --global user.name "NICK"
-git config --global user.mail mail@gmail.com
-git config --global user.password *********
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/flond7/angular-startingPoint.git
-git push -u origin main
-
-git branch (check branch name)
-git branch -mv origin master (change name from origin to master)
-
-git remote -v (check origin)
-git remote set-url origin https://github.com/USERNAME/REPOSITORY.git (change repository)
-
-
-
-## DJANGO REST FRAMEWORK
-- in the api app add models (one table one model) modifying mainProject/api/models.py
--
-
 
 
 
@@ -365,6 +333,10 @@ def pageOneFunction(request):
     sample/templates/pageOne.html
 
 
+## DJANGO ADMIN CUSTOM
+- The files are in venv/django/contrib/admin/templates
+
+
 
 ## GITHUB
 git init
@@ -385,13 +357,8 @@ git remote -v (check origin)
 git remote set-url origin https://github.com/USERNAME/REPOSITORY.git (change repository)
 
 
-
 ## DJANGO REST FRAMEWORK
 - in the api app add models (one table one model) modifying mainProject/api/models.py
--
-
-
-
 
 
 ## REST
