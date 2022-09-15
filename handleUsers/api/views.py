@@ -33,6 +33,5 @@ def index(request):
 #@login_required(login_url="/login/")
 def user_overview(request):
     userList = customUser.objects.all()
-    print(userList)
-    return render(request, 'user_overview.html')
+    return render(request, 'user_overview.html', {'userList': userList})
 
