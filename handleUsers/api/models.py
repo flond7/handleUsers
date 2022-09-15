@@ -19,6 +19,11 @@ DEFAULT_LAN_ID = 1
   che raccoglie tutte le informazioni dell'utente relative a quell'applicazione
   --- per visualizzare l'elenco a scelta multipla bisogna usare model.ManyToManyFiels(officeXXX)
 
+  NOTA
+  nei manyToMany fields bisogna mettere obbligatoriamente un valore, per questo quando si creano i vari "uffici" nel db bisogna sempre metterne uno vuoto
+  lo standard è inserire un ufficio "--" (così se nella logica bisogna recuperare il fatto che l'ufficio sia vuoto si può fare univocamente)
+
+
 """
 
 class officeMail(models.Model):
@@ -26,13 +31,13 @@ class officeMail(models.Model):
 
   def __str__(self):
     return self.mail
-
+""" 
 class officeAdweb(models.Model):
   offices = models.CharField(max_length=100, blank=True, default='')
 
   def __str__(self):
     return self.offices
-
+ """
 class officeSDI(models.Model):
   offices = models.CharField(max_length=100, blank=True, default='')
 
@@ -53,14 +58,14 @@ class userLan (models.Model):
 
   def __str__(self):
     return self.lanId
-
+""" 
 class userAdweb (models.Model):
   adwebId = models.CharField("Nome utente", max_length=100, blank=True, default='A516-')
   adwebOffices = models.ManyToManyField(officeAdweb)
 
   def __str__(self):
     return self.adwebId
-
+ """
 class userSDI (models.Model):
   sdiId = models.CharField("LOGIN FVG", max_length=100, blank=True, default='')
   sdiOffices = models.ManyToManyField(officeSDI)
@@ -75,20 +80,21 @@ class customUser(models.Model):
   name = models.CharField("Nome", max_length=100, blank=True, default='')
   surname = models.CharField("Cognome", max_length=100, blank=True, default='')
   cf = models.CharField("Codice fiscale", max_length=100, blank=True, default='')
+  office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'b1', blank=False) #assegnazione a un ufficio principale, per capirsi
 
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
   mailOffices = models.ManyToManyField(officeMail)
-  mailDeleted = models.BooleanField("Mail - Cancellata / disattivata", default=False)
+  mailDeleted = models.BooleanField("Mail disattivata", default=False)
 
   #LAN
   #lan = models.ForeignKey(userLan, default=DEFAULT_LAN_ID, on_delete=models.CASCADE)
   lan = models.CharField("ID personale", max_length=120, blank=False, default="A516-")
-  lanDeleted = models.BooleanField("Lan - Cancellata / disattivata", default=False)
+  lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=False)
+  lanDeleted = models.BooleanField("Lan disattivata", default=False)
 
   #ADWEB
-  adweb = models.ForeignKey(userAdweb, default=DEFAULT_ADWEB_ID, on_delete=models.CASCADE)
-  adwebOffices = models.ManyToManyField(officeAdweb)
+  adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
   adwebDeleted = models.BooleanField("Adweb - Cancellato / disattivato", default=False)
   
   #ASCOT
@@ -104,14 +110,15 @@ class customUser(models.Model):
 
   #BOXAPPS
   hasBoxapps = models.BooleanField(default=False)
+  boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
 
   #WEBSITE
   hasWebsite = models.BooleanField(default=False)
-  websiteUser = models.BooleanField(default=False)
-  websiteAdmin = models.BooleanField(default=False)
+  websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w1', blank=False)
 
-  #ITERATTI
+  #CRM
   hasCRM = models.BooleanField(default=False)
+  crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c1', blank=False)
   crmDeleted = models.BooleanField("CRM - Cancellato / disattivato", default=False)
 
   #AVCP
