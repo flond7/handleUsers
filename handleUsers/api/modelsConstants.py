@@ -20,6 +20,7 @@ MAIN_OFFICE_CHOICES = [
 ]
 
 MAIL_OFFICE_CHOICES = [
+  ('mo0', '--'),
   ('mo1', 'magazzino@'),
   ('mo2', 'patrimonio@'),
   ('mo3', 'tecnico@'),
