@@ -227,7 +227,16 @@ https://realpython.com/django-migrations-a-primer/
     os.path.join(BASE_DIR, 'static'), BASE_DIR / "static",
   ]
 
-
+## CONSTANTS
+- to show a constant in a template (es: app name) create a constants.py file in the app folder (es: api/constants.py)
+- create a constant in the form of an object with multiple key values co you can import just one object in all pages and have all the values
+- in the view file import the constants file
+  from .constants import MY_CONST
+- in the single view function create a contect (has to be an object, with the key value 'MY_CONST': MY_CONST )
+  def user_overview(request):
+    userList = customUser.objects.all()
+    return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST})
+- in the template use the constant as {{MY_CONST.keyName}}    
 
 *** NESTED MODELS ***
 - add _id = models.ObjectIdField() to the model fields of the nested model in order to have nested models

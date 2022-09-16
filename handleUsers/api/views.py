@@ -10,6 +10,7 @@ from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
 
+from .constants import MY_CONST
 from .models import customUser
 
 # Create your views here.
@@ -33,5 +34,5 @@ def index(request):
 #@login_required(login_url="/login/")
 def user_overview(request):
     userList = customUser.objects.all()
-    return render(request, 'user_overview.html', {'userList': userList})
+    return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST})
 
