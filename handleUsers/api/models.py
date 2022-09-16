@@ -1,6 +1,6 @@
-import mailbox
 from django.db import models
 import uuid
+from multiselectfield import MultiSelectField
 from api.modelsConstants import *
 
 # Create your models here.
@@ -27,7 +27,7 @@ DEFAULT_LAN_ID = 1
 """
 
 class officeMail(models.Model):
-  mail = models.CharField(max_length=100, blank=True, default='')
+  mail = models.CharField(max_length = 4, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
 
   def __str__(self):
     return self.mail
@@ -45,12 +45,12 @@ class officeSDI(models.Model):
     return self.offices
 
 
-class userEmail (models.Model):
+""" class userEmail (models.Model):
   personalMail = models.CharField("Mail personale", max_length=100, blank=True, default='')
   officeMail = models.ManyToManyField(officeMail)
 
   def __str__(self):
-    return self.personalMail
+    return self.personalMail """
 
 class userLan (models.Model):
   lanId = models.CharField("Nome utente rete locale", max_length=100, blank=True, default='A516-')
@@ -84,7 +84,8 @@ class customUser(models.Model):
 
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
-  mailOffices = models.ManyToManyField(officeMail)
+  mailOffices = MultiSelectField(max_length = 4, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
+  #mailOffices = models.ManyToManyField(officeMail)
   mailDeleted = models.BooleanField("Mail disattivata", default=False)
 
   #LAN

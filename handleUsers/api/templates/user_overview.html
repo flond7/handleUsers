@@ -52,14 +52,14 @@
                         <p class="text-xs text-secondary mb-0">{{u.get_lanRole_display}}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm {% if u.mailDeleted or u.mailOffice is '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
-                          {% if u.mailDeleted or u.mailOffice is '--'%}  No {% else %} Ok {% endif %}
+                        <span class="badge badge-sm {% if u.mailDeleted or u.mailOffice == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.mailDeleted or u.mailOffice == '--'%}  No {% else %} Ok {% endif %}
                         </span>
                       </td>
                       
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm {% if u.adwebDeleted or u.get_adwebOffice_display is '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
-                          {% if u.adwebDeleted or u.get_adwebOffice_display is '--'%} No {% else %} Ok {% endif %}
+                        <span class="badge badge-sm {% if u.adwebDeleted or u.get_adwebOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.adwebDeleted or u.get_adwebOffice_display == '--'%} No {% else %} Ok {% endif %}
                         </span>
                       </td>
                       <td class="align-middle text-center text-sm">
