@@ -13,6 +13,8 @@
 - Nei file andare in api/modelsConstants.py e individuare dove si vuole aggiungere qualcosa
 - Inserire l'elemento nell'array
 
+### Creare una nuova pagina
+- In handleUsers/api/templates creare la nuova pagina nomePagina.html
 
 ## AMMINISTRATORE NON SMANETTONE
 - interfaccia da backend

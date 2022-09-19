@@ -12,6 +12,7 @@ from django.shortcuts import render
 
 from .constants import MY_CONST
 from .models import customUser
+from .serializer import customUserSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -36,3 +37,15 @@ def user_overview(request):
     userList = customUser.objects.all()
     return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST})
 
+def index(request):
+    userList = customUser.objects.all()
+    return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
+
+""" def profile(request,):
+    userList = customUser.objects.all()
+    return render(request, 'profile.html', {'userList': userList, 'MY_CONST': MY_CONST}) """
+
+@api_view(['GET'])
+def profile(request, pk):
+  u = customUser.objects.get(id=pk)
+  return render(request, 'profile.html', {'userList': u, 'MY_CONST': MY_CONST})
