@@ -21,20 +21,20 @@ MAIN_OFFICE_CHOICES = [
 
 MAIL_OFFICE_CHOICES = [
   ('mo0', '--'),
-  ('mo1', 'magazzino@comune.aviano.pn.it'),
-  ('mo2', 'patrimonio@comune.aviano.pn.it'),
-  ('mo3', 'tecnico@comune.aviano.pn.it'),
-  ('mo4', 'manutenzione@comune.aviano.pn.it'),
-  ('mo5', 'tributi@comune.aviano.pn.it'),
-  ('mo6', 'ragioneria@comune.aviano.pn.it'),
-  ('mo7', 'informatica@comune.aviano.pn.it'),
+  ('mo1', 'magazzino@'),
+  ('mo2', 'patrimonio@'),
+  ('mo3', 'tecnico@'),
+  ('mo4', 'manutenzione@'),
+  ('mo5', 'tributi@'),
+  ('mo6', 'ragioneria@'),
+  ('mo7', 'informatica@'),
   ('mo8', '@'),
   ('mo9', '@'),
   ('mo10', '@'),
   ('mo11', '@'),
   ('mo12', '@'),
 ]
-ADWEB_OFFICES_CHOICES = [
+ADWEB_OFFICE_CHOICES = [
   ('ao0', '--'),
   ('ao1', 'Servizi alla persona e alla comunità'),
   ('ao2', 'Servizi demografici'),

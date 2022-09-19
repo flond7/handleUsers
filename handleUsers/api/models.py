@@ -84,28 +84,25 @@ class customUser(models.Model):
 
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
-  mailOffices = MultiSelectField(max_length = 4, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
+  mailOffice = MultiSelectField(max_length = 100, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
   #mailOffices = models.ManyToManyField(officeMail)
-  mailDeleted = models.BooleanField("Mail disattivata", default=False)
-
+  
   #LAN
   #lan = models.ForeignKey(userLan, default=DEFAULT_LAN_ID, on_delete=models.CASCADE)
   lan = models.CharField("ID personale", max_length=120, blank=False, default="A516-")
   lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=False)
-  lanDeleted = models.BooleanField("Lan disattivata", default=False)
-
-  #ADWEB
-  adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
-  adwebDeleted = models.BooleanField("Adweb - Cancellato / disattivato", default=False)
   
+  #ADWEB
+  #adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
+  adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
+    
   #ASCOT
   hasAscot = models.BooleanField(default=False)
 
   #SDI
   hasSDI = models.BooleanField(default=False)
-  sdiOffices = models.ManyToManyField(officeSDI)
-  sdiDeleted = models.BooleanField("SDI - Cancellato / disattivato", default=False)
-
+  sdiOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 's0', blank=False)
+  
   #ITERATTI
   hasIteratti = models.BooleanField(default=False)
 
@@ -120,7 +117,6 @@ class customUser(models.Model):
   #CRM
   hasCRM = models.BooleanField(default=False)
   crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c1', blank=False)
-  crmDeleted = models.BooleanField("CRM - Cancellato / disattivato", default=False)
 
   #AVCP
   hasAvcp = models.BooleanField(default=False)
@@ -136,13 +132,25 @@ class customUser(models.Model):
 
   #SERVIZI SCOLASTICI - Portale Kpax
   hasServScuola = models.BooleanField(default=False)
-  servScuolaDeleted = models.BooleanField("Servizi scolastici - Cancellato / disattivato", default=False)
 
   #ALBO PRETORIO
   hasAlboPret = models.BooleanField(default=False)
-  alboPretDeleted = models.BooleanField("Albo pretorio - Cancellato / disattivato", default=False)
 
   note = models.TextField(default="")
+
+  #DISATTIVAZIONI
+  mailDeleted = models.BooleanField("Mail disattivata", default=False)
+  lanDeleted = models.BooleanField("Lan disattivata", default=False)
+  adwebDeleted = models.BooleanField("Adweb disattivato", default=False)
+  ascotDeleted = models.BooleanField("Ascot disattivato", default=False)
+  sdiDeleted = models.BooleanField("SDI disattivato", default=False)
+  iterattiDeleted = models.BooleanField("SDI disattivato", default=False)
+  boxAppsDeleted = models.BooleanField("SDI disattivato", default=False)
+  websiteDeleted = models.BooleanField("Sito disattivato", default=False)
+  crmDeleted = models.BooleanField("CRM disattivato", default=False)
+  avcpDeleted = models.BooleanField("AVCP disattivato", default=False)
+  servScuolaDeleted = models.BooleanField("Servizi scolastici disattivato", default=False)
+  alboPretDeleted = models.BooleanField("Albo pretorio disattivato", default=False)
 
   class Meta:
     ordering = []
