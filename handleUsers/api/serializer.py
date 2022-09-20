@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import customUser
 
-from api.modelsConstants import PATH_STATUS_CHOICES, CITIZENSHIP_CHOICES
+#from api.modelsConstants import *
 
 class customUserSerializer(serializers.ModelSerializer):
   class Meta:

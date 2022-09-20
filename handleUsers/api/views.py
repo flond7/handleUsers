@@ -48,4 +48,4 @@ def index(request):
 @api_view(['GET'])
 def profile(request, pk):
   u = customUser.objects.get(id=pk)
-  return render(request, 'profile.html', {'userList': u, 'MY_CONST': MY_CONST})
+  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST})
