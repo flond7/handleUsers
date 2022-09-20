@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.shortcuts import render
 
 from .constants import MY_CONST
+from .modelsConstants import *
 from .models import customUser
 from .serializer import customUserSerializer
 
@@ -48,4 +49,5 @@ def index(request):
 @api_view(['GET'])
 def profile(request, pk):
   u = customUser.objects.get(id=pk)
-  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST})
+  MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
+  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
