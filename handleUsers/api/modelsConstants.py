@@ -82,28 +82,55 @@ ADWEB_OFFICE_CHOICES = [
   ('ao20', 'Segretario generale'),
   ('ao21', 'Ufficio gestione delle risorse umane - MCM'),
 ]
-
+ITERATTI_OFFICE_CHOICES = [
+  ('i0', '--'),
+  ('i1', 'Generale'),
+  ('i2', 'Affari generali'),
+  ('i3', ''),
+  ('i4', ''),
+  ('i5', ''),
+  ('i6', ''),
+  ('i7', ''),
+  ('i8', 'Informatica'),
+  ('i9', 'Ragioneria'),
+  ('i10', 'Tributi'),
+  ('i11', ''),
+  ('i12', ''),
+  ('i13', ''),
+  ('i14', ''),
+  ('i15', ''),
+  ('i16', ''),
+  ('i17', ''),
+  ('i18', ''),
+  ('i19', ''),
+  ('i20', ''),
+  ('i21', ''),
+]
 LAN_ROLES_CHOICES = [
   ('l1', 'Utente'),
   ('l2', 'Amministratore'),
 ]
 
 WEBSITE_ROLES_CHOICES = [
+  ('w0', '--'),
   ('w1', 'Utente'),
   ('w2', 'Amministratore'),
 ]
 
 BOXAPP_ROLES_CHOICES = [
+  ('b0', '--'),
   ('b1', 'Utente'),
   ('b2', 'Amministratore'),
 ]
 
 SERVSCOL_ROLES_CHOICES = [
+  ('ss0', '--'),
   ('ss1', 'Utente'),
   ('ss2', 'Amministratore'),
 ]
 
 CRM_ROLES_CHOICES = [
+  ('c0', '--'),
   ('c1', 'Utente'),
   ('c2', 'Amministratore'),
 ]
