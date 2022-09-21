@@ -63,20 +63,37 @@
                         </span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-danger">No</span>
+                        <span class="badge badge-sm {% if u.iterattiDeleted or u.get_iterattiOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.iterattiDeleted or u.get_iterattiOffice_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-danger">No</span>
+                        <span class="badge badge-sm {% if u.ascotDeleted or u.get_ascotOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.ascotDeleted or u.get_ascotOffice_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Ok</span>
+                        <span class="badge badge-sm {% if u.sdiDeleted or u.get_sdiOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.sdiDeleted or u.get_sdiOffice_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Ok</span>
+                        <span class="badge badge-sm {% if u.websiteDeleted or u.get_websiteOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.websiteDeleted or u.get_websiteOffice_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
                       </td>
+
+                      VEDEREEEEEEEEE
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm {% if u.servScolDeleted or u.get_websiteOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.servScolDeleted or u.get_websiteOffice_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
+                      </td>
+
+
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
+                        <a href="profile/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Dettagli
                         </a>
                       </td>
                     </tr>
