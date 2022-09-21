@@ -18,7 +18,31 @@ MAIN_OFFICE_CHOICES = [
   ('o16', 'Informagiovani'),
   ('o17', 'CDR'),
 ]
-
+LAN_OFFICE_CHOICES = [
+  ('l0', '--'),
+  ('l1', 'Affari Generali'),
+  ('l2', 'Ambiente'),
+  ('l3', 'Anagrafe'),
+  ('l4', 'Associazioni'),
+  ('l5', 'Biblioteca'),
+  ('l6', 'Casa di riposo'),
+  ('l7', 'Commercio'),
+  ('l8', 'Contratti'),
+  ('l9', 'Informagiovani'),
+  ('l10', 'Lavori pubblici'),
+  ('l11', 'Manutenzione'),
+  ('l12', 'Patrimonio'),
+  ('l13', 'Personale'),
+  ('l14', 'Polizia municipale'),
+  ('l15', 'Protocollo'),
+  ('l16', 'Ragioneria'),
+  ('l17', 'Segreteria'),
+  ('l18', 'Segreteria sindaco'),
+  ('l19', 'Servizi educativi'),
+  ('l20', 'Sistemi informatici'),
+  ('l21', 'Tributi'),
+  ('l22', 'Urbanistica'),
+]
 MAIL_OFFICE_CHOICES = [
   ('mo0', '--'),
   ('mo1', 'magazzino@'),

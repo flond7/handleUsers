@@ -91,6 +91,7 @@ class customUser(models.Model):
   #lan = models.ForeignKey(userLan, default=DEFAULT_LAN_ID, on_delete=models.CASCADE)
   lan = models.CharField("ID personale", max_length=120, blank=False, default="A516-")
   lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=False)
+  lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=False)
   
   #ADWEB
   #adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
