@@ -108,7 +108,6 @@ class customUser(models.Model):
   hasIteratti = models.BooleanField(default=False)
 
   #BOXAPPS
-  hasBoxapps = models.BooleanField(default=False)
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
 
   #WEBSITE
