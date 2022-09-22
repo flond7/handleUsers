@@ -106,6 +106,57 @@ ITERATTI_OFFICE_CHOICES = [
   ('i20', ''),
   ('i21', ''),
 ]
+SDI_OFFICE_CHOICES = [
+  ('sdi0', '--'),
+  ('sdi1', 'Generale'),
+  ('sdi2', 'Affari generali'),
+  ('sdi3', ''),
+  ('sdi4', ''),
+  ('sdi5', ''),
+  ('sdi6', ''),
+  ('sdi7', ''),
+  ('sdi8', 'Informatica'),
+  ('sdi9', 'Ragioneria'),
+  ('sdi10', 'Tributi'),
+  ('sdi11', ''),
+  ('sdi12', ''),
+  ('sdi13', ''),
+  ('sdi14', ''),
+  ('sdi15', ''),
+  ('sdi16', ''),
+  ('sdi17', ''),
+  ('sdi18', ''),
+  ('sdi19', ''),
+  ('sdi20', ''),
+  ('sdi21', ''),
+]
+ASCOT_OFFICE_CHOICES = [
+  ('a0', '--'),
+  ('a1', 'Servizi alla persona e alla comunità'),
+  ('a2', 'Servizi demografici'),
+  ('a3', 'Servizi educativi e culturali'),
+  ('a4', 'Servizio affari generali urp protocollo'),
+  ('a5', 'Servizio appalti e contratti'),
+  ('a6', 'Servizio turismo sport e associazioni'),
+  ('a7', 'Servizio casa di soggiorno anziani'),
+  ('a8', 'Servizi informatici'),
+  ('a9', 'Servizio contabilità e bilancio'),
+  ('a10', 'Servizio tributi'),
+  ('a11', 'Servizio ambiente ed energie rinnovabili'),
+  ('a12', 'Servizio SUAP e commercio'),
+  ('a13', 'Servizio urbanistica ed edilizia privata'),
+  ('a14', 'Servizio gestione rifiuti'),
+  ('a15', 'Servizio lavori pubblici ed espropri'),
+  ('a16', 'Servizio manutenzione'),
+  ('a17', 'Servizio patrimonio'),
+  ('a18', 'Servizio Polizia locale'),
+  ('a19', 'Servizio Segreteria particolare e rappresentanza'),
+  ('a20', 'Segretario generale'),
+  ('a21', 'Ufficio gestione delle risorse umane - MCM'),
+]
+
+
+
 LAN_ROLES_CHOICES = [
   ('l1', 'Utente'),
   ('l2', 'Amministratore'),
@@ -116,21 +167,59 @@ WEBSITE_ROLES_CHOICES = [
   ('w1', 'Utente'),
   ('w2', 'Amministratore'),
 ]
-
 BOXAPP_ROLES_CHOICES = [
   ('b0', '--'),
   ('b1', 'Utente'),
   ('b2', 'Amministratore'),
 ]
-
 SERVSCOL_ROLES_CHOICES = [
   ('ss0', '--'),
   ('ss1', 'Utente'),
   ('ss2', 'Amministratore'),
 ]
-
 CRM_ROLES_CHOICES = [
   ('c0', '--'),
   ('c1', 'Utente'),
   ('c2', 'Amministratore'),
+]
+SUE_ROLES_CHOICES = [
+  ('s0', '--'),
+  ('s1', 'Utente'),
+  ('s2', 'Amministratore'),
+]
+SUAP_ROLES_CHOICES = [
+  ('s0', '--'),
+  ('s1', 'Utente'),
+  ('s2', 'Amministratore'),
+]
+AVCP_ROLES_CHOICES = [
+  ('a0', '--'),
+  ('a1', 'Utente'),
+  ('a2', 'Amministratore'),
+]
+FVGPAY_ROLES_CHOICES = [
+  ('f0', '--'),
+  ('f1', 'Utente'),
+  ('f2', 'Amministratore'),
+]
+ALBOPRET_ROLES_CHOICES = [
+  ('ap0', '--'),
+  ('ap1', 'Visualizzatore'),
+  ('ap2', 'Editor'),
+]
+
+ITERATTI_ROLES_CHOICES = [
+  ('i0', '--'),
+  ('i1', 'Utente'),
+  ('i2', 'Amministratore'),
+]
+SDI_ROLES_CHOICES = [
+  ('sdi0', '--'),
+  ('sdi1', 'Utente'),
+  ('sdi2', 'Amministratore'),
+]
+ASCOT_ROLES_CHOICES = [
+  ('a0', '--'),
+  ('a1', 'Utente'),
+  ('a2', 'Amministratore'),
 ]

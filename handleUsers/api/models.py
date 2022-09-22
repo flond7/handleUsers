@@ -98,43 +98,42 @@ class customUser(models.Model):
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
     
   #ASCOT
-  hasAscot = models.BooleanField(default=False)
+  ascotRole = models.CharField("Ruolo Ascot", max_length = 4, choices = ASCOT_ROLES_CHOICES, default = 'a0', blank=False)
+  ascotOffice = MultiSelectField("Uffici Ascot", max_length = 100, choices = ASCOT_OFFICE_CHOICES, default = 'a0', blank=False)
 
   #SDI
-  hasSDI = models.BooleanField(default=False)
-  sdiOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 's0', blank=False)
+  sdiRole = models.CharField("Ruolo in SDI", max_length = 4, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
+  sdiOffice = MultiSelectField("Uffici SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
   
   #ITERATTI
-  hasIteratti = models.BooleanField(default=False)
+  iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'w1', blank=False)
 
   #BOXAPPS
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
 
   #WEBSITE
-  hasWebsite = models.BooleanField(default=False)
   websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w1', blank=False)
 
   #CRM
-  hasCRM = models.BooleanField(default=False)
   crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c1', blank=False)
 
   #AVCP
-  hasAvcp = models.BooleanField(default=False)
+  avcpRole = models.CharField(max_length = 2, choices = AVCP_ROLES_CHOICES, default = 'a0', blank=False)
 
   #FVG pay
-  hasFVGPay = models.BooleanField(default=False)
+  fvgPayRole = models.CharField(max_length = 2, choices = FVGPAY_ROLES_CHOICES, default = 's0', blank=False)
 
   #SUE
-  hasSue = models.BooleanField(default=False)
+  sueRole = models.CharField(max_length = 2, choices = SUE_ROLES_CHOICES, default = 's0', blank=False)
 
   #SUAP
-  #hasSuap = models.BooleanField()
+  suapRole = models.CharField(max_length = 2, choices = SUAP_ROLES_CHOICES, default = 's0', blank=False)
 
   #SERVIZI SCOLASTICI - Portale Kpax
-  hasServScuola = models.BooleanField(default=False)
+  servScolRole = models.CharField(max_length = 4, choices = SERVSCOL_ROLES_CHOICES, default = 'ss0', blank=False)
 
   #ALBO PRETORIO
-  hasAlboPret = models.BooleanField(default=False)
+  alboPretRole = models.CharField(max_length = 4, choices = ALBOPRET_ROLES_CHOICES, default = 'ap0', blank=False)
 
   note = models.TextField(default="")
 
