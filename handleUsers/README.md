@@ -379,3 +379,41 @@ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git (change rep
 
 ## REST
 https://www.bezkoder.com/django-angular-crud-rest-framework/
+
+
+
+
+
+
+
+# SU RASBBERRY
+- Make sure you have the proxy configured (see below)
+- Create project folder in var/www/html/projectFolder
+- Create the virtual environment and activate it
+  python -m venv venv (create a venv virtuanl environment)
+  source venv/bin/activate (to activate the venv environment)
+- Install django
+  pip install --proxy=http://proxy-xxxxxxxx:801 django==4.1
+- copy the files with bitvise ssh client (main project-folder) inside the var/www/html/projectFolder (so you have venv and then the project-folder)
+- Insall the other requirements
+  cd var/www/html/projectFolder/project-folder
+  pip install --proxy=http://proxy-bc-el.regione.fvg.it:801 -r requirements.txt
+- Run the server (it will let you see if there are some libraries you still have to install, in that case install them)
+  python manage.py runserver
+
+
+## CONFIG PROXY ON RASPBERRY (https://www.pitronica.com/tutorials/pi-tutorials/raspberry-pi-behind-a-proxy-server/)
+- Make sure you have the proxy configured for APT
+  sudo nano /etc/apt/apt.conf
+  Acquire::http::Proxy "http://192.168.10.10:8081"; (line to add)
+### proxy for the general environment ### (THIS ONE WORKS!!!)
+- sudo nano /etc/environment
+- eport both http_proxy and https_proxy (add both lines with http if you don't have an https)
+  export http_proxy="http://proxy-xxxx:801"
+  export https_proxy="http://proxy-xxxx:801"
+- modify the visudo file that allows to use sudo on some commands
+- add these settings to the sudoers file
+  sudo visudo
+- Add the following line to the file so sudo will use the environment variables you just created
+  Defaults    env_keep+="http_proxy https_proxy no_proxy"
+- reboot

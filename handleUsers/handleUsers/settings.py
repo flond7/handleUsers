@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sass_processor',
+    #'sass_processor',
     'multiselectfield',
     'api',
 ]
@@ -56,7 +56,7 @@ MIDDLEWARE = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder',
+    #'sass_processor.finders.CssFinder',
 ]
 
 ROOT_URLCONF = 'handleUsers.urls'
