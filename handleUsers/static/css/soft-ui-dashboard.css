@@ -17138,6 +17138,7 @@ textarea.form-control-lg {
   height: 48px;
   width: 48px;
   transition: all 0.2s ease-in-out;
+  background-image: linear-gradient(310deg, #d63384 0%, #F56565 100%);
 }
 .avatar img {
   width: 100%;
