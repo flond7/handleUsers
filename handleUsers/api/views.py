@@ -14,6 +14,7 @@ from .constants import MY_CONST
 from .modelsConstants import *
 from .models import customUser
 from .serializer import customUserSerializer
+#from api.filters import customUserFilter
 
 # Create your views here.
 @api_view(['GET'])
@@ -51,3 +52,11 @@ def profile(request, pk):
   u = customUser.objects.get(id=pk)
   MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
   return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
+
+@api_view(['GET'])
+def adweb(request):
+  u = customUser.objects.all()
+  #u_filter = customUserFilter(request.GET, queryset=u)
+  MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
+  #return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'filter': u_filter })
+  return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })

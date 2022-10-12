@@ -8,5 +8,6 @@ urlpatterns = [
   path('index', views.index, name="index"),
   #path('profile', views.profile, name="profile"),
   path('profile/<str:pk>', views.profile, name="profile"),
+  path('adweb', views.adweb, name="adweb"),
   
  ] 

@@ -96,6 +96,8 @@ class customUser(models.Model):
   #ADWEB
   #adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
+  adwebRole = MultiSelectField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'mo0', blank=False)
+  adwebNote = models.CharField("Note per adweb", max_length = 150, blank=False)
     
   #ASCOT
   ascotRole = models.CharField("Ruolo Ascot", max_length = 4, choices = ASCOT_ROLES_CHOICES, default = 'a0', blank=False)
