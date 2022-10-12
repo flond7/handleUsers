@@ -4,6 +4,12 @@
 - aggiungere l'elemento
 
 
+# AGGIUNGERE UNA PAGINA PER APPLICATIVI
+- creare una pagina html in api/templates (es: adweb.html)
+- aggiungere la voce della pagina in api/templates/includes/sidebar.html modificando il nome del segment e href
+- aggiungere l'url in api/urls.py
+- aggiungere la funzione per visualizzare la pagina in api/view.py (ricordarsi sdi passare eventuali parametri nella funzione)
+
 
 # INSTALLAZIONE
 

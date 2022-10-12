@@ -383,7 +383,8 @@ https://www.bezkoder.com/django-angular-crud-rest-framework/
 
 
 
-
+## CSV
+https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 
 
 # SU RASBBERRY
