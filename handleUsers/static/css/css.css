@@ -1,0 +1,10 @@
+.avatar-border {
+  background-image: none !important;
+  border: 2px solid #d63384;
+}
+
+.form-input {
+  background-color: #f4f4f4;;
+  border: none !important;
+  height: 2.2rem
+}

@@ -96,8 +96,8 @@ class customUser(models.Model):
   #ADWEB
   #adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
-  adwebRole = MultiSelectField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'mo0', blank=False)
-  adwebNote = models.CharField("Note per adweb", max_length = 150, default='', blank=False)
+  adwebRole = MultiSelectField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=False)
+  adwebNote = models.CharField("Note per adweb", max_length = 150, default='', blank=True)
     
   #ASCOT
   ascotRole = models.CharField("Ruolo Ascot", max_length = 4, choices = ASCOT_ROLES_CHOICES, default = 'a0', blank=False)
@@ -107,8 +107,10 @@ class customUser(models.Model):
   sdiRole = models.CharField("Ruolo in SDI", max_length = 4, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
   sdiOffice = MultiSelectField("Uffici SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
   
-  #ITERATTI
-  iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'w1', blank=False)
+  #GIFRA - ITERATTI
+  iteratti = models.CharField("ID iteratti", max_length=120, blank=False, default="")
+  iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'i0', blank=False)
+  iterattiOffice = MultiSelectField("Uffici iteratti", max_length = 100, choices = ITERATTI_OFFICE_CHOICES, default = 'i0', blank=False)
 
   #BOXAPPS
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
@@ -137,7 +139,7 @@ class customUser(models.Model):
   #ALBO PRETORIO
   alboPretRole = models.CharField(max_length = 4, choices = ALBOPRET_ROLES_CHOICES, default = 'ap0', blank=False)
 
-  note = models.TextField(default="")
+  note = models.TextField(default=" ")
 
   #DISATTIVAZIONI
   mailDeleted = models.BooleanField("Mail disattivata", default=False)

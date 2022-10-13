@@ -1,0 +1,69 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Create user {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-body p-3 pb-2">
+              <div class="py-2">
+                <h6 class="border-bottom w-100 pb-2">Informazioni generali</h6>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="name">Nome</label>
+                    <input class="form-input w-100" type="text" id="name" name="name" value={{u.name}}>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="surname">Cognome</label>
+                    <input class="form-input w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="cf">Codice fiscale</label>
+                    <input class="form-input rounded border-none w-100" type="text" id="cf" name="cf" value={{u.cf}}>
+                  </div>
+                </div>
+              </div>
+
+              <div class="py-2">
+                <h6 class="border-bottom w-100 pb-2">Mail</h6>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="name">Mail personale</label>
+                    <input class="form-input rounded w-100 px-2" type="text" id="mail" name="mail" value="@comune.aviano.pn.it">
+                  </div>
+                  <div class="col-md-3">
+                    <label for="surname">Deleghe mail uffici</label></br>
+
+                    {% for office in MAIL_OFFICE_CHOICES %}
+                    <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
+                    {% endfor %}
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div class="row justify-content-end py-2">
+                <button class="rounded bg-primary">Save</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      {% include "includes/footer.html" %}
+
+    </div>
+    
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
