@@ -76,6 +76,7 @@ class userSDI (models.Model):
 
 class customUser(models.Model):
   #_id = models.ObjectIdField()
+  #id = models.AutoField(primary_key=True)
   authorId = models.UUIDField(primary_key=False, unique=True, default=uuid.uuid4, editable=False)
   name = models.CharField("Nome", max_length=100, blank=True, default='')
   surname = models.CharField("Cognome", max_length=100, blank=True, default='')
@@ -85,7 +86,6 @@ class customUser(models.Model):
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
   mailOffice = MultiSelectField(max_length = 100, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
-  #mailOffices = models.ManyToManyField(officeMail)
   
   #LAN
   #lan = models.ForeignKey(userLan, default=DEFAULT_LAN_ID, on_delete=models.CASCADE)
@@ -94,7 +94,6 @@ class customUser(models.Model):
   lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=False)
   
   #ADWEB
-  #adwebOffice = models.CharField(max_length = 4, choices = ADWEB_OFFICES_CHOICES, default = 'ao1', blank=False)
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
   adwebRole = MultiSelectField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=False)
   adwebNote = models.CharField("Note per adweb", max_length = 150, default='', blank=True)
@@ -108,7 +107,7 @@ class customUser(models.Model):
   sdiOffice = MultiSelectField("Uffici SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
   
   #GIFRA - ITERATTI
-  iteratti = models.CharField("ID iteratti", max_length=120, blank=False, default="")
+  iteratti = models.CharField("ID iteratti", max_length=120, blank=True, default="")
   iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'i0', blank=False)
   iterattiOffice = MultiSelectField("Uffici iteratti", max_length = 100, choices = ITERATTI_OFFICE_CHOICES, default = 'i0', blank=False)
 
@@ -116,10 +115,10 @@ class customUser(models.Model):
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
 
   #WEBSITE
-  websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w1', blank=False)
+  websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w0', blank=False)
 
   #CRM
-  crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c1', blank=False)
+  crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c0', blank=False)
 
   #AVCP
   avcpRole = models.CharField(max_length = 2, choices = AVCP_ROLES_CHOICES, default = 'a0', blank=False)
@@ -139,7 +138,7 @@ class customUser(models.Model):
   #ALBO PRETORIO
   alboPretRole = models.CharField(max_length = 4, choices = ALBOPRET_ROLES_CHOICES, default = 'ap0', blank=False)
 
-  note = models.TextField(default=" ")
+  note = models.TextField(default="", blank=True)
 
   #DISATTIVAZIONI
   mailDeleted = models.BooleanField("Mail disattivata", default=False)
@@ -159,6 +158,6 @@ class customUser(models.Model):
     ordering = []
 
   def __str__(self):
-    return self.name
+    return self.name + ' ' + self.surname
 
 

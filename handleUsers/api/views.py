@@ -43,37 +43,28 @@ def user_overview(request):
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
-    return render(request, 'user_create.html', {'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES})
+    return render(request, 'user_create.html', {'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES})
 
-def user_update(request, id):
-    # dictionary for initial data with
-    # field names as keys
-    context ={}
- 
-    # fetch the object related to passed id
-    #obj = get_object_or_404(GeeksModel, id = id)
- 
-    # pass the object as instance in form
-    form = GeeksForm(request.POST or None, instance = obj)
- 
-    # save the data from the form and
-    # redirect to detail_view
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/"+id)
- 
-    # add form dictionary to context
-    context["form"] = form
- 
-    return render(request, "update_view.html", context)
+def user_add(request):
+  cu = customUserForm()
+  if request.method == "POST":
+    cu = customUserForm(request.POST)
+    if cu.is_valid():
+      cu.save()
+      return HttpResponseRedirect('user_overview')
+    else:
+      return HttpResponse("your form is wrong")
+    
+
+    """ if form.is_valid():
+      cu = form.save(commit=False)
+      print("OK")
+    else:
+      print("ERR") """
 
 def index(request):
     userList = customUser.objects.all()
     return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
-
-""" def profile(request,):
-    userList = customUser.objects.all()
-    return render(request, 'profile.html', {'userList': userList, 'MY_CONST': MY_CONST}) """
 
 @api_view(['GET'])
 def profile(request, pk):
