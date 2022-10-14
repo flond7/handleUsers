@@ -2,6 +2,18 @@
   background-image: none !important;
   border: 2px solid #d63384;
 }
+.avatar-border-yellow {
+  background-image: none !important;
+  border: 2px solid #e0a119;
+}
+.avatar-border-green {
+  background-image: none !important;
+  border: 2px solid #19df50;
+}
+.avatar-border-blue {
+  background-image: none !important;
+  border: 2px solid #1990e0;
+}
 
 .form-input {
   background-color: #f4f4f4;;
