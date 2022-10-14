@@ -17,6 +17,7 @@ MAIN_OFFICE_CHOICES = [
   ('o15', 'Biblioteca'),
   ('o16', 'Informagiovani'),
   ('o17', 'CDR'),
+  ('o18', 'Politico')
 ]
 LAN_OFFICE_CHOICES = [
   ('l0', '--'),

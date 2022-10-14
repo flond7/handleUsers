@@ -92,6 +92,7 @@ class customUser(models.Model):
   lan = models.CharField("ID personale", max_length=120, blank=False, default="A516-")
   lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=False)
   lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=False)
+  lanNote = models.CharField("Note per lan", max_length = 150, default='', blank=True)
   
   #ADWEB
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
