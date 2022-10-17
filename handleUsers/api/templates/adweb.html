@@ -9,7 +9,7 @@
 
     <div class="container-fluid py-4">
 
-      <div class="col-12 mb-4">
+      {% comment %} <div class="col-12 mb-4">
         <div class="card h-100">
           <div class="card-header pb-0 p-3">
             <h6 class="mb-0">Filtri</h6>
@@ -22,7 +22,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> {% endcomment %}
 
       <div class="row">
         <div class="col-12">
@@ -47,7 +47,19 @@
                             <div class="d-flex mx-3 py-3 border-bottom">
                               <div class="d-flex justify-content-centeralign-start col-md-2">
                                 <div>
-                                  <img src="{% static 'img/viking.png' %}" class="avatar avatar-border me-3" alt="user1">
+                                  {% if u.get_lanRole_display == 'Amministratore'%}
+                                    <img src= "{% static 'img/admin_mini.jpg' %}"  alt="profile_image" class="avatar avatar-border me-3">
+                                  {% elif u.get_office_display == 'Politico' %}
+                                    <img src="{% static 'img/viking_blue.png' %}" class="avatar avatar-border-blue me-3">
+                                  {% elif u.get_office_display == 'Segreteria' %}
+                                    <img src="{% static 'img/vikingessa_yellow.png' %}" class="avatar avatar-border-yellow me-3">
+                                  {% elif u.get_office_display == 'Urp' %}
+                                    <img src="{% static 'img/viking_yellow.png' %}" class="avatar avatar-border-yellow me-3">
+                                  {% elif u.get_office_display == 'LLPP' %}
+                                    <img src="{% static 'img/vikingessa_green.png' %}" class="avatar avatar-border-green me-3">
+                                  {% else %}
+                                    <img src="{% static 'img/viking.png' %}" class="avatar avatar-border me-3">
+                                  {% endif %}
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                   <h6 class="mb-0 text-sm">{{u.name}} {{u.surname}}</h6>
@@ -63,7 +75,7 @@
 
                               <div class="align-middle text-center my-auto col-md-2 text-sm">
                                 <span class="badge badge-sm {% if u.adwebRole == 'Utente'%} bg-gradient-primary {% else %} bg-gradient-secondary {% endif %}">
-                                  {{ u.adwebRole}}
+                                  {{ u.get_adwebRole_display}}
                                 </span>
                               </div>
 
