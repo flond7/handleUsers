@@ -27,6 +27,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">SDI</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Sito</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Serv. Scolastici</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Albo</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1"></th>
                     </tr>
                   </thead>
@@ -37,20 +38,23 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
-                          <div>
-
-                            {% if u.get_lanRole_display == 'Amministratore'%}
-                              <img src= "{% static 'img/admin_mini.jpg' %}"  alt="profile_image" class="avatar avatar-sm avatar-border me-3">
-                            {% elif u.get_office_display == 'Politico' %}
-                              <img src="{% static 'img/viking_blue.png' %}" class="avatar avatar-sm avatar-border-blue me-3">
-                            {% elif u.get_office_display == 'Segreteria' %}
-                              <img src="{% static 'img/vikingessa_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
-                            {% elif u.get_office_display == 'LLPP' %}
-                              <img src="{% static 'img/vikingessa_green.png' %}" class="avatar avatar-sm avatar-border-green me-3">
-                            {% else %}
-                              <img src="{% static 'img/viking.png' %}" class="avatar avatar-sm avatar-border me-3">
-                            {% endif %}
-                          </div>
+                          <a href="profile/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            <div>
+                              {% if u.get_lanRole_display == 'Amministratore'%}
+                                <img src= "{% static 'img/admin_mini.jpg' %}"  alt="profile_image" class="avatar avatar-sm avatar-border me-3">
+                              {% elif u.get_office_display == 'Politico' %}
+                                <img src="{% static 'img/viking_blue.png' %}" class="avatar avatar-sm avatar-border-blue me-3">
+                              {% elif u.get_office_display == 'Segreteria' %}
+                                <img src="{% static 'img/vikingessa_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
+                              {% elif u.get_office_display == 'Urp' %}
+                                <img src="{% static 'img/viking_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
+                              {% elif u.get_office_display == 'LLPP' %}
+                                <img src="{% static 'img/vikingessa_green.png' %}" class="avatar avatar-sm avatar-border-green me-3">
+                              {% else %}
+                                <img src="{% static 'img/viking.png' %}" class="avatar avatar-sm avatar-border me-3">
+                              {% endif %}
+                            </div>
+                          </a>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{u.name}} {{u.surname}}</h6>
                             <p class="text-xs text-secondary mb-0">{{u.get_office_display}}</p>
@@ -104,6 +108,11 @@
                         </span>
                       </td>
 
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm {% if u.alboPretDeleted or u.get_alboPretRole_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                          {% if u.servScolDeleted or u.get_alboPretRole_display == '--'%} No {% else %} Ok {% endif %}
+                        </span>
+                      </td>
 
                       <td class="align-middle">
                         <a href="profile/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
