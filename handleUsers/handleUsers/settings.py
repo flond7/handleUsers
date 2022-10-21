@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'sass_processor',
     'multiselectfield',
+    'django_filters',
     'api',
 ]
 

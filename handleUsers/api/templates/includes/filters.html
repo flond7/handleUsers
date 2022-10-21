@@ -1,0 +1,38 @@
+<div class="col-12 mb-4">
+  <div class="card mb-4">
+    <div class="card-header pb-0 p-3">
+      <h6 class="mb-0">Filtri</h6>
+    </div>
+    <div class="card-body p-3">
+      <form method="get">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="name">Nome</label>
+            <input class="form-input w-100" type="text" id="name" name="name" value={{u.name}}>
+          </div>
+          <div class="col-md-3">
+            <label for="surname">Cognome</label>
+            <input class="form-input w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+          </div>
+          <div class="col-md-3">
+            <label for="cf">Ufficio</label></br>
+            <select class="form-input rounded border-none w-100" name="office">
+              {% for office in MAIN_OFFICE_CHOICES %}
+              <option value={{office.0}}>{{office.1}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-1 mt-2">
+            <label></label></br>
+            <button class="btn btn-sm text-white bg-primary" type="submit">Cerca</button>
+          </div>
+          <div class="col-md-1 mt-2">
+            <label></label></br>
+            <a class="nav-link {% if 'user-overview' in segment %} active {% endif %}" href="/api/user_overview">
+              <div class="btn btn-sm text-white bg-secondary">Reset</div>
+            </a>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

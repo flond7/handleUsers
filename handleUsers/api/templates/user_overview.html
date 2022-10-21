@@ -9,16 +9,58 @@
 
     <div class="container-fluid py-4">
 
-      <div class="row">
+      {% include "includes/filters.html" %} 
+      {% comment %} <div class="col-12 mb-4">
+        <div class="card mb-4">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">Filtri</h6>
+          </div>
+          <div class="card-body p-3">
+            <form method="get">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="name">Nome</label>
+                  <input class="form-input w-100" type="text" id="name" name="name" value={{u.name}}>
+                </div>
+                <div class="col-md-3">
+                  <label for="surname">Cognome</label>
+                  <input class="form-input w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+                </div>
+                <div class="col-md-3">
+                  <label for="cf">Ufficio</label></br>
+                  <select class="form-input rounded border-none w-100" name="office">
+                    {% for office in MAIN_OFFICE_CHOICES %}
+                    <option value={{office.0}}>{{office.1}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-1 mt-2">
+                  <label></label></br>
+                  <button class="btn btn-sm text-white bg-primary" type="submit">Cerca</button>
+                </div>
+                <div class="col-md-1 mt-2">
+                  <label></label></br>
+                  <a class="nav-link {% if 'user-overview' in segment %} active {% endif %}" href="/api/user_overview">
+                    <div class="btn btn-sm text-white bg-secondary">Reset</div>
+                  </a>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
         <div class="col-12">
           <div class="card mb-4">
-    
+            
+
+            
+
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Utente {{ user.name }}</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Utente</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-md-1">LAN</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Mail</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1 ">Adweb</th>

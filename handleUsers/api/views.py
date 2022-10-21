@@ -14,7 +14,7 @@ from .modelsConstants import *
 from .models import customUser
 from .serializer import customUserSerializer
 from .forms import customUserForm
-#from api.filters import customUserFilter
+from .filters import customUserFilter
 
 # Create your views here.
 @api_view(['GET'])
@@ -37,8 +37,24 @@ def index(request):
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
 def user_overview(request):
-    userList = customUser.objects.all()
+    userList = customUser.objects.all().order_by('name')
+    #if the dictionary has some values the boolean is true, otherwise false
+    if bool(request.GET):
+      user_filter = customUserFilter(request.GET, queryset=userList)
+      print(user_filter.qs)
+      # ATTENTION: django-filters puts the result inside a qs so you have to pass user_filter.qs
+      return render(request, 'user_overview.html', {'userList': user_filter.qs, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES,})
+    else:
+      return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES,}) 
+     
+    """ userList = customUser.objects.all().order_by('name')
+    user_search = customUserFilter(request.GET, queryset=userList)
+    print(userList)
+    # get all the elements, filter them and then pass the result of the filter as userList
     return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST})
+ """
+
+
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)

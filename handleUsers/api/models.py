@@ -81,7 +81,7 @@ class customUser(models.Model):
   name = models.CharField("Nome", max_length=100, blank=True, default='')
   surname = models.CharField("Cognome", max_length=100, blank=True, default='')
   cf = models.CharField("Codice fiscale", max_length=100, blank=True, default='')
-  office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'b1', blank=False) #assegnazione a un ufficio principale, per capirsi
+  office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'o0', blank=False) #assegnazione a un ufficio principale, per capirsi
 
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
@@ -96,7 +96,7 @@ class customUser(models.Model):
   
   #ADWEB
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
-  adwebRole = MultiSelectField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=False)
+  adwebRole = models.CharField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=False)
   adwebNote = models.CharField("Note per adweb", max_length = 150, default='', blank=True)
     
   #ASCOT
@@ -159,6 +159,6 @@ class customUser(models.Model):
     ordering = []
 
   def __str__(self):
-    return self.name + ' ' + self.surname
+    return self.name + ' ' + self.surname + ' ' + self.office + ' ' + self.lanRole
 
 
