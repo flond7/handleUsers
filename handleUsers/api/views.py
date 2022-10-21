@@ -41,20 +41,15 @@ def user_overview(request):
     #if the dictionary has some values the boolean is true, otherwise false
     if bool(request.GET):
       user_filter = customUserFilter(request.GET, queryset=userList)
+      #get params from url
+      name = request.GET.get('name')
+      surname = request.GET.get('surname')
+      office = request.GET.get('office')
       print(user_filter.qs)
       # ATTENTION: django-filters puts the result inside a qs so you have to pass user_filter.qs
-      return render(request, 'user_overview.html', {'userList': user_filter.qs, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES,})
+      return render(request, 'user_overview.html', {'userList': user_filter.qs, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'url_office':office, 'surname':surname,'name':name })
     else:
-      return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES,}) 
-     
-    """ userList = customUser.objects.all().order_by('name')
-    user_search = customUserFilter(request.GET, queryset=userList)
-    print(userList)
-    # get all the elements, filter them and then pass the result of the filter as userList
-    return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST})
- """
-
-
+      return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES}) 
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)

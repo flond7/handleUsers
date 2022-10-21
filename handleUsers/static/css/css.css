@@ -16,7 +16,8 @@
 }
 
 .form-input {
-  background-color: #f4f4f4;;
-  border: none !important;
-  height: 2.2rem
+  background-color: #fff;;
+  border: #eaeaea 1px solid !important;
+  height: 2.2rem;
+  padding: 0 1rem;
 }

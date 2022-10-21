@@ -159,6 +159,6 @@ class customUser(models.Model):
     ordering = []
 
   def __str__(self):
-    return self.name + ' ' + self.surname + ' ' + self.office + ' ' + self.lanRole
+    return self.name + ' ' + self.surname
 
 
