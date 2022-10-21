@@ -58,6 +58,14 @@ MAIL_OFFICE_CHOICES = [
   ('mo10', 'polizia.locale@'),
   ('mo11', '@'),
   ('mo12', '@'),
+  ('mo13', '@'),
+  ('mo14', '@'),
+  ('mo15', '@'),
+  ('mo16', '@'),
+  ('mo17', '@'),
+  ('mo18', '@'),
+  ('mo19', '@'),
+  ('mo20', 'vicesindaco@'),
 ]
 ADWEB_OFFICE_CHOICES = [
   ('ao0', '--'),
@@ -82,6 +90,7 @@ ADWEB_OFFICE_CHOICES = [
   ('ao19', 'Servizio Segreteria particolare e rappresentanza'),
   ('ao20', 'Segretario generale'),
   ('ao21', 'Ufficio gestione delle risorse umane - MCM'),
+  ('ao22', 'Nominativo per consigli e giunte')
 ]
 ITERATTI_OFFICE_CHOICES = [
   ('i0', '--'),
@@ -123,27 +132,18 @@ ITERATTI_OFFICE_CHOICES = [
 ]
 SDI_OFFICE_CHOICES = [
   ('sdi0', '--'),
-  ('sdi1', 'Generale'),
-  ('sdi2', 'Affari generali'),
-  ('sdi3', ''),
-  ('sdi4', ''),
-  ('sdi5', ''),
-  ('sdi6', ''),
-  ('sdi7', ''),
-  ('sdi8', 'Informatica'),
-  ('sdi9', 'Ragioneria'),
-  ('sdi10', 'Tributi'),
-  ('sdi11', ''),
-  ('sdi12', ''),
-  ('sdi13', ''),
-  ('sdi14', ''),
-  ('sdi15', ''),
-  ('sdi16', ''),
-  ('sdi17', ''),
-  ('sdi18', ''),
-  ('sdi19', ''),
-  ('sdi20', ''),
-  ('sdi21', ''),
+  ('sdi1', 'Casa di soggiorno anziani'),
+  ('sdi2', 'Affari generali, URP, protocollo'),
+  ('sdi3', 'Segreteria generale'),
+  ('sdi4', 'Gestione risorse umane'),
+  ('sdi5', 'Polizia locale'),
+  ('sdi6', 'Servizio contabilità'),
+  ('sdi7', 'Servizio contratti'),
+  ('sdi8', 'Servizio cultura biblioteca'),
+  ('sdi9', 'Servizio manutenzione'),
+  ('sdi10', 'Servizio personale'),
+  ('sdi11', 'Servizio tributi'),
+  ('sdi12', 'Settore urbanistica, ambiente, commercio'),
 ]
 ASCOT_OFFICE_CHOICES = [
   ('a0', '--'),
@@ -170,13 +170,10 @@ ASCOT_OFFICE_CHOICES = [
   ('a21', 'Ufficio gestione delle risorse umane - MCM'),
 ]
 
-
-
 LAN_ROLES_CHOICES = [
   ('l1', 'Utente'),
   ('l2', 'Amministratore'),
 ]
-
 WEBSITE_ROLES_CHOICES = [
   ('w0', '--'),
   ('w1', 'Utente'),
@@ -221,11 +218,14 @@ ALBOPRET_ROLES_CHOICES = [
   ('ap0', '--'),
   ('ap1', 'Visualizzatore'),
   ('ap2', 'Editor'),
+  ('ap3', 'Amministratore'),
 ]
 ADWEB_ROLES_CHOICES = [
   ('a0', 'Utente'),
   ('a1', 'Addetto segreteria'),
-  ('a2', 'Potere di firma'),
+  ('a2', 'Istruttore ragioneria'),
+  ('a3', 'Potere di firma'),
+  ('a5', 'Politico'),
 ]
 ITERATTI_ROLES_CHOICES = [
   ('i0', '--'),
