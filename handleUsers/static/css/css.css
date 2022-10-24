@@ -21,3 +21,10 @@
   height: 2.2rem;
   padding: 0 1rem;
 }
+
+.create-form-input {
+  background-color: #fff;;
+  border: #eaeaea 1px solid !important;
+  height: 2.2rem;
+  padding: 0 1rem;
+}

@@ -11,10 +11,19 @@
           <div class="col-md-2">
             <label for="cf">Ufficio</label></br>
             <select class="form-input rounded border-none w-100" name="office">
+              {% comment %} 
+              If office is '--' then change the value to '' otherwise the filter will give back an incorrect search when looking just with names or surnames 
+              {% endcomment %}
               {% for office in MAIN_OFFICE_CHOICES %}
-              <option value={{office.0}} {% if office.0 == url_office %} selected {% endif %}>
-                {{office.1}}
-              </option>
+                {% if office.0 == 'o0' %}
+                <option value='' {% if office.0 == url_office %} selected {% endif %}>
+                  {{office.1}}
+                </option>
+                {% else %}
+                <option value={{office.0}} {% if office.0 == url_office %} selected {% endif %}>
+                  {{office.1}}
+                </option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>
