@@ -54,12 +54,24 @@ def user_overview(request):
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
-    return render(request, 'user_create.html', {'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES})
+    submitted = False
+    if request.method == "POST":
+        cu = customUserForm(request.POST)
+        if cu.is_valid():
+            cu.save()
+            return HttpResponseRedirect('user_create?submitted=True')
+        else:
+            print("INVALID")
+    else:
+        cu = customUserForm()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'user_create.html', {'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES})
 
 def user_add(request):
   cu = customUserForm()
   if request.method == "POST":
-    cu = customUserForm(request.POST)
+    cu = customUserForm(request.POST) 
     if cu.is_valid():
       cu.save()
       return HttpResponseRedirect('user_overview')
