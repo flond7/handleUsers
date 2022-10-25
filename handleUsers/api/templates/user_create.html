@@ -13,7 +13,7 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-body p-3 pb-2">
-              {% if submitted %}
+              {% comment %} {% if submitted %}
                 data submitted
               {% else %}
               <form method="POST" action="user_create" enctype="multipart/form-data">
@@ -23,9 +23,15 @@
                   <input class="bg-primary" type="submit" value="Submit">
                 </div>
               </form> 
-              {% endif%}
-                {% comment %} <div class="py-2">
-                  <h6 class="border-bottom w-100 pb-2">Informazioni generali</h6>
+              {% endif%} {% endcomment %}
+              {% if submitted %}
+                data submitted
+              {% else %}
+              <form method="POST" action="user_create" enctype="multipart/form-data">
+                {% csrf_token %}
+              
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Informazioni generali</h6>
                   <div class="row">
                     <div class="col-md-3">
                       <label for="name">Nome</label>
@@ -47,28 +53,22 @@
                         {% endfor %}
                       </select>
                     </div>
-                    <div class="col-md-3">
-                      <label for="cf">Ufficio</label>
-                      {% for office in MAIN_OFFICE_CHOICES %}
-                      <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
-                      {% endfor %}
-                    </div> 
                   </div>
-                </div> {% endcomment %}
+                </div>
 
                 {% comment %} MAIL {% endcomment %}
-                {% comment %} <div class="py-2">
-                  <h6 class="border-bottom w-100 pb-2">Mail</h6>
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Mail</h6>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <label for="name">Mail personale</label>
                       <input class="form-input rounded w-100 px-2" type="text" id="mail" name="mail" value="@comune.aviano.pn.it">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                       <label for="surname">Deleghe mail uffici</label></br>
                       <div class="row">
                         {% for office in MAIL_OFFICE_CHOICES %}
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
@@ -76,26 +76,54 @@
                     </div>
                     
                   </div>
-                </div> {% endcomment %}
+                </div>
               
                 {% comment %} LAN {% endcomment %}
-                {% comment %} <div class="py-2">
-                  <h6 class="border-bottom w-100 pb-2">LAN</h6>
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">LAN</h6>
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label for="name">Nome utente</label>
                       <input class="form-input rounded w-100 px-2" type="text" id="lan" name="lan" value="">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label for="surname">Ruolo</label></br>
                       {% for role in LAN_ROLES_CHOICES %}
                       <input class="" type="checkbox" id="" name={{role.0}}><span class="pl-3"> {{role.1}}</span></br>
                       {% endfor %}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                       <label for="surname">Cartelle visualizzate</label></br>
                       <div class="row">
                         {% for office in LAN_OFFICE_CHOICES %}
+                        <div class="col-md-4">
+                          <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ADWEB {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ADWEB</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="name">Note</label>
+                      <input class="form-input rounded w-100 px-2" type="text" id="adwebNote" name="adwebNote" value="">
+                    </div>
+                    <div class="col-md-2">
+                      <label>Ruolo</label></br>
+                      {% for role in ADWEB_ROLES_CHOICES %}
+                      <input class="" type="checkbox" id="" name={{role.0}}><span class="pl-3"> {{role.1}}</span></br>
+                      {% endfor %}
+                    </div>
+                    <div class="col-md-8">
+                      <label for="surname">Uffici adweb</label></br>
+                      <div class="row">
+                        {% for office in ADWEB_OFFICE_CHOICES %}
                         <div class="col-md-6">
                           <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
@@ -104,27 +132,26 @@
                     </div>
                     
                   </div>
-                </div> {% endcomment %}
+                </div>
 
-                {% comment %} ADWEB {% endcomment %}
-                {% comment %} <div class="py-2">
-                  <h6 class="border-bottom w-100 pb-2">ADWEB</h6>
+                {% comment %} ASCOT {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ASCOT</h6>
                   <div class="row">
-                    <div class="col-md-3">
-                      <label for="name">Note</label>
-                      <input class="form-input rounded w-100 px-2" type="text" id="adwebNote" name="adwebNote" value="">
+                    <div class="col-md-2">
+                    
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Ruolo</label></br>
-                      {% for role in ADWEB_ROLES_CHOICES %}
+                      {% for role in ASCOT_ROLES_CHOICES %}
                       <input class="" type="checkbox" id="" name={{role.0}}><span class="pl-3"> {{role.1}}</span></br>
                       {% endfor %}
                     </div>
-                    <div class="col-md-6">
-                      <label for="surname">Uffici adweb</label></br>
+                    <div class="col-md-8">
+                      <label for="surname">Uffici ascot</label></br>
                       <div class="row">
-                        {% for office in ADWEB_OFFICE_CHOICES %}
-                        <div class="col-md-12">
+                        {% for office in ASCOT_OFFICE_CHOICES %}
+                        <div class="col-md-6">
                           <input class="" type="checkbox" id="" name={{office.0}}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
@@ -132,8 +159,130 @@
                     </div>
                     
                   </div>
-                </div> {% endcomment %}
- 
+                </div>
+
+                {% comment %} SERVIZI VARI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Ruoli in servizi vari</h6>
+                  <div class="row">
+
+                    <div class="col-md-3">
+                      <label>Ruolo Boxapp</label></br>
+                      <select class="form-input rounded border-none w-100" name="boxAppsRole">
+                        {% for office in BOXAPP_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Website</label></br>
+                      <select class="form-input rounded border-none w-100" name="websiteRole">
+                        {% for office in WEBSITE_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Servizi scolastici</label></br>
+                      <select class="form-input rounded border-none w-100" name="servScolRole">
+                        {% for office in SERVSCOL_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Ruolo Avcp</label></br>
+                      <select class="form-input rounded border-none w-100" name="avcpRole">
+                        {% for office in AVCP_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo FVGpay</label></br>
+                      <select class="form-input rounded border-none w-100" name="servScolRole">
+                        {% for office in FVGPAY_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Ruolo CRM</label></br>
+                      <select class="form-input rounded border-none w-100" name="crmRole">
+                        {% for office in CRM_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Albo pretorio</label></br>
+                      <select class="form-input rounded border-none w-100" name="sueRole">
+                        {% for office in ALBOPRET_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Ruolo SUAP</label></br>
+                      <select class="form-input rounded border-none w-100" name="suapRole">
+                        {% for office in SUAP_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo SUE</label></br>
+                      <select class="form-input rounded border-none w-100" name="sueRole">
+                        {% for office in SUE_ROLES_CHOICES %}
+                        <option value={{office.0}}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+                {% comment %} NOTE {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 w-100 pb-2">Note</h6>
+                  <div class="col-md-12">
+                    <input class="form-input rounded w-100 px-2" type="textarea" row="" id="note" name="note" value="">
+                  </div>
+                </div>
+
+                {% comment %} DISABILITAZIONI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Disabilitazioni</h6>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='mailDeleted' value=mailDeleted><span class="pl-3"> Mail disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='lanDeleted' value={{lanDeleted}}><span class="pl-3"> Lan disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value={{adwebDeleted}}><span class="pl-3"> Adweb disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted><span class="pl-3"> Ascot disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value={{sdiDeleted}}><span class="pl-3"> SDI disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value={{iterattiDeleted}}><span class="pl-3"> Iteratti disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted><span class="pl-3"> Boxapps disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value={{websiteDeleted}}><span class="pl-3"> Sito disabilitato</span></div>
+                      <div><input class="" type="checkbox" id="" name='crmDeleted' value={{crmDeleted}}><span class="pl-3"> Crm disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted><span class="pl-3"> Avcp disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value={{servScuolaDeleted}}><span class="pl-3"> Servizi scolastici disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value={{alboPretDeleted}}><span class="pl-3"> Albo pretorio disabilitata</span></div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row justify-content-end py-2">
+                  <input class="rounded border-none bg-primary text-white col-md-1 mx-3" type="submit" value="Submit">
+                </div>
+
+              </form> 
+              {% endif%}
             </div>
 
           </div>
