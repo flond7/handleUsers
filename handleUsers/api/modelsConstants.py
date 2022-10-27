@@ -176,8 +176,9 @@ LAN_ROLES_CHOICES = [
 ]
 WEBSITE_ROLES_CHOICES = [
   ('w0', '--'),
-  ('w1', 'Utente'),
+  ('w1', 'Editor'),
   ('w2', 'Amministratore'),
+  ('w3', 'Utente area privata'),
 ]
 BOXAPP_ROLES_CHOICES = [
   ('b0', '--'),
