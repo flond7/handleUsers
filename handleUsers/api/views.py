@@ -28,11 +28,6 @@ def apiOverview(request):
   }
   return Response(basicApi_urls)
 
-""" @login_required(login_url="/login/")
-def index(request):
-    context = {'segment': 'index'}
-
-    return render(request, 'templates/login.html') """
 
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
@@ -75,6 +70,59 @@ def user_create(request):
     'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES,
     'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES})
 
+@login_required
+@permission_required('customuser.add_choice', raise_exception=True)
+def user_edit(request, pk):
+    u = customUser.objects.get(id=pk)
+
+    print(u.lanRole)
+    print(LAN_ROLES_CHOICES)
+    # MAIL iterate the office to check the selected ones
+    checked_mail_offices = list(MAIL_OFFICE_CHOICES)
+    for i in range(len(MAIL_OFFICE_CHOICES)):
+      checked_mail_offices[i] = list(checked_mail_offices[i])
+      if MAIL_OFFICE_CHOICES[i][0] in u.mailOffice:
+        checked_mail_offices[i].append('checked')
+      else:
+        checked_mail_offices[i].append('unchecked')
+    
+    # LAN iterate the office to check the selected ones
+    checked_lan_offices = list(LAN_OFFICE_CHOICES)
+    for i in range(len(LAN_OFFICE_CHOICES)):
+      checked_lan_offices[i] = list(checked_lan_offices[i])
+      if LAN_OFFICE_CHOICES[i][0] in u.lanOffice:
+        checked_lan_offices[i].append('checked')
+      else:
+        checked_lan_offices[i].append('unchecked')
+
+    # ADWEB iterate the office to check the selected ones
+    checked_adweb_offices = list(ADWEB_OFFICE_CHOICES)
+    for i in range(len(ADWEB_OFFICE_CHOICES)):
+      checked_adweb_offices[i] = list(checked_adweb_offices[i])
+      if ADWEB_OFFICE_CHOICES[i][0] in u.adwebOffice:
+        checked_adweb_offices[i].append('checked')
+      else:
+        checked_adweb_offices[i].append('unchecked')
+
+
+    if request.method == "POST":
+        cu = customUserForm(request.POST)
+        if cu.is_valid():
+            cu.save()
+            return HttpResponseRedirect('user_create?submitted=True')
+        else:
+            print("INVALID")
+    else:
+        cu = customUserForm()
+    return render(request, 'user_create.html', {'form': cu, 'u':u, 'MY_CONST': MY_CONST, 
+    'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+    'LAN_OFFICE_CHOICES':checked_lan_offices, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
+    'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
+    'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES, 'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'MAIL_OFFICE_CHOICES': checked_mail_offices,
+    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES,
+    'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES})
+
 def user_add(request):
   cu = customUserForm()
   if request.method == "POST":
@@ -84,13 +132,6 @@ def user_add(request):
       return HttpResponseRedirect('user_overview')
     else:
       return HttpResponse("your form is wrong")
-    
-
-    """ if form.is_valid():
-      cu = form.save(commit=False)
-      print("OK")
-    else:
-      print("ERR") """
 
 def index(request):
     userList = customUser.objects.all()
