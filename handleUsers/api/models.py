@@ -154,6 +154,7 @@ class customUser(models.Model):
   avcpDeleted = models.BooleanField("AVCP disattivato", default=False)
   servScuolaDeleted = models.BooleanField("Servizi scolastici disattivato", default=False)
   alboPretDeleted = models.BooleanField("Albo pretorio disattivato", default=False)
+  masterdataDeleted = models.BooleanField("Masterdata eliminato", default=False)
 
   class Meta:
     ordering = []

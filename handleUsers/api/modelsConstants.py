@@ -56,7 +56,7 @@ MAIL_OFFICE_CHOICES = [
   ('mo8', 'segreteria@'),
   ('mo9', 'sindaco@'),
   ('mo10', 'polizia.locale@'),
-  ('mo11', '@'),
+  ('mo11', 'serviziscolastici@'),
   ('mo12', '@'),
   ('mo13', '@'),
   ('mo14', '@'),
