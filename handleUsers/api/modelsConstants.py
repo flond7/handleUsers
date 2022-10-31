@@ -171,6 +171,7 @@ ASCOT_OFFICE_CHOICES = [
 ]
 
 LAN_ROLES_CHOICES = [
+  ('l0', '--'),
   ('l1', 'Utente'),
   ('l2', 'Amministratore'),
 ]
