@@ -115,6 +115,9 @@ class customUser(models.Model):
   #BOXAPPS
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
 
+  #MASTERDATA
+  masterDataRole = models.CharField(max_length = 4, choices = MASTERDATA_ROLES_CHOICES, default = 'm1', blank=False)
+
   #WEBSITE
   websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w0', blank=False)
 

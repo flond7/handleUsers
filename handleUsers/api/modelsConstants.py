@@ -186,6 +186,11 @@ BOXAPP_ROLES_CHOICES = [
   ('b1', 'Utente'),
   ('b2', 'Amministratore'),
 ]
+MASTERDATA_ROLES_CHOICES = [
+  ('m0', '--'),
+  ('m1', 'Voce inserita'),
+  ('m2', 'Amministratore'),
+]
 SERVSCOL_ROLES_CHOICES = [
   ('ss0', '--'),
   ('ss1', 'Utente'),

@@ -291,6 +291,13 @@
                         <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
+                      </br>
+                      <label>Ruolo Masterdata</label></br>
+                      <select class="form-input rounded border-none w-100" name="masterDataRole">
+                        {% for office in MASTERDATA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.masterDataRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
                     </div>
 
                     <div class="col-md-3">
@@ -325,24 +332,24 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div><input class="" type="checkbox" id="" name='mailDeleted' value=mailDeleted><span class="pl-3"> Mail disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='lanDeleted' value={{lanDeleted}}><span class="pl-3"> Lan disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='masterdataDeleted' value={{adwebDeleted}}><span class="pl-3"> Masterdata cancellato</span></div>
-                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value={{adwebDeleted}}><span class="pl-3"> Adweb disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='lanDeleted' value=lanDeleted {% if u.lanRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.lanRole == 'l0' %} text-light {% endif %}" > Lan disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='masterdataDeleted' value=masterdataDeleted {% if u.masterDataRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.masterDataRole == 'l0' %} text-light {% endif %}"> Masterdata cancellato</span></div>
+                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value=adwebDeleted {% if u.adwebRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.adwebRole == 'a0' %} text-light {% endif %}"> Adweb disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted><span class="pl-3"> Ascot disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value={{sdiDeleted}}><span class="pl-3"> SDI disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value={{iterattiDeleted}}><span class="pl-3"> Iteratti disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted {% if u.ascotRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.ascotRole == 'a0' %} text-light {% endif %}"> Ascot disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value=sdiDeleted {% if u.sdiRole == 'sdi0' %} disabled {% endif %}><span class="pl-3 {% if u.sdiRole == 'sdi0' %} text-light {% endif %}"> SDI disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value=iterattiDeleted {% if u.iterattiRole == 'i0' %} disabled {% endif %}><span class="pl-3 {% if u.iterattiRole == 'i0' %} text-light {% endif %}"> Iteratti disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted><span class="pl-3"> Boxapps disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value={{websiteDeleted}}><span class="pl-3"> Sito disabilitato</span></div>
-                      <div><input class="" type="checkbox" id="" name='crmDeleted' value={{crmDeleted}}><span class="pl-3"> Crm disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted {% if u.boxAppsRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.boxAppsRole == 'c0' %} text-light {% endif %}"> Boxapps disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value=websiteDeleted {% if u.websiteRole == 'w0' %} disabled {% endif %}><span class="pl-3 {% if u.websiteRole == 'w0' %} text-light {% endif %}"> Sito disabilitato</span></div>
+                      <div><input class="" type="checkbox" id="" name='crmDeleted' value=crmDeleted {% if u.crmRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.crmRole == 'c0' %} text-light {% endif %}"> Crm disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted><span class="pl-3"> Avcp disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value={{servScuolaDeleted}}><span class="pl-3"> Servizi scolastici disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value={{alboPretDeleted}}><span class="pl-3"> Albo pretorio disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted {% if u.avcpRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.avcpRole == 'a0' %} text-light {% endif %}"> Avcp disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value=servScuolaDeleted {% if u.servScolRole == 'ss0' %} disabled {% endif %}><span class="pl-3 {% if u.servScolRole == 'ss0' %} text-light {% endif %}"> Servizi scolastici disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value=alboPretDeleted {% if u.alboPretRole == 'ap0' %} disabled {% endif %}><span class="pl-3 {% if u.alboPretRole == 'ap0' %} text-light {% endif %}"> Albo pretorio disabilitata</span></div>
                     </div>
 
                   </div>
