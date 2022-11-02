@@ -228,11 +228,12 @@ ALBOPRET_ROLES_CHOICES = [
   ('ap3', 'Amministratore'),
 ]
 ADWEB_ROLES_CHOICES = [
-  ('a0', 'Utente'),
-  ('a1', 'Addetto segreteria'),
+  ('a0', '--'),
+  ('a1', 'Istruttore'),
   ('a2', 'Istruttore ragioneria'),
-  ('a3', 'Potere di firma'),
+  ('a3', 'Istruttore segreteria'),
   ('a5', 'Politico'),
+  ('a6', 'Potere di firma'),
 ]
 ITERATTI_ROLES_CHOICES = [
   ('i0', '--'),
