@@ -331,25 +331,25 @@
                   <h6 class="h6 border-bottom w-100 pb-2">Disabilitazioni</h6>
                   <div class="row">
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='mailDeleted' value=mailDeleted><span class="pl-3"> Mail disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='lanDeleted' value=lanDeleted {% if u.lanRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.lanRole == 'l0' %} text-light {% endif %}" > Lan disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='masterdataDeleted' value=masterdataDeleted {% if u.masterDataRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.masterDataRole == 'l0' %} text-light {% endif %}"> Masterdata cancellato</span></div>
-                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value=adwebDeleted {% if u.adwebRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.adwebRole == 'a0' %} text-light {% endif %}"> Adweb disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='mailDeleted' value=mailDeleted {% if u.mailDeleted %} checked {% endif %}><span class="pl-3"> Mail disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='lanDeleted' value=lanDeleted {% if u.lanDeleted %} checked {% endif %} {% if u.lanRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.lanRole == 'l0' %} text-light {% endif %}" > Lan disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='masterdataDeleted' value=masterdataDeleted {% if u.masterdataDeleted %} checked {% endif %} {% if u.masterDataRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.masterDataRole == 'l0' %} text-light {% endif %}"> Masterdata cancellato</span></div>
+                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value=adwebDeleted {% if u.adwebDeleted %} checked {% endif %} {% if u.adwebRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.adwebRole == 'a0' %} text-light {% endif %}"> Adweb disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted {% if u.ascotRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.ascotRole == 'a0' %} text-light {% endif %}"> Ascot disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value=sdiDeleted {% if u.sdiRole == 'sdi0' %} disabled {% endif %}><span class="pl-3 {% if u.sdiRole == 'sdi0' %} text-light {% endif %}"> SDI disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value=iterattiDeleted {% if u.iterattiRole == 'i0' %} disabled {% endif %}><span class="pl-3 {% if u.iterattiRole == 'i0' %} text-light {% endif %}"> Iteratti disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted {% if u.ascotDeleted %} checked {% endif %} {% if u.ascotRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.ascotRole == 'a0' %} text-light {% endif %}"> Ascot disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value=sdiDeleted {% if u.sdiDeleted %} checked {% endif %} {% if u.sdiRole == 'sdi0' %} disabled {% endif %}><span class="pl-3 {% if u.sdiRole == 'sdi0' %} text-light {% endif %}"> SDI disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value=iterattiDeleted {% if u.iterattiDeleted %} checked {% endif %} {% if u.iterattiRole == 'i0' %} disabled {% endif %}><span class="pl-3 {% if u.iterattiRole == 'i0' %} text-light {% endif %}"> Iteratti disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted {% if u.boxAppsRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.boxAppsRole == 'c0' %} text-light {% endif %}"> Boxapps disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value=websiteDeleted {% if u.websiteRole == 'w0' %} disabled {% endif %}><span class="pl-3 {% if u.websiteRole == 'w0' %} text-light {% endif %}"> Sito disabilitato</span></div>
-                      <div><input class="" type="checkbox" id="" name='crmDeleted' value=crmDeleted {% if u.crmRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.crmRole == 'c0' %} text-light {% endif %}"> Crm disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted {% if u.boxAppsDeleted %} checked {% endif %} {% if u.boxAppsRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.boxAppsRole == 'c0' %} text-light {% endif %}"> Boxapps disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value=websiteDeleted {% if u.websiteDeleted %} checked {% endif %} {% if u.websiteRole == 'w0' %} disabled {% endif %}><span class="pl-3 {% if u.websiteRole == 'w0' %} text-light {% endif %}"> Sito disabilitato</span></div>
+                      <div><input class="" type="checkbox" id="" name='crmDeleted' value=crmDeleted {% if u.crmDeleted %} checked {% endif %} {% if u.crmRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.crmRole == 'c0' %} text-light {% endif %}"> Crm disabilitata</span></div>
                     </div>
                     <div class="col-md-3">
-                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted {% if u.avcpRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.avcpRole == 'a0' %} text-light {% endif %}"> Avcp disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value=servScuolaDeleted {% if u.servScolRole == 'ss0' %} disabled {% endif %}><span class="pl-3 {% if u.servScolRole == 'ss0' %} text-light {% endif %}"> Servizi scolastici disabilitata</span></div>
-                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value=alboPretDeleted {% if u.alboPretRole == 'ap0' %} disabled {% endif %}><span class="pl-3 {% if u.alboPretRole == 'ap0' %} text-light {% endif %}"> Albo pretorio disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted {% if u.avcpDeleted %} checked {% endif %} {% if u.avcpRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.avcpRole == 'a0' %} text-light {% endif %}"> Avcp disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value=servScuolaDeleted {% if u.servScuolaDeleted %} checked {% endif %} {% if u.servScolRole == 'ss0' %} disabled {% endif %}><span class="pl-3 {% if u.servScolRole == 'ss0' %} text-light {% endif %}"> Servizi scolastici disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value=alboPretDeleted {% if u.alboPretDeleted %} checked {% endif %} {% if u.alboPretRole == 'ap0' %} disabled {% endif %}><span class="pl-3 {% if u.alboPretRole == 'ap0' %} text-light {% endif %}"> Albo pretorio disabilitata</span></div>
                     </div>
 
                   </div>
