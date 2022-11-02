@@ -9,6 +9,7 @@ urlpatterns = [
   path('user_edit/<str:pk>', views.user_edit, name="user_edit"),
   path('user_add', views.user_add, name='user_add'),
   path('index', views.index, name="index"),
+  path('info', views.info, name="info"),
   #path('profile', views.profile, name="profile"),
   path('profile/<str:pk>', views.profile, name="profile"),
   path('adweb', views.adweb, name="adweb"),

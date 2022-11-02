@@ -28,7 +28,6 @@ def apiOverview(request):
   }
   return Response(basicApi_urls)
 
-
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
 def user_overview(request):
@@ -182,6 +181,9 @@ def user_add(request):
 def index(request):
     userList = customUser.objects.all()
     return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
+
+def info(request):
+    return render(request, 'account_info.html', {'MY_CONST': MY_CONST})
 
 @api_view(['GET'])
 def profile(request, pk):

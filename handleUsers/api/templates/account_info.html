@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+      <div class="row">
+        <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+          <div class="card p-3 mb-3">
+            <h4 class="mb-3 border-bottom">Masterdata</h6>
+            <div class="row">
+              <div class="col-md-8">
+                <h6>Amministratori e nominativi</h6>
+                <p>Gli account di amministratore masterdata si creano e cancellano da richieste.enti@insiel.it I nominativi dei vari dipendenti si inseriscono direttamente nel masterdata. Deve esserci una persona con account amministratore, quindi, che entra e segue le procedure per l'inserimento</p>
+                
+                <h6 class="mt-4">Link</h6>
+                <ul>
+                  <li>masterdata procedimenti: http://mdr.regione.fvg.it/apex/f?p=MDAP</li>
+                  <li>masterdata strutture: http://mdr.regione.fvg.it/apex/f?p=MDSO</li>
+                </ul>
+
+                <h6 class="mt-4">Cancellazione nominativo da struttura / ufficio</h6>
+                <ul>
+                  <li>accedere a masterdata strutture come amministratore con SPID o LOGINFVG</li>
+                  <li>andare in pubblicati > dati dell'ente > variazioni > cancellazione persone da struttura</li>
+                  <li>cercare la struttura (es: servizi informatici). compaiono le persone assegnate all'ufficio</li>
+                  <li>selezionare la persona che bisogna eliminare e cliccare su cancellazione associazione. la cancellazione viene prenotata</li>
+                  <li>andare in pubblicazione > collegamenti > pubblicazione di un evento</li>
+                  <li>cliccare sull'evento e poi su pubblica</li>
+                  <li>andare sul backend del sito internet, in bacheca > masterdata > legami > aggiorna delta</li>
+                  <li>andare sulla pagina dove il dato è stato modificato (es: organigramma > servizi informatici) e ripubblicare la pagina</li>
+                </ul>
+              </div>
+              <div class="col-md-4 text-small">
+                <h6>Note</h6>
+                <p>I dati del masterdata vengono ripresi e pubblicati automaticamente nel sito kpax ma va aggiornata la sezione masterdata del sito e poi ripubblicata la pagina interessata</p>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+      </div>
+
+
+
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+{% endblock javascripts %}
