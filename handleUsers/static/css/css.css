@@ -19,6 +19,21 @@
   border: 2px solid #1990e0;
 }
 
+.button-inactive {
+  background: none !important;
+  border: #67748e 1px solid !important; 
+  color: #67748e;
+  align-items: middle;
+  height: 2.2rem
+}
+.button-active {
+  background: none !important;
+  border: #d63384 1px solid !important; 
+  color: #d63384;
+  align-items: middle;
+  height: 2.2rem
+}
+
 .form-input {
   background-color: #fff;;
   border: #eaeaea 1px solid !important;

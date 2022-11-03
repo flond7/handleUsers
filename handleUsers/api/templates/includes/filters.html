@@ -1,5 +1,23 @@
-      <form method="get">
+      <form method="get" class="w-100">
         <div class="row justify-content-end">
+          <div class="col-md-1">
+            <div class="d-flex">
+              <div class="col">
+                <label class="mx-0 w-100 text-center">Attivi</label>
+                <button class="rounded button-active border-none"><i class="fa fa-users mx-1"></i> </button>
+              </div>
+              
+              <div class="col">
+                <label class="mx-0 w-100 text-center">Inattivi</label>
+                <button class="rounded border-none button-inactive d-flex align-items-center justify-content-center mx-3"><i class="fa fa-users mx-1"></i> </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3"></div>
+          {% comment %} <div class="col-md-1">
+            <label for="name">Nome</label>
+            <input class="form-input rounded border-none w-100" type="text" id="name" name="name" value={{name}}>
+          </div> {% endcomment %}
           <div class="col-md-2">
             <label for="name">Nome</label>
             <input class="form-input rounded border-none w-100" type="text" id="name" name="name" value={{name}}>
@@ -27,7 +45,7 @@
               {% endfor %}
             </select>
           </div>
-          <div class="col-md-3 d-flex align-items-center justify-content-center mt-4">
+          <div class="col-md-2 d-flex align-items-center justify-content-center mt-4">
             
             <button class="btn btn-sm text-white bg-primary" type="submit">Cerca</button>
             
