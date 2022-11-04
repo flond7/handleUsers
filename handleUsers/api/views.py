@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
+from django.core.exceptions import ValidationError
 
 from .constants import MY_CONST
 from .modelsConstants import *
@@ -16,29 +17,24 @@ from .serializer import customUserSerializer
 from .forms import customUserForm
 from .filters import customUserFilter
 
-# Create your views here.
-@api_view(['GET'])
-def apiOverview(request):
-  basicApi_urls = {
-    'List':'/woman-list/',
-    'Detail':'/woman-detail/<str:pk>',
-    'Create':'/woman-create/',
-    'Update':'/woman-update/<str:pk>',
-    'Delete':'/woman-delete/<str:pk>',
-  }
-  return Response(basicApi_urls)
-
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
 def user_overview(request):
     userList = customUser.objects.all().order_by('name')
-    #if the dictionary has some values the boolean is true, otherwise false
+    # if the dictionary has some values the boolean is true, otherwise false
     if bool(request.GET):
       user_filter = customUserFilter(request.GET, queryset=userList)
-      #get params from url
+      # get params from url
       name = request.GET.get('name')
       surname = request.GET.get('surname')
       office = request.GET.get('office')
+      active = request.GET.get('active')
+      # if the search is for active/inactive users check user params
+      if active == 'True':
+        print('active')
+      elif active == 'False':
+        print('inactive')
+      
       # ATTENTION: django-filters puts the result inside a qs so you have to pass user_filter.qs
       return render(request, 'user_overview.html', {'userList': user_filter.qs, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'url_office':office, 'surname':surname,'name':name })
     else:
@@ -47,14 +43,34 @@ def user_overview(request):
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
+    u = customUser()
     submitted = False
     if request.method == "POST":
         cu = customUserForm(request.POST)
+        #print(cu)
+        print(u.ascotOffice)
+        print(type(u.ascotOffice))
         if cu.is_valid():
             cu.save()
             return HttpResponseRedirect('user_create?submitted=True')
         else:
-            print("INVALID")
+            render(request, 'user_create.html', {'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
+    'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+    'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
+    'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 
+    'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':SDI_OFFICE_CHOICES,
+    'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':ITERATTI_OFFICE_CHOICES,
+    'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES,
+    'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES, 'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES,
+    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+    'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
+        # if user is new then set active to true
+        # if the user is modified check if it's still active 
+
+
     else:
         cu = customUserForm()
         if 'submitted' in request.GET:
@@ -67,9 +83,11 @@ def user_create(request):
     'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':ITERATTI_OFFICE_CHOICES,
     'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES,
     'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES, 'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES,
-    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES,
-    'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES})
+    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+    'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
@@ -154,9 +172,11 @@ def user_edit(request, pk):
     'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
     'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
     'MAIL_OFFICE_CHOICES': checked_mail_offices,
-    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES,
-    'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES})
+    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+    'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
 
 def user_update(request):
   cu = customUserForm()

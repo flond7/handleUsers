@@ -143,6 +143,7 @@ class customUser(models.Model):
   alboPretRole = models.CharField(max_length = 4, choices = ALBOPRET_ROLES_CHOICES, default = 'ap0', blank=False)
 
   note = models.TextField(default="", blank=True)
+  active = models.BooleanField(default=True)
 
   #DISATTIVAZIONI
   mailDeleted = models.BooleanField("Mail disattivata", default=False)
