@@ -13,6 +13,11 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-body p-3 pb-2">
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  {{ form.errors }}
+                </div>
+              {% endif %}
               {% comment %} {% if submitted %}
                 data submitted
               {% else %}
@@ -24,9 +29,6 @@
                 </div>
               </form> 
               {% endif%} {% endcomment %}
-              {% if submitted %}
-                data submitted
-              {% else %}
               <form method="POST" action='user_create' enctype="multipart/form-data">
                 {% csrf_token %}
               
@@ -84,7 +86,7 @@
                   <div class="row">
                     <div class="col-md-2">
                       <label>Nome utente</label>
-                      <input class="form-input rounded w-100 px-2" type="text" id="lan" name="lan" value={{u.lan}}>
+                      <input class="form-input rounded w-100 px-2" type="text" id="lan" name="lan" value={% if u %} {{u.lan}} {% else %} 'A516-' {% endif %}>
                     </div>
                     <div class="col-md-2">
                       <label>Ruolo</label></br>
@@ -285,17 +287,17 @@
                         {% endfor %}
                       </select>
                       </br>
-                      <label>Ruolo Albo Pretorio</label></br>
-                      <select class="form-input rounded border-none w-100" name="alboPretRole">
-                        {% for office in ALBOPRET_ROLES_CHOICES %}
-                        <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
-                        {% endfor %}
-                      </select>
-                      </br>
                       <label>Ruolo Masterdata</label></br>
                       <select class="form-input rounded border-none w-100" name="masterDataRole">
                         {% for office in MASTERDATA_ROLES_CHOICES %}
                         <option value={{office.0}} {% if office.0 == u.masterDataRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Albo Pretorio</label></br>
+                      <select class="form-input rounded border-none w-100" name="alboPretRole">
+                        {% for office in ALBOPRET_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
                     </div>
@@ -308,7 +310,7 @@
                         {% endfor %}
                       </select>
                       </br>
-                      <label>Ruolo Albo Pretorio</label></br>
+                      <label>Ruolo SUE</label></br>
                       <select class="form-input rounded border-none w-100" name="sueRole">
                         {% for office in SUE_ROLES_CHOICES %}
                         <option value={{office.0}} {% if office.0 == u.sueRole %} selected {% endif %}>{{office.1}}</option>
@@ -360,7 +362,6 @@
                 </div>
 
               </form> 
-              {% endif%}
             </div>
 
           </div>
