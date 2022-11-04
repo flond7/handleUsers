@@ -24,14 +24,19 @@
   border: #67748e 1px solid !important; 
   color: #67748e;
   align-items: middle;
-  height: 2.2rem
+  height: 2.2rem;
+  max-width: 2rem;
 }
 .button-active {
   background: none !important;
   border: #d63384 1px solid !important; 
   color: #d63384;
   align-items: middle;
-  height: 2.2rem
+  height: 2.2rem;
+  max-width: 2rem;
+}
+.icon-bg {
+  font-size: 2rem;
 }
 
 .form-input {
