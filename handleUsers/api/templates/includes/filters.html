@@ -4,12 +4,17 @@
             <div class="d-flex">
               <div class="col">
                 <label class="mx-0 w-100 text-center">Attivi</label>
-                <button class="rounded button-active border-none"><i class="fa fa-users mx-1"></i> </button>
+                {% comment %} <button class="rounded button-active border-none"><i class="fa fa-users mx-1"></i> </button> {% endcomment %}
+                <a class="btn d-flex justify-content-center rounded button-active border-none" href="/api/user_overview?name=&surname=&office=&active=True">
+                  <i class="fa fa-users mx-1"></i>
+                </a>
               </div>
               
-              <div class="col">
+              <div class="col mx-2">
                 <label class="mx-0 w-100 text-center">Inattivi</label>
-                <button class="rounded border-none button-inactive d-flex align-items-center justify-content-center mx-3"><i class="fa fa-users mx-1"></i> </button>
+                <a class="btn d-flex justify-content-center rounded button-inactive border-none" href="/api/user_overview?name=&surname=&office=&active=False">
+                  <i class="fa fa-users mx-1"></i>
+                </a>
               </div>
             </div>
           </div>
