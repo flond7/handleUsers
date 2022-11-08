@@ -174,6 +174,7 @@ LAN_ROLES_CHOICES = [
   ('l0', '--'),
   ('l1', 'Utente'),
   ('l2', 'Amministratore'),
+  ('l3', 'Solo internet'),
 ]
 WEBSITE_ROLES_CHOICES = [
   ('w0', '--'),
