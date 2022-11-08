@@ -6,17 +6,47 @@
   background-image: none !important;
   border: 2px solid #d63384;
 }
+.avatar-border-admin {
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to bottom right, #A7E11E, #1990e0) 1;
+  border-radius: 0.75rem;
+}
+.avatar-border-purple {
+  background-image: none !important;
+  border: 2px solid #d63384;
+}
+.avatar-border-pink {
+  background-image: none !important;
+  border: 2px solid #d63384;
+}
 .avatar-border-yellow {
   background-image: none !important;
   border: 2px solid #e0a119;
+}
+.avatar-border-lightYellow {
+  background-image: none !important;
+  border: 2px solid #ebce91;
 }
 .avatar-border-green {
   background-image: none !important;
   border: 2px solid #19df50;
 }
+.avatar-border-lightGreen {
+  background-image: none !important;
+  border: 2px solid #A7E11E;
+}
 .avatar-border-blue {
   background-image: none !important;
   border: 2px solid #1990e0;
+}
+.avatar-border-darkBlue {
+  background-image: none !important;
+  border: 2px solid #1243b5;
+}
+.avatar-border-black {
+  background-image: none !important;
+  border: 2px solid #333;
 }
 
 .button-inactive {
