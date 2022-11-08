@@ -45,10 +45,16 @@
                                 <img src="{% static 'img/vikingessa_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
                               {% elif u.get_office_display == 'Urp' %}
                                 <img src="{% static 'img/viking_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
+                              {% elif u.get_office_display == 'Anagrafe' %}
+                                <img src="{% static 'img/vikingessa_red.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
+                              {% elif u.get_office_display == 'Contratti' %}
+                                <img src="{% static 'img/viking_red.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
                               {% elif u.get_office_display == 'LLPP' %}
                                 <img src="{% static 'img/vikingessa_green.png' %}" class="avatar avatar-sm avatar-border-green me-3">
+                              {% elif u.get_office_display == 'Manutenzione' %}
+                                <img src="{% static 'img/viking_lightGreen.png' %}" class="avatar avatar-sm avatar-border-green me-3">
                               {% else %}
-                                <img src="{% static 'img/viking.png' %}" class="avatar avatar-sm avatar-border me-3">
+                                <img src="{% static 'img/viking_black.png' %}" class="avatar avatar-sm avatar-border me-3">
                               {% endif %}
                             </div>
                           </a>
