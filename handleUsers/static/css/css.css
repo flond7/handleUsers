@@ -66,9 +66,14 @@
   max-width: 2rem;
 }
 .icon-bg {
+  font-size: 1.1rem !important;
+}
+/* fox allignment in bigger icons*/
+/* .fa-bg:before {
+  margin: -1.7rem 1.5rem;
   font-size: 2rem;
 }
-
+ */
 .form-input {
   background-color: #fff;;
   border: #eaeaea 1px solid !important;
@@ -81,4 +86,7 @@
   border: #eaeaea 1px solid !important;
   height: 2.2rem;
   padding: 0 1rem;
+}
+.text-black {
+  color: var(--bs-heading-color) !important;
 }
