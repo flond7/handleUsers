@@ -292,20 +292,6 @@ https://dev.to/rawas_aditya/how-to-reset-django-migrations-169o
 
 
 
-## REST
-https://www.bezkoder.com/django-angular-crud-rest-framework/
-
-*** WITH ERROR NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None ***
-- pymongo version might be wrong, use 3.12.1
-  pip uninstall pymongo
-  pip install --proxy=http://proxy-bc-el.regione.fvg.it:801 pymongo==3.12.1
-
-*** WITH ERROR cannot be of type "<class \'django.db.models.fields.BigAutoField\'>" ***
-- If it's a mega object with nested objects defined as models, remember to add abstract = True to the Meta class, wich means that djongo won't create a new "table" for the model just include the field where you embedded them
-- it's best to reset the DB and migrate again by
-  -- in migration folder KEEP __init__.py and delete all the other files
-  -- python manage.py makepigrations
-  -- python manage.py migrate
 
 
 ## MODELS SPECIFICS
@@ -317,24 +303,6 @@ To use constants for models,
 reset DB
 https://dev.to/rawas_aditya/how-to-reset-django-migrations-169o
 
-
-## MANAGE URLS
-- In main project folder urls.py you can link the ursl.py of a specific app within the main project inside urlpatterns in the form:
-  path('sample/', include('sample.urls'))
-- remember to have include imported at the top:
-  from django.urls import path, include
-- Create a ursl.py within the app folder to specify urls for the subfolder (the urs will be ip/root-name-main-urls/root-name-app-urls) :
-  from django.urls import path
-  from . import views
-  urlpatterns = [
-    path('pageOne', views.pageOneFunction, name='pageOneName'),
-  ]
-- In settings.py in the main projects add the string with the app name to INSTALLED APPS
-  INSTALLED_APPS = [
-    'django.contrib.admin',
-    . . .
-    'sample',
-  ]
 
 
 
@@ -400,7 +368,8 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
   cd var/www/html/projectFolder/project-folder
   pip install --proxy=http://proxy-bc-el.regione.fvg.it:801 -r requirements.txt
 - Run the server (it will let you see if there are some libraries you still have to install, in that case install them)
-  python manage.py runserver
+  python manage.py runserver 0.0.0.0:3000
+- access the webpage from anywhere on local network trough http://172.20.34.138:3000/api/user_overview
 
 
 ## CONFIG PROXY ON RASPBERRY (https://www.pitronica.com/tutorials/pi-tutorials/raspberry-pi-behind-a-proxy-server/)
