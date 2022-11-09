@@ -40,16 +40,19 @@ def user_overview(request):
     else:
       return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES}) 
 
-@login_required
-@permission_required('customuser.add_choice', raise_exception=True)
+#@login_required
+#@permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
     u = customUser()
     submitted = False
     if request.method == "POST":
+      
+        print(request.POST.getlist('lanOffice'))
+        print(request.POST.get('lanOffice'))
+        print(request.POST.getlist('ascotOffice'))
         cu = customUserForm(request.POST)
         #print(cu)
         print(u.ascotOffice)
-        print(type(u.ascotOffice))
         if cu.is_valid():
             cu.save()
             return HttpResponseRedirect('user_create?submitted=True')
@@ -89,12 +92,13 @@ def user_create(request):
     'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
     'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
 
-@login_required
-@permission_required('customuser.add_choice', raise_exception=True)
+#@login_required
+#@permission_required('customuser.add_choice', raise_exception=True)
 def user_edit(request, pk):
     u = customUser.objects.get(id=pk)
     
     print(u.adwebOffice)
+    print(u.lanOffice)
 
     # MAIL iterate the office to check the selected ones
     checked_mail_offices = list(MAIL_OFFICE_CHOICES)

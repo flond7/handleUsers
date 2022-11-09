@@ -51,7 +51,7 @@
                       <label for="cf">Ufficio</label></br>
                       <select class="form-input rounded border-none w-100" name="office">
                         {% for office in MAIN_OFFICE_CHOICES %}
-                        <option value={{office.0}} {% if office.0 == u.office %} selected {% endif %}>{{office.1}}</option>
+                        <option value={{office.0}} {% if office.0 == u.office %} selected {% endif %}> {{office.1}}</option>
                         {% endfor %}
                       </select>
                     </div>
@@ -71,7 +71,7 @@
                       <div class="row">
                         {% for office in MAIL_OFFICE_CHOICES %}
                         <div class="col-md-4">
-                          <input class="" type="checkbox" id="" name='office' {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='mailOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
@@ -101,7 +101,7 @@
                       <div class="row">
                         {% for office in LAN_OFFICE_CHOICES %}
                         <div class="col-md-4">
-                          <input class="" type="checkbox" id="" name='lanOffice' {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='lanOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
@@ -137,7 +137,7 @@
                       <div class="row">
                         {% for office in ADWEB_OFFICE_CHOICES %}
                         <div class="col-md-6">
-                          <input class="" type="checkbox" id="" name='adwebOffice' value={{u.adwebOffice}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='adwebOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
@@ -166,7 +166,7 @@
                       <div class="row">
                         {% for office in ASCOT_OFFICE_CHOICES %}
                         <div class="col-md-6">
-                          <input class="" type="checkbox" id="" name='ascotOffice' {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='ascotOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
@@ -195,7 +195,7 @@
                       <div class="row">
                         {% for office in SDI_OFFICE_CHOICES %}
                         <div class="col-md-6">
-                          <input class="" type="checkbox" id="" name='sdiOffice' {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='sdiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
@@ -224,7 +224,7 @@
                       <div class="row">
                         {% for office in ITERATTI_OFFICE_CHOICES %}
                         <div class="col-md-6">
-                          <input class="" type="checkbox" id="" name='iterattiOffice' {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          <input class="" type="checkbox" id="" name='iterattiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
                       </div>
