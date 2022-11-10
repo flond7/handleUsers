@@ -37,7 +37,9 @@
                         <div class="d-flex px-2 py-1">
                           <a href="profile/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                             <div>
-                              {% if u.get_lanRole_display == 'Amministratore'%}
+
+                              {% include "includes/application_user_small.html" %}
+                              {% comment %} {% if u.get_lanRole_display == 'Amministratore'%}
                                 <img src= "{% static 'img/admin_mini.jpg' %}"  alt="profile_image" class="avatar-sm avatar-border-admin me-3">
 
                               {% elif u.get_office_display == 'Politico' %}
@@ -72,7 +74,7 @@
 
                               {% else %}
                                 <img src="{% static 'img/viking_black.png' %}" class="avatar avatar-sm avatar-border-black me-3">
-                              {% endif %}
+                              {% endif %} {% endcomment %}
                             </div>
                           </a>
                           <div class="d-flex flex-column justify-content-center">
@@ -139,7 +141,7 @@
                           Dettagli
                         </a>
                         | 
-                        <a href="user_edit/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="user_edit/{{u.id}}?submitted=true" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Modifica
                         </a>
                       </td>
