@@ -40,19 +40,13 @@ def user_overview(request):
     else:
       return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES}) 
 
-#@login_required
-#@permission_required('customuser.add_choice', raise_exception=True)
+@login_required
+@permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
     u = customUser()
     submitted = False
     if request.method == "POST":
-      
-        print(request.POST.getlist('lanOffice'))
-        print(request.POST.get('lanOffice'))
-        print(request.POST.getlist('ascotOffice'))
         cu = customUserForm(request.POST)
-        #print(cu)
-        print(u.ascotOffice)
         if cu.is_valid():
             cu.save()
             return HttpResponseRedirect('user_create?submitted=True')
@@ -78,6 +72,7 @@ def user_create(request):
         cu = customUserForm()
         if 'submitted' in request.GET:
             submitted = True
+            
     return render(request, 'user_create.html', {'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
     'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
     'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
@@ -92,13 +87,12 @@ def user_create(request):
     'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
     'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
 
-#@login_required
-#@permission_required('customuser.add_choice', raise_exception=True)
+@login_required
+@permission_required('customuser.add_choice', raise_exception=True)
 def user_edit(request, pk):
+    submitted = request.GET.get('submitted')
+    print(submitted)
     u = customUser.objects.get(id=pk)
-    
-    print(u.adwebOffice)
-    print(u.lanOffice)
 
     # MAIL iterate the office to check the selected ones
     checked_mail_offices = list(MAIL_OFFICE_CHOICES)
@@ -157,18 +151,16 @@ def user_edit(request, pk):
     if request.method == "POST":
         u.save()
         cu = customUserForm(request.POST)
-        
-        print(cu.get)
-        print(u)
+
         if cu.is_valid():
             cu.save()
             print("VALID")
-            #return HttpResponseRedirect('profile.html')
+            return HttpResponseRedirect('profile.html')
         else:
             print("PRINT")
     else:
         cu = customUserForm()
-    return render(request, 'user_create.html', {'u':u, 'MY_CONST': MY_CONST, 
+    return render(request, 'user_create.html', {'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
     'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
     'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
     'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
@@ -212,8 +204,9 @@ def info(request):
 @api_view(['GET'])
 def profile(request, pk):
   u = customUser.objects.get(id=pk)
-  MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
-  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
+  #MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
+  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST, 
+  'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
 
 @api_view(['GET'])
 def adweb(request):
@@ -222,3 +215,9 @@ def adweb(request):
   MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
   #return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'filter': u_filter })
   return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
+
+@api_view(['GET'])
+def iteratti(request):
+  u = customUser.objects.all()
+  #MY_MODEL_CONST = {'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
+  return render(request, 'iteratti.html', {'userList': u, 'MY_CONST': MY_CONST, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
