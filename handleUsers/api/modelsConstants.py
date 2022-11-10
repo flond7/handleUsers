@@ -127,17 +127,17 @@ ITERATTI_OFFICE_CHOICES = [
   ('i31', 'MESSO - Messo'),
   ('i32', 'ALBO - Albo'),
   ('i33', 'ATALBO - Atti albo'),
-  ('i33', 'VIG - POLIZIA LOCALE'),
+  ('i33', 'VIG - Polizia locale'),
   ('i34', 'CR - Casa di riposo'),
   ('i35', 'UFFSEG - Ufficio segreteria'),
   ('i36', 'SEG - Segretario'),
   ('i37', 'SIND - Sindaco'),
-  ('i38', 'GEN  - COMUNE DI AVIANO - COMUNE DI AVIANO'),
+  ('i38', 'GEN  - Protocollo generale'),
   ('i39', 'BASS	- Basso Daniele - assessore'),
   ('i40', 'CREM	- Cremon Martina - assessore'),
   ('i41', 'RAGZ - Ragozzino Giuseppe - assessore'),
-  ('i42', 'MEN  - MENEGOZ ANDREA - assessore'),
-  ('i43', 'MUN  - MUNGO GIORGIA - assessore'),
+  ('i42', 'MEN  - Menegoz Andrea - assessore'),
+  ('i43', 'MUN  - Mungo Giorgia - assessore'),
 
 ]
 SDI_OFFICE_CHOICES = [
