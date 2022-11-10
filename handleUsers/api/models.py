@@ -111,6 +111,7 @@ class customUser(models.Model):
   iteratti = models.CharField("ID iteratti", max_length=120, blank=True, default="")
   iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'i0', blank=False)
   iterattiOffice = MultiSelectField("Uffici iteratti", max_length = 100, choices = ITERATTI_OFFICE_CHOICES, default = 'i0', blank=False)
+  iterattiNote = models.CharField("Note per iteratti", max_length = 150, default='', blank=True)
 
   #BOXAPPS
   boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
