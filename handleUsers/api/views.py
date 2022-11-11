@@ -91,7 +91,6 @@ def user_create(request):
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_edit(request, pk):
     submitted = request.GET.get('submitted')
-    print(submitted)
     u = customUser.objects.get(id=pk)
 
     # MAIL iterate the office to check the selected ones
@@ -149,7 +148,8 @@ def user_edit(request, pk):
         checked_iteratti_offices[i].append('unchecked')
 
     if request.method == "POST":
-        u.save()
+
+        #u.save()
         cu = customUserForm(request.POST)
 
         if cu.is_valid():
@@ -160,19 +160,19 @@ def user_edit(request, pk):
             print("PRINT")
     else:
         cu = customUserForm()
-    return render(request, 'user_create.html', {'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
-    'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
-    'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
-    'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
-    'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
-    'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
-    'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
-    'MAIL_OFFICE_CHOICES': checked_mail_offices,
-    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
-    'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
-    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
+        return render(request, 'user_create.html', {'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
+        'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+        'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
+        'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
+        'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
+        'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
+        'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
+        'MAIL_OFFICE_CHOICES': checked_mail_offices,
+        'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+        'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+        'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+        'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+        'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
 
 def user_update(request):
   cu = customUserForm()
@@ -183,7 +183,7 @@ def user_update(request):
       return HttpResponseRedirect('user_overview')
     else:
       return HttpResponse("your form is wrong")
-
+""" 
 def user_add(request):
   cu = customUserForm()
   if request.method == "POST":
@@ -193,7 +193,7 @@ def user_add(request):
       return HttpResponseRedirect('user_overview')
     else:
       return HttpResponse("your form is wrong")
-
+ """
 def index(request):
     userList = customUser.objects.all()
     return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
