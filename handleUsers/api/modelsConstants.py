@@ -63,12 +63,13 @@ MAIL_OFFICE_CHOICES = [
   ('mo15', 'gestione.territorio@'),
   ('mo16', 'ambiente@'),
   ('mo17', 'commercio@'),
-  ('mo18', '@'),
+  ('mo18', 'urp@'),
   ('mo19', '@'),
   ('mo20', 'vicesindaco@'),
 ]
 ADWEB_OFFICE_CHOICES = [
   ('ao0', '--'),
+  ('ao23', '2015 Attività segreteria'),
   ('ao1', 'Servizi alla persona e alla comunità'),
   ('ao2', 'Servizi demografici'),
   ('ao3', 'Servizi educativi e culturali'),
