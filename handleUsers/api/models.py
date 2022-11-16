@@ -31,26 +31,12 @@ class officeMail(models.Model):
 
   def __str__(self):
     return self.mail
-""" 
-class officeAdweb(models.Model):
-  offices = models.CharField(max_length=100, blank=True, default='')
 
-  def __str__(self):
-    return self.offices
- """
 class officeSDI(models.Model):
   offices = models.CharField(max_length=100, blank=True, default='')
 
   def __str__(self):
     return self.offices
-
-
-""" class userEmail (models.Model):
-  personalMail = models.CharField("Mail personale", max_length=100, blank=True, default='')
-  officeMail = models.ManyToManyField(officeMail)
-
-  def __str__(self):
-    return self.personalMail """
 
 class userLan (models.Model):
   lanId = models.CharField("Nome utente rete locale", max_length=100, blank=True, default='A516-')
@@ -58,21 +44,13 @@ class userLan (models.Model):
 
   def __str__(self):
     return self.lanId
-""" 
-class userAdweb (models.Model):
-  adwebId = models.CharField("Nome utente", max_length=100, blank=True, default='A516-')
-  adwebOffices = models.ManyToManyField(officeAdweb)
 
-  def __str__(self):
-    return self.adwebId
- """
 class userSDI (models.Model):
   sdiId = models.CharField("LOGIN FVG", max_length=100, blank=True, default='')
   sdiOffices = models.ManyToManyField(officeSDI)
 
   def __str__(self):
     return self.sdiId
-
 
 class customUser(models.Model):
   #_id = models.ObjectIdField()
@@ -132,6 +110,12 @@ class customUser(models.Model):
 
   #FVG pay
   fvgPayRole = models.CharField(max_length = 2, choices = FVGPAY_ROLES_CHOICES, default = 's0', blank=False)
+
+  #MEPA
+  mepaRole = models.CharField(max_length = 4, choices = MEPA_ROLES_CHOICES, default = 'm0', blank=False)
+
+  #AGENZIA DELLE ENTRATE
+  agEntrRole = models.CharField(max_length = 4, choices = AGENTR_ROLES_CHOICES, default = 'a0', blank=False)
 
   #SUE
   sueRole = models.CharField(max_length = 2, choices = SUE_ROLES_CHOICES, default = 's0', blank=False)

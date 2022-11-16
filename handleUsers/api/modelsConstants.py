@@ -233,6 +233,16 @@ FVGPAY_ROLES_CHOICES = [
   ('f1', 'Utente'),
   ('f2', 'Amministratore'),
 ]
+MEPA_ROLES_CHOICES = [
+  ('m0', '--'),
+  ('m1', 'Istruttore'),
+  ('m2', 'Punto ordinante'),
+]
+AGENTR_ROLES_CHOICES = [
+  ('a0', '--'),
+  ('a1', 'Istruttore'),
+  ('a2', 'PO'),
+]
 ALBOPRET_ROLES_CHOICES = [
   ('ap0', '--'),
   ('ap1', 'Visualizzatore'),
