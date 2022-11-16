@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #'sass_processor',
     'multiselectfield',
     'django_filters',
+    'django_extensions',
     'api',
 ]
 
