@@ -60,6 +60,7 @@ class customUser(models.Model):
   surname = models.CharField("Cognome", max_length=100, blank=True, default='')
   cf = models.CharField("Codice fiscale", max_length=100, blank=True, default='')
   office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'o0', blank=False) #assegnazione a un ufficio principale, per capirsi
+  jobCategory = models.CharField("Categoria",max_length = 5, default = '', blank=True) #C1, C2, D1, D2... per eventuale recupero gesnet
 
   #MAIL
   mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
