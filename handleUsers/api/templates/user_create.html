@@ -248,7 +248,7 @@
                   <h6 class="h6 border-bottom w-100 pb-2">Ruoli in servizi vari</h6>
                   <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Ruolo Boxapp</label></br>
                       <select class="form-input rounded border-none w-100" name="boxAppsRole">
                         {% for office in BOXAPP_ROLES_CHOICES %}
@@ -262,18 +262,9 @@
                         <option value={{office.0}} {% if office.0 == u.websiteRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
-                      </br>
-                      <label>Ruolo Servizi scolastici</label></br>
-                      <select class="form-input rounded border-none w-100" name="servScolRole">
-                        {% for office in SERVSCOL_ROLES_CHOICES %}
-                        <option value={{office.0}} {% if office.0 == u.servScolRole %} selected {% endif %}>{{office.1}}</option>
-                        {% endfor %}
-                      </select>
-                    </br>
-
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Ruolo Avcp</label></br>
                       <select class="form-input rounded border-none w-100" name="avcpRole">
                         {% for office in AVCP_ROLES_CHOICES %}
@@ -289,7 +280,7 @@
                       </select>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Ruolo CRM</label></br>
                       <select class="form-input rounded border-none w-100" name="crmRole">
                         {% for office in CRM_ROLES_CHOICES %}
@@ -303,16 +294,25 @@
                         <option value={{office.0}} {% if office.0 == u.masterDataRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
-                      </br>
+                    </div>
+
+                    <div class="col-md-2">
                       <label>Ruolo Albo Pretorio</label></br>
                       <select class="form-input rounded border-none w-100" name="alboPretRole">
                         {% for office in ALBOPRET_ROLES_CHOICES %}
                         <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
+                      </br>
+                      <label>Amministrazione trasparente</label></br>
+                      <select class="form-input rounded border-none w-100" name="ammTraspRole">
+                        {% for office in AMMTRASP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.ammTraspRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Ruolo SUAP</label></br>
                       <select class="form-input rounded border-none w-100" name="suapRole">
                         {% for office in SUAP_ROLES_CHOICES %}
@@ -325,14 +325,18 @@
                         {% for office in SUE_ROLES_CHOICES %}
                         <option value={{office.0}} {% if office.0 == u.sueRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
-                      </select></br>
-                      <label>Amministrazione trasparente</label></br>
-                      <select class="form-input rounded border-none w-100" name="ammTraspRole">
-                        {% for office in AMMTRASP_ROLES_CHOICES %}
-                        <option value={{office.0}} {% if office.0 == u.ammTraspRole %} selected {% endif %}>{{office.1}}</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo Servizi scolastici</label></br>
+                      <select class="form-input rounded border-none w-100" name="servScolRole">
+                        {% for office in SERVSCOL_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.servScolRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
                     </div>
+                    
                   </div>
                 </div>
 
