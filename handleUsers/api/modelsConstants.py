@@ -272,3 +272,8 @@ ASCOT_ROLES_CHOICES = [
   ('a1', 'Utente'),
   ('a2', 'Amministratore'),
 ]
+AMMTRASP_ROLES_CHOICES = [
+  ('at0', '--'),
+  ('at1', 'Utente'),
+  ('at2', 'Amministratore'),
+]
