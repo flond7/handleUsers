@@ -9,7 +9,7 @@ MAIN_OFFICE_CHOICES = [
   ('o7', 'Messo'),
   ('o8', 'Polizia locale'),
   ('o9', 'Anagrafe'),
-  ('o10', 'Magazzino'),
+  ('o10', 'Manutenzione'),
   ('o11', 'LLPP'),
   ('o12', 'Ambiente'),
   ('o13', 'Commercio'),
@@ -46,7 +46,7 @@ LAN_OFFICE_CHOICES = [
 ]
 MAIL_OFFICE_CHOICES = [
   ('mo0', '--'),
-  ('mo1', 'magazzino@'),
+  ('mo1', 'manutenzione@'),
   ('mo2', 'patrimonio@'),
   ('mo3', 'tecnico@'),
   ('mo4', 'manutenzione@'),
