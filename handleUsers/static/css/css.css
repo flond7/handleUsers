@@ -1,6 +1,9 @@
 .h6 {
   color: #d63384
 }
+.min-height-150 {
+  min-height: 150px;
+}
 
 .avatar-border {
   background-image: none !important;
@@ -10,7 +13,7 @@
   border-width: 2px;
   border-style: solid;
   border-image: linear-gradient(to bottom right, #A7E11E, #1990e0) 1;
-  border-radius: 0.75rem;
+  border-radius: 0 !important;
 }
 
 

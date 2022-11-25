@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.core.exceptions import ValidationError
 
+
 from .constants import MY_CONST
 from .modelsConstants import *
 from .models import customUser
@@ -17,9 +18,13 @@ from .serializer import customUserSerializer
 from .forms import customUserForm
 from .filters import customUserFilter
 
+
+
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
 def user_overview(request):
+    #custom css for avatar
+    cssPage = 'avatar me-3'
     userList = customUser.objects.all().order_by('name')
     # if the dictionary has some values the boolean is true, otherwise false
     if bool(request.GET):
@@ -36,9 +41,14 @@ def user_overview(request):
         print('inactive')
       
       # ATTENTION: django-filters puts the result inside a qs so you have to pass user_filter.qs
-      return render(request, 'user_overview.html', {'userList': user_filter.qs, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'url_office':office, 'surname':surname,'name':name })
+      return render(request, 'user_overview.html', {
+        'userList': user_filter.qs, 
+        'cssPage':cssPage,
+        'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 'url_office':office, 'surname':surname,'name':name })
     else:
-      return render(request, 'user_overview.html', {'userList': userList, 'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES}) 
+      return render(request, 'user_overview.html', {'userList': userList, 
+        'cssPage':cssPage,
+        'MY_CONST': MY_CONST, 'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES}) 
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
@@ -203,21 +213,27 @@ def info(request):
 
 @api_view(['GET'])
 def profile(request, pk):
+  #custom css for avatar
+  cssPage = "w-100 border-radius-lg shadow-sm"
   u = customUser.objects.get(id=pk)
   #MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
-  return render(request, 'profile.html', {'u': u, 'MY_CONST': MY_CONST, 
+  return render(request, 'profile.html', {'u': u,  'cssPage':cssPage, 'MY_CONST': MY_CONST, 
   'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
 
 @api_view(['GET'])
 def adweb(request):
+  #custom css for avatar
+  cssPage = 'avatar me-3'
   u = customUser.objects.all()
   #u_filter = customUserFilter(request.GET, queryset=u)
   MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
   #return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'filter': u_filter })
-  return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
+  return render(request, 'adweb.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
 
 @api_view(['GET'])
 def iteratti(request):
+  #custom css for avatar
+  cssPage = 'avatar me-3'
   u = customUser.objects.all()
   #MY_MODEL_CONST = {'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
-  return render(request, 'iteratti.html', {'userList': u, 'MY_CONST': MY_CONST, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
+  return render(request, 'iteratti.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
