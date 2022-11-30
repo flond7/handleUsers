@@ -37,44 +37,7 @@
                         <div class="d-flex px-2 py-1">
                           <a href="profile/{{u.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                             <div>
-
                               {% include "includes/user_avatar.html" %}
-                              {% comment %} {% if u.get_lanRole_display == 'Amministratore'%}
-                                <img src= "{% static 'img/admin_mini.jpg' %}"  alt="profile_image" class="avatar-sm avatar-border-admin me-3">
-
-                              {% elif u.get_office_display == 'Politico' %}
-                                <img src="{% static 'img/viking_blue.png' %}" class="avatar avatar-sm avatar-border-blue me-3">
-                              {% elif u.get_office_display == 'Segreteria' %}
-                                <img src="{% static 'img/vikingessa_darkBlue.png' %}" class="avatar avatar-sm avatar-border-darkBlue me-3">
-                              
-                              {% elif u.get_office_display == 'Urp' %}
-                                <img src="{% static 'img/viking_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
-                              
-                              {% elif u.get_office_display == 'Anagrafe' %}
-                                <img src="{% static 'img/vikingessa_red.png' %}" class="avatar avatar-sm avatar-border-red me-3">
-                              {% elif u.get_office_display == 'Contratti' %}
-                                <img src="{% static 'img/viking_red.png' %}" class="avatar avatar-sm avatar-border-red me-3">
-                              
-                              {% elif u.get_office_display == 'Ragioneria' %}
-                                <img src="{% static 'img/vikingessa_purple.png' %}" class="avatar avatar-sm avatar-border-purple me-3">
-                              {% elif u.get_office_display == 'Tributi' %}
-                                <img src="{% static 'img/viking_pink.png' %}" class="avatar avatar-sm avatar-border-pink me-3">
-
-                                {% elif u.get_office_display == 'LLPP' %}
-                                <img src="{% static 'img/vikingessa_yellow.png' %}" class="avatar avatar-sm avatar-border-yellow me-3">
-                              {% elif u.get_office_display == 'Manutenzione' %}
-                                <img src="{% static 'img/viking_lightYellow.png' %}" class="avatar avatar-sm avatar-border-lightYellow me-3">
-
-                              {% elif u.get_office_display == 'Edilizia' %}
-                                <img src="{% static 'img/viking_lightGreen.png' %}" class="avatar avatar-sm avatar-border-green me-3">
-                              {% elif u.get_office_display == 'Commercio' %}
-                                <img src="{% static 'img/viking_lightGreen.png' %}" class="avatar avatar-sm avatar-border-green me-3">
-                              {% elif u.get_office_display == 'Ambiente' %}
-                                <img src="{% static 'img/vikingessa_lightGreen.png' %}" class="avatar avatar-sm avatar-border-green me-3">
-
-                              {% else %}
-                                <img src="{% static 'img/viking_black.png' %}" class="avatar avatar-sm avatar-border-black me-3">
-                              {% endif %} {% endcomment %}
                             </div>
                           </a>
                           <div class="d-flex flex-column justify-content-center">
@@ -141,7 +104,7 @@
                           Dettagli
                         </a>
                         | 
-                        <a href="user_edit/{{u.id}}?submitted=true" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="user_update/{{u.id}}?submitted=true" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Modifica
                         </a>
                       </td>
