@@ -73,7 +73,8 @@ def user_create(request):
     'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
     'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
     'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES': AMMTRASP_ROLES_CHOICES})
+    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+    'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
         # if user is new then set active to true
         # if the user is modified check if it's still active 
 
@@ -95,7 +96,8 @@ def user_create(request):
     'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
     'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
     'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES})
+    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+    'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
@@ -182,9 +184,129 @@ def user_edit(request, pk):
         'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
         'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
         'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-        'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES})
+        'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+        'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
+# function for a separated create/edit page
+def user_updateNew(request, pk):
+    submitted = request.GET.get('submitted')
+    u = customUser.objects.get(id=pk)
+
+    # MAIL iterate the office to check the selected ones
+    checked_mail_offices = list(MAIL_OFFICE_CHOICES)
+    for i in range(len(MAIL_OFFICE_CHOICES)):
+      checked_mail_offices[i] = list(checked_mail_offices[i])
+      if MAIL_OFFICE_CHOICES[i][0] in u.mailOffice:
+        checked_mail_offices[i].append('checked')
+      else:
+        checked_mail_offices[i].append('unchecked')
+    
+    # LAN iterate the office to check the selected ones
+    checked_lan_offices = list(LAN_OFFICE_CHOICES)
+    for i in range(len(LAN_OFFICE_CHOICES)):
+      checked_lan_offices[i] = list(checked_lan_offices[i])
+      if LAN_OFFICE_CHOICES[i][0] in u.lanOffice:
+        checked_lan_offices[i].append('checked')
+      else:
+        checked_lan_offices[i].append('unchecked')
+
+    # ADWEB iterate the office to check the selected ones
+    checked_adweb_offices = list(ADWEB_OFFICE_CHOICES)
+    for i in range(len(ADWEB_OFFICE_CHOICES)):
+      checked_adweb_offices[i] = list(checked_adweb_offices[i])
+      if ADWEB_OFFICE_CHOICES[i][0] in u.adwebOffice:
+        checked_adweb_offices[i].append('checked')
+      else:
+        checked_adweb_offices[i].append('unchecked')
+
+    # ASCOT iterate the office to check the selected ones
+    checked_ascot_offices = list(ASCOT_OFFICE_CHOICES)
+    for i in range(len(ASCOT_OFFICE_CHOICES)):
+      checked_ascot_offices[i] = list(checked_ascot_offices[i])
+      if ASCOT_OFFICE_CHOICES[i][0] in u.ascotOffice:
+        checked_ascot_offices[i].append('checked')
+      else:
+        checked_ascot_offices[i].append('unchecked')
+
+    # SDI iterate the office to check the selected ones
+    checked_sdi_offices = list(SDI_OFFICE_CHOICES)
+    for i in range(len(SDI_OFFICE_CHOICES)):
+      checked_sdi_offices[i] = list(checked_sdi_offices[i])
+      if SDI_OFFICE_CHOICES[i][0] in u.sdiOffice:
+        checked_sdi_offices[i].append('checked')
+      else:
+        checked_sdi_offices[i].append('unchecked')
+
+    # ITERATTI iterate the office to check the selected ones
+    checked_iteratti_offices = list(ITERATTI_OFFICE_CHOICES)
+    for i in range(len(ITERATTI_OFFICE_CHOICES)):
+      checked_iteratti_offices[i] = list(checked_iteratti_offices[i])
+      if ITERATTI_OFFICE_CHOICES[i][0] in u.iterattiOffice:
+        checked_iteratti_offices[i].append('checked')
+      else:
+        checked_iteratti_offices[i].append('unchecked')
+
+    # if I'm sending a post request it means I want to save, otherwise I'm sending a GET request and it means I want to see the page
+    if request.method == "POST":
+        print("POST")
+        submitted = True
+        cu = customUserForm(request.POST)
+        print(cu)
+        if cu.is_valid():
+            cu.save()
+            return render(request, 'user_update.html', {
+            'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
+            'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+            'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
+            'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
+            'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
+            'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
+            'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
+            'MAIL_OFFICE_CHOICES': checked_mail_offices,
+            'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 
+            'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+            'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 
+            'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+            'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
+            'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+            'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
+            'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+            'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
+            'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
+            'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+            'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
+            'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
+        #u.save()
+    else:
+        cu = customUserForm()
+        return render(request, 'user_update.html', {
+        'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
+        'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+        'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
+        'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
+        'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
+        'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
+        'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
+        'MAIL_OFFICE_CHOICES': checked_mail_offices,
+        'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 
+        'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+        'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 
+        'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+        'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
+        'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+        'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
+        'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+        'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
+        'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
+        'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+        'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
+        'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
+
+
+
+# in the user creation/edit view if submitted = True then this function gets called
 def user_update(request):
+  print ("USER UPDATE")
   cu = customUserForm()
   if request.method == "POST":
     cu = customUserForm(request.POST) 

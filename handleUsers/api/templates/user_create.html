@@ -310,6 +310,20 @@
                         <option value={{office.0}} {% if office.0 == u.ammTraspRole %} selected {% endif %}>{{office.1}}</option>
                         {% endfor %}
                       </select>
+                      </br>
+                      <label>Mepa</label></br>
+                      <select class="form-input rounded border-none w-100" name="mepaRole">
+                        {% for office in MEPA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.mepaRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </br>
+                    <label>Agenzia delle entrate</label></br>
+                    <select class="form-input rounded border-none w-100" name="agEntrRole">
+                      {% for office in AGENTR_ROLES_CHOICES %}
+                      <option value={{office.0}} {% if office.0 == u.agEntrRole %} selected {% endif %}>{{office.1}}</option>
+                      {% endfor %}
+                    </select>
                     </div>
 
                     <div class="col-md-2">
