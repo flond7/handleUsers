@@ -16,28 +16,13 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar-xl position-relative">
-
               {% include "includes/user_avatar.html" %}
-              
-              {% comment %} {% if u.get_lanRole_display == 'Amministratore'%}
-                <img src= "{% static 'img/admin_mini.jpg' %}"  class="w-100 border-radius-lg shadow-sm avatar-border">
-              {% elif u.get_office_display == 'Politico' %}
-                <img src="{% static 'img/viking_blue.png' %}" class="w-100 border-radius-lg shadow-sm avatar-border-blue">
-              {% elif u.get_office_display == 'Segreteria' %}
-                <img src="{% static 'img/vikingessa_yellow.png' %}" class="w-100 border-radius-lg shadow-sm avatar-border-yellow">
-              {% elif u.get_office_display == 'Urp' %}
-                <img src="{% static 'img/viking_yellow.png' %}" class="w-100 border-radius-lg shadow-sm avatar-border-yellow">
-              {% elif u.get_office_display == 'LLPP' %}
-                <img src="{% static 'img/vikingessa_green.png' %}" class="w-100 border-radius-lg shadow-sm avatar-border-green">
-              {% else %}
-                <img src="{% static 'img/viking.png' %}" class="w-100 border-radius-lg shadow-sm avatar-border">
-              {% endif %} {% endcomment %}
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                {{u.name}} {{u.surname}}
+                {{u.name}} {{u.surname}} - {{u.cf}}
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
                 {{u.get_office_display}}
