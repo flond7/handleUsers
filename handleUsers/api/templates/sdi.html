@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
-{% block title %} Adweb {% endblock title %}
+{% block title %} Sdi {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -30,7 +30,7 @@
                         <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-4">Note</div>
                       </div>
                         {% for u in userList %} 
-                          {% if office.1 in u.get_adwebOffice_display %}
+                          {% if office.1 in u.get_sdiOffice_display %}
                             <div class="d-flex mx-3 py-3 border-bottom">
                               <div class="d-flex justify-content-centeralign-start col-md-2">
                                 <div>
