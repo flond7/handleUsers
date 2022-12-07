@@ -36,8 +36,8 @@
                         <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Utente</div>
                         <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Attivo</div>
                         <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Ufficio</div>
-                        <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-3">Ruolo</div>
-                        <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-3">Note</div>
+                        <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-4">Ruolo</div>
+                        <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Note</div>
                       </div>
                         {% for u in userList %} 
                           {% if office.1 in u.get_sdiOffice_display %}
@@ -66,7 +66,7 @@
                                 {% endfor %}
                               </div>
 
-                              <div class="align-middle text-center my-auto col-md-3 text-sm">
+                              <div class="align-middle text-center my-auto col-md-4 text-sm">
                                 {% for element in u.get_sdiRole_display|split %}
                                 <span class="badge badge-sm bg-gradient-secondary d-block mb-1 w-fit">
                                   {{ element}}
@@ -74,7 +74,7 @@
                                 {% endfor %}
                               </div>
 
-                              <div class="align-middle my-auto col-md-3 text-sm">
+                              <div class="align-middle my-auto col-md-2 text-sm">
                                 <span> {{ u.sdiNote}} </span>
                               </div>
 
