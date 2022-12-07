@@ -17,7 +17,8 @@ MAIN_OFFICE_CHOICES = [
   ('o15', 'Biblioteca'),
   ('o16', 'Informagiovani'),
   ('o17', 'CDR'),
-  ('o18', 'Politico')
+  ('o18', 'Politico'),
+  ('o19', 'Contratti')
 ]
 LAN_OFFICE_CHOICES = [
   ('l0', '--'),
@@ -149,14 +150,14 @@ ITERATTI_OFFICE_CHOICES = [
 ]
 SDI_ROLES_CHOICES = [
   ('sdi0', '--'),
-  ('sdi1', 'FPAVAL - Attive: Valida, mette allegati, visualizza fatture propria struttura'),
+  ('sdi1', 'FPAVAL - Attive: Valida mette allegati visualizza fatture propria struttura'),
   ('sdi2', 'FPALETT - Attive: Legge fatture propria struttura'),
-  ('sdi3', 'FPAFIRMA - Attive: Valida, mette allegati, Convalida fatture intero ente'),
+  ('sdi3', 'FPAFIRMA - Attive: Valida mette allegati e convalida fatture intero ente'),
   ('sdi4', 'FPAGESTLETT - Passive: Visualizza fatture propria struttura'),
   ('sdi5', 'FPASUPER - Passive: Visualizza fatture intero ente'),
   ('sdi6', 'FPASUPERA - Passive: Visualizza e porta in contabilità fatture intero ente'),
-  ('sdi7', 'FPASUPERB - Passive: Visualizza, porta in contabilità, dà esito per fatture intero ente'),
-  ('sdi8', 'FPASUPERC - Passive: Visualizza, porta in contabilità, dà esito e inoltra per fatture intero ente'),
+  ('sdi7', 'FPASUPERB - Passive: Visualizza porta in contabilità dà esito per fatture intero ente'),
+  ('sdi8', 'FPASUPERC - Passive: Visualizza porta in contabilità dà esito e inoltra per fatture intero ente'),
   ('sdi9', 'FPAGESTIONE - Passive: Gestisce fatture propria struttura'),
 ]
 ASCOT_OFFICE_CHOICES = [
@@ -278,6 +279,7 @@ SDI_OFFICE_CHOICES = [
   ('sdi10', 'Tributi'),
   ('sdi11', 'Urbanistica ambiente commercio'),
   ('sdi12', 'Ufficio centrale'),
+  ('sdi13', 'Manutenzione'),
 ]
 ASCOT_ROLES_CHOICES = [
   ('a0', '--'),
