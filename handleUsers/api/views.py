@@ -290,17 +290,6 @@ def user_update(request, pk):
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
-""" 
-def user_add(request):
-  cu = customUserForm()
-  if request.method == "POST":
-    cu = customUserForm(request.POST) 
-    if cu.is_valid():
-      cu.save()
-      return HttpResponseRedirect('user_overview')
-    else:
-      return HttpResponse("your form is wrong")
- """
 def index(request):
     userList = customUser.objects.all()
     return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
@@ -329,3 +318,10 @@ def iteratti(request):
   cssPage = 'avatar me-3'
   u = customUser.objects.all()
   return render(request, 'iteratti.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
+
+@api_view(['GET'])
+def sdi(request):
+  #custom css for avatar
+  cssPage = 'avatar me-3'
+  u = customUser.objects.all()
+  return render(request, 'sdi.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'SDI_OFFICE_CHOICES': SDI_OFFICE_CHOICES })

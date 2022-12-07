@@ -14,5 +14,6 @@ urlpatterns = [
   path('profile/<str:pk>', views.profile, name="profile"),
   path('adweb', views.adweb, name="adweb"),
   path('iteratti', views.iteratti, name="iteratti"),
+  path('sdi', views.sdi, name="sdi"),
   
  ] 
