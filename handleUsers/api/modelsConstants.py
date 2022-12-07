@@ -64,7 +64,7 @@ MAIL_OFFICE_CHOICES = [
   ('mo16', 'ambiente@'),
   ('mo17', 'commercio@'),
   ('mo18', 'urp@'),
-  ('mo19', '@'),
+  ('mo19', 'casa.riposo@'),
   ('mo20', 'vicesindaco@'),
 ]
 ADWEB_OFFICE_CHOICES = [
@@ -147,17 +147,17 @@ ITERATTI_OFFICE_CHOICES = [
   ('i43', 'PORAG  - PO Ragioneria'),
 
 ]
-SDI_OFFICE_CHOICES = [
+SDI_ROLES_CHOICES = [
   ('sdi0', '--'),
-  ('sdi1', 'Fatture Attive - Validatore'),
-  ('sdi2', 'Fatture Attive - Lettore'),
-  ('sdi3', 'Fatture Attive - Responsabile firma'),
-  ('sdi4', 'Fatture Passive - Visualizzatore struttura'),
-  ('sdi5', 'Fatture Passive - Visualizzatore'),
-  ('sdi6', 'Fatture Passive - Supervisore contabilità'),
-  ('sdi7', 'Fatture Passive - Supervisore contabilità e esiti'),
-  ('sdi8', 'Fatture Passive - Supervisore contabilità, esiti e inoltro'),
-  ('sdi9', 'Fatture Passive - Gestore'),
+  ('sdi1', 'FPAVAL - Attive: Valida, mette allegati, visualizza fatture propria struttura'),
+  ('sdi2', 'FPALETT - Attive: Legge fatture propria struttura'),
+  ('sdi3', 'FPAFIRMA - Attive: Valida, mette allegati, Convalida fatture intero ente'),
+  ('sdi4', 'FPAGESTLETT - Passive: Visualizza fatture propria struttura'),
+  ('sdi5', 'FPASUPER - Passive: Visualizza fatture intero ente'),
+  ('sdi6', 'FPASUPERA - Passive: Visualizza e porta in contabilità fatture intero ente'),
+  ('sdi7', 'FPASUPERB - Passive: Visualizza, porta in contabilità, dà esito per fatture intero ente'),
+  ('sdi8', 'FPASUPERC - Passive: Visualizza, porta in contabilità, dà esito e inoltra per fatture intero ente'),
+  ('sdi9', 'FPAGESTIONE - Passive: Gestisce fatture propria struttura'),
 ]
 ASCOT_OFFICE_CHOICES = [
   ('a0', '--'),
@@ -183,7 +183,6 @@ ASCOT_OFFICE_CHOICES = [
   ('a20', 'Segretario generale'),
   ('a21', 'Ufficio gestione delle risorse umane - MCM'),
 ]
-
 LAN_ROLES_CHOICES = [
   ('l0', '--'),
   ('l1', 'Utente'),
@@ -265,10 +264,20 @@ ITERATTI_ROLES_CHOICES = [
   ('i1', 'Utente'),
   ('i2', 'Amministratore'),
 ]
-SDI_ROLES_CHOICES = [
+SDI_OFFICE_CHOICES = [
   ('sdi0', '--'),
-  ('sdi1', 'Utente'),
-  ('sdi2', 'Potere di firma'),
+  ('sdi1', 'Casa di soggiorno anziani'),
+  ('sdi2', 'Risorse umane 2019'),
+  ('sdi3', 'Polizia locale'),
+  ('sdi4', 'Segreteria generale'),
+  ('sdi5', 'Affari generali urp protocollo'),
+  ('sdi6', 'Contabilità'),
+  ('sdi7', 'Contratti'),
+  ('sdi8', 'Cultura biblioteca'),
+  ('sdi9', 'Personale'),
+  ('sdi10', 'Tributi'),
+  ('sdi11', 'Urbanistica ambiente commercio'),
+  ('sdi12', 'Ufficio centrale'),
 ]
 ASCOT_ROLES_CHOICES = [
   ('a0', '--'),
