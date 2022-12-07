@@ -169,12 +169,11 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="col-md-6">
-                        <label>Ufficio</label><span class="danger">**</span></br>
-                        <select class="form-input rounded border-none w-100" name="sdiOffice">
+                        {% comment %} <select class="form-input rounded border-none w-100" name="sdiOffice">
                           {% for office in SDI_OFFICE_CHOICES %}
                           <option value={{office.0}} {% if office.0 == u.sdiOffice %} selected {% endif %}>{{office.1}}</option>
                           {% endfor %}
-                        </select>
+                        </select> {% endcomment %}
                       </div>
                       <div class="col-md-12">
                         <label for="name">Note</label>
@@ -183,10 +182,20 @@
                     </div>
 
                     <div class="col-md-8">
+                      <label>Ufficio</label><span class="danger">**</span></br>
+                      <div class="row">
+                          {% for office in SDI_OFFICE_CHOICES %}
+                          <div class="col-md-12">
+                            <input class="" type="checkbox" id="" name='sdiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                          </div>
+                          {% endfor %}
+                      </div>
+                      <hr>
+
                       <label for="surname">Ruoli in SDI <span class="danger">**</span></label></br>
                       <div class="row">
                         {% for office in SDI_ROLES_CHOICES %}
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                           <input class="" type="checkbox" id="" name='sdiRole' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
                         </div>
                         {% endfor %}
