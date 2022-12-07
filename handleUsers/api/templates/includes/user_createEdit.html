@@ -1,0 +1,381 @@
+
+              {% comment %} {% if submitted == 'true'%}
+              <form method="POST" action='' enctype="multipart/form-data">
+              {% else %}
+              <form method="POST" action='user_create' enctype="multipart/form-data"> 
+              
+              {% endif %}{% endcomment %}
+              {% comment %} <form method="POST" action='user_create' enctype="multipart/form-data"> {% endcomment %}
+                {% csrf_token %}
+
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                  {{ form.errors }}
+                </div>
+                {% endif %}
+
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Informazioni generali</h6>
+                  {% comment %} needed to edit the record {% endcomment %}
+                  <input type="hidden" name="id" value={{u.authorId}}>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="name">Nome</label>
+                      <input class="form-input w-100" type="text" id="name" name="name" value={{u.name}}>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="surname">Cognome</label>
+                      <input class="form-input w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="cf">Codice fiscale</label>
+                      <input class="form-input rounded border-none w-100" type="text" id="cf" name="cf" value={{u.cf}}>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="cf">Ufficio</label></br>
+                      <select class="form-input rounded border-none w-100" name="office">
+                        {% for office in MAIN_OFFICE_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.office %} selected {% endif %}> {{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-1">
+                      <label for="surname">Categoria</label>
+                      <input class="form-input w-100" type="text" id="jobCategory" name="jobCategory" value={{u.jobCategory}}>
+                    </div>
+                  </div>
+                </div>
+
+                {% comment %} MAIL {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Mail</h6>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name">Mail personale</label>
+                      <input class="form-input rounded w-100 px-2" type="text" id="mail" name="mail" value={% if u %} {{u.mail}} {% else %} '@comune.aviano.pn.it' {% endif %}>
+                    </div>
+                    <div class="col-md-8">
+                      <label for="surname">Deleghe mail uffici <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in MAIL_OFFICE_CHOICES %}
+                        <div class="col-md-4">
+                          <input class="" type="checkbox" id="" name='mailOffice' value={{office.0}} {% if office.2 == "checked" %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              
+                {% comment %} LAN {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">LAN</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label>Nome utente</label>
+                      <input class="form-input rounded w-100 px-2" type="text" id="lan" name="lan" value={% if u %} {{u.lan}} {% else %} 'A516-' {% endif %}>
+                    </div>
+                    <div class="col-md-2">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="lanRole">
+                        {% for office in LAN_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.lanRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-8">
+                      <label>Cartelle visualizzate <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in LAN_OFFICE_CHOICES %}
+                        <div class="col-md-4">
+                          <input class="" type="checkbox" id="" name='lanOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ADWEB {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ADWEB</h6>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="col-md-6">
+                        {% comment %} <label>Nome utente adweb</label>
+                        <input class="form-input rounded w-100 px-2" type="text" id="adweb" name="lan" value={{u.adweb}}>
+                       {% endcomment %}</div>
+                      <div class="col-md-6">
+                        <label>Ruolo</label></br>
+                        <select class="form-input rounded border-none w-100" name="adwebRole">
+                          {% for office in ADWEB_ROLES_CHOICES %}
+                          <option value={{office.0}} {% if office.0 == u.lanRole %} selected {% endif %}>{{office.1}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="name">Note</label>
+                        <textarea class="form-input rounded w-100 px-2" type="text" name="adwebNote" value={{u.adwebNote}}>{{u.adwebNote}}</textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <label>Uffici adweb <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in ADWEB_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='adwebOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ASCOT {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ASCOT</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                    
+                    </div>
+                    <div class="col-md-2">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="ascotRole">
+                        {% for office in ASCOT_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.ascotRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-8">
+                      <label for="surname">Uffici ascot <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in ASCOT_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='ascotOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} SDI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">SDI</h6>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="col-md-6">
+                        <label>Ufficio</label><span class="danger">**</span></br>
+                        <select class="form-input rounded border-none w-100" name="sdiOffice">
+                          {% for office in SDI_OFFICE_CHOICES %}
+                          <option value={{office.0}} {% if office.0 == u.sdiOffice %} selected {% endif %}>{{office.1}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="name">Note</label>
+                        <textarea rows="4" class="form-input rounded w-100 px-2" type="text" name="sdiNote" value={{u.sdiNote}}>{{u.sdiNote}}</textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8">
+                      <label for="surname">Ruoli in SDI <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in SDI_ROLES_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='sdiRole' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ITERATTI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Iteratti</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                    
+                    </div>
+                    <div class="col-md-2">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="iterattiRole">
+                        {% for office in ITERATTI_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.iterattiRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-8">
+                      <label for="surname">Uffici iteratti <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in ITERATTI_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='iterattiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} SERVIZI VARI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Ruoli in servizi vari</h6>
+                  <div class="row">
+
+                    <div class="col-md-2">
+                      <label>Ruolo Boxapp</label></br>
+                      <select class="form-input rounded border-none w-100" name="boxAppsRole">
+                        {% for office in BOXAPP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.boxAppsRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Website</label></br>
+                      <select class="form-input rounded border-none w-100" name="websiteRole">
+                        {% for office in WEBSITE_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.websiteRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo Avcp</label></br>
+                      <select class="form-input rounded border-none w-100" name="avcpRole">
+                        {% for office in AVCP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.avcpRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo FVGpay</label></br>
+                      <select class="form-input rounded border-none w-100" name="fvgPayRole">
+                        {% for office in FVGPAY_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.fvgPayRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo CRM</label></br>
+                      <select class="form-input rounded border-none w-100" name="crmRole">
+                        {% for office in CRM_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.crmRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo Masterdata</label></br>
+                      <select class="form-input rounded border-none w-100" name="masterDataRole">
+                        {% for office in MASTERDATA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.masterDataRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo Albo Pretorio</label></br>
+                      <select class="form-input rounded border-none w-100" name="alboPretRole">
+                        {% for office in ALBOPRET_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Amministrazione trasparente</label></br>
+                      <select class="form-input rounded border-none w-100" name="ammTraspRole">
+                        {% for office in AMMTRASP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.ammTraspRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Mepa</label></br>
+                      <select class="form-input rounded border-none w-100" name="mepaRole">
+                        {% for office in MEPA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.mepaRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </br>
+                    <label>Agenzia delle entrate</label></br>
+                    <select class="form-input rounded border-none w-100" name="agEntrRole">
+                      {% for office in AGENTR_ROLES_CHOICES %}
+                      <option value={{office.0}} {% if office.0 == u.agEntrRole %} selected {% endif %}>{{office.1}}</option>
+                      {% endfor %}
+                    </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo SUAP</label></br>
+                      <select class="form-input rounded border-none w-100" name="suapRole">
+                        {% for office in SUAP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.suapRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                      <label>Ruolo SUE</label></br>
+                      <select class="form-input rounded border-none w-100" name="sueRole">
+                        {% for office in SUE_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.sueRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label>Ruolo Servizi scolastici</label></br>
+                      <select class="form-input rounded border-none w-100" name="servScolRole">
+                        {% for office in SERVSCOL_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.servScolRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} NOTE {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 w-100 pb-2">Note</h6>
+                  <div class="col-md-12">
+                    <input class="form-input rounded w-100 px-2" type="textarea" row="" id="note" name="note" value="">
+                  </div>
+                </div>
+
+                {% comment %} DISABILITAZIONI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Disabilitazioni</h6>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='mailDeleted' value=mailDeleted {% if u.mailDeleted %} checked {% endif %}><span class="pl-3"> Mail disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='lanDeleted' value=lanDeleted {% if u.lanDeleted %} checked {% endif %} {% if u.lanRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.lanRole == 'l0' %} text-light {% endif %}" > Lan disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='masterdataDeleted' value=masterdataDeleted {% if u.masterdataDeleted %} checked {% endif %} {% if u.masterDataRole == 'l0' %} disabled {% endif %}><span class="pl-3 {% if u.masterDataRole == 'l0' %} text-light {% endif %}"> Masterdata cancellato</span></div>
+                      <div><input class="" type="checkbox" id="" name='adwebDeleted' value=adwebDeleted {% if u.adwebDeleted %} checked {% endif %} {% if u.adwebRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.adwebRole == 'a0' %} text-light {% endif %}"> Adweb disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='ascotDeleted' value=ascotDeleted {% if u.ascotDeleted %} checked {% endif %} {% if u.ascotRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.ascotRole == 'a0' %} text-light {% endif %}"> Ascot disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='sdiDeleted' value=sdiDeleted {% if u.sdiDeleted %} checked {% endif %} {% if u.sdiRole == 'sdi0' %} disabled {% endif %}><span class="pl-3 {% if u.sdiRole == 'sdi0' %} text-light {% endif %}"> SDI disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='iterattiDeleted' value=iterattiDeleted {% if u.iterattiDeleted %} checked {% endif %} {% if u.iterattiRole == 'i0' %} disabled {% endif %}><span class="pl-3 {% if u.iterattiRole == 'i0' %} text-light {% endif %}"> Iteratti disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='boxAppsDeleted' value=boxAppsDeleted {% if u.boxAppsDeleted %} checked {% endif %} {% if u.boxAppsRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.boxAppsRole == 'c0' %} text-light {% endif %}"> Boxapps disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='websiteDeleted' value=websiteDeleted {% if u.websiteDeleted %} checked {% endif %} {% if u.websiteRole == 'w0' %} disabled {% endif %}><span class="pl-3 {% if u.websiteRole == 'w0' %} text-light {% endif %}"> Sito disabilitato</span></div>
+                      <div><input class="" type="checkbox" id="" name='crmDeleted' value=crmDeleted {% if u.crmDeleted %} checked {% endif %} {% if u.crmRole == 'c0' %} disabled {% endif %}><span class="pl-3 {% if u.crmRole == 'c0' %} text-light {% endif %}"> Crm disabilitata</span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div><input class="" type="checkbox" id="" name='avcpDeleted' value=avcpDeleted {% if u.avcpDeleted %} checked {% endif %} {% if u.avcpRole == 'a0' %} disabled {% endif %}><span class="pl-3 {% if u.avcpRole == 'a0' %} text-light {% endif %}"> Avcp disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='servScuolaDeleted' value=servScuolaDeleted {% if u.servScuolaDeleted %} checked {% endif %} {% if u.servScolRole == 'ss0' %} disabled {% endif %}><span class="pl-3 {% if u.servScolRole == 'ss0' %} text-light {% endif %}"> Servizi scolastici disabilitata</span></div>
+                      <div><input class="" type="checkbox" id="" name='alboPretDeleted' value=alboPretDeleted {% if u.alboPretDeleted %} checked {% endif %} {% if u.alboPretRole == 'ap0' %} disabled {% endif %}><span class="pl-3 {% if u.alboPretRole == 'ap0' %} text-light {% endif %}"> Albo pretorio disabilitata</span></div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row justify-content-end py-2 fixed-footer">
+                  <input class="rounded border-none bg-primary text-white col-md-1 mx-3" type="submit" value="Submit">
+                </div>
+
+              {% comment %} </form>  {% endcomment %}
+            

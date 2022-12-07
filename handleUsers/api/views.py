@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework.response import Response
@@ -53,7 +53,6 @@ def user_overview(request):
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
-    u = customUser()
     submitted = False
     if request.method == "POST":
         cu = customUserForm(request.POST)
@@ -187,96 +186,85 @@ def user_edit(request, pk):
         'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
+def iterateOffices(selectedField, officeList):
+    # MAIL iterate the office to check the selected ones
+    checked_offices = list(officeList)
+    for i in range(len(officeList)):
+      checked_offices[i] = list(checked_offices[i])
+      if officeList[i][0] in selectedField:
+        checked_offices[i].append('checked')
+      else:
+        checked_offices[i].append('unchecked')
+    return checked_offices
+
+def checkOffices(request, selectedField, officeList):
+    print(request)
+    print("REQUEST SOPRA")
+    checked_offices =[]
+    for i in range(len(officeList)):
+      #checked_offices[i] = list(checked_offices[i])
+      if officeList[i][0] in request:
+        print('officeList[i][0]')
+        print(officeList[i][0])
+        checked_offices.append(officeList[i][1])
+    print(checked_offices)
+    return checked_offices
+
 # function for a separated create/edit page
-def user_updateNew(request, pk):
+def user_update(request, pk):
     submitted = request.GET.get('submitted')
     u = customUser.objects.get(id=pk)
 
-    # MAIL iterate the office to check the selected ones
-    checked_mail_offices = list(MAIL_OFFICE_CHOICES)
-    for i in range(len(MAIL_OFFICE_CHOICES)):
-      checked_mail_offices[i] = list(checked_mail_offices[i])
-      if MAIL_OFFICE_CHOICES[i][0] in u.mailOffice:
-        checked_mail_offices[i].append('checked')
-      else:
-        checked_mail_offices[i].append('unchecked')
-    
-    # LAN iterate the office to check the selected ones
-    checked_lan_offices = list(LAN_OFFICE_CHOICES)
-    for i in range(len(LAN_OFFICE_CHOICES)):
-      checked_lan_offices[i] = list(checked_lan_offices[i])
-      if LAN_OFFICE_CHOICES[i][0] in u.lanOffice:
-        checked_lan_offices[i].append('checked')
-      else:
-        checked_lan_offices[i].append('unchecked')
-
-    # ADWEB iterate the office to check the selected ones
-    checked_adweb_offices = list(ADWEB_OFFICE_CHOICES)
-    for i in range(len(ADWEB_OFFICE_CHOICES)):
-      checked_adweb_offices[i] = list(checked_adweb_offices[i])
-      if ADWEB_OFFICE_CHOICES[i][0] in u.adwebOffice:
-        checked_adweb_offices[i].append('checked')
-      else:
-        checked_adweb_offices[i].append('unchecked')
-
-    # ASCOT iterate the office to check the selected ones
-    checked_ascot_offices = list(ASCOT_OFFICE_CHOICES)
-    for i in range(len(ASCOT_OFFICE_CHOICES)):
-      checked_ascot_offices[i] = list(checked_ascot_offices[i])
-      if ASCOT_OFFICE_CHOICES[i][0] in u.ascotOffice:
-        checked_ascot_offices[i].append('checked')
-      else:
-        checked_ascot_offices[i].append('unchecked')
-
-    # SDI iterate the office to check the selected ones
-    checked_sdi_offices = list(SDI_OFFICE_CHOICES)
-    for i in range(len(SDI_OFFICE_CHOICES)):
-      checked_sdi_offices[i] = list(checked_sdi_offices[i])
-      if SDI_OFFICE_CHOICES[i][0] in u.sdiOffice:
-        checked_sdi_offices[i].append('checked')
-      else:
-        checked_sdi_offices[i].append('unchecked')
-
-    # ITERATTI iterate the office to check the selected ones
-    checked_iteratti_offices = list(ITERATTI_OFFICE_CHOICES)
-    for i in range(len(ITERATTI_OFFICE_CHOICES)):
-      checked_iteratti_offices[i] = list(checked_iteratti_offices[i])
-      if ITERATTI_OFFICE_CHOICES[i][0] in u.iterattiOffice:
-        checked_iteratti_offices[i].append('checked')
-      else:
-        checked_iteratti_offices[i].append('unchecked')
+    checked_mail_offices = iterateOffices(u.mailOffice, MAIL_OFFICE_CHOICES)
+    checked_lan_offices = iterateOffices(u.lanOffice, LAN_OFFICE_CHOICES)
+    checked_adweb_offices = iterateOffices(u.adwebOffice, ADWEB_OFFICE_CHOICES)
+    checked_ascot_offices = iterateOffices(u.ascotOffice, ASCOT_OFFICE_CHOICES)
+    checked_sdi_offices = iterateOffices(u.sdiOffice, SDI_OFFICE_CHOICES)
+    checked_iteratti_offices = iterateOffices(u.iterattiOffice, ITERATTI_OFFICE_CHOICES)
 
     # if I'm sending a post request it means I want to save, otherwise I'm sending a GET request and it means I want to see the page
     if request.method == "POST":
+        cu = customUserForm(request.POST)
         print("POST")
         submitted = True
-        cu = customUserForm(request.POST)
-        print(cu)
+        # fetch the object related to passed id
+        obj = get_object_or_404(customUser, id = pk)
+        # pass the object as instance in form
+        cu = customUserForm(request.POST or None, instance = obj)
         if cu.is_valid():
+          
+            print('form VALID')
             cu.save()
-            return render(request, 'user_update.html', {
-            'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
-            'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
-            'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
-            'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
-            'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
-            'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
-            'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
-            'MAIL_OFFICE_CHOICES': checked_mail_offices,
-            'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 
-            'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
-            'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 
-            'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-            'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
-            'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
-            'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
-            'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-            'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
-            'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
-            'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
-            'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
-            'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
-        #u.save()
+            u = customUser.objects.get(id=pk)
+            cssPage = "w-100 border-radius-lg shadow-sm"
+            return render(request, 'profile.html', {'u': u,  'cssPage':cssPage, 'MY_CONST': MY_CONST, 
+            'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
+            
+        else:
+          print('form is not valid')
+          print(cu.errors)
+          return render(request, 'user_update.html', {
+        'u':u, 'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
+        'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+        'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES,'LAN_OFFICE_CHOICES':checked_lan_offices, 
+        'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': checked_adweb_offices, 
+        'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':checked_sdi_offices,
+        'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':checked_iteratti_offices,
+        'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':checked_ascot_offices,
+        'MAIL_OFFICE_CHOICES': checked_mail_offices,
+        'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 
+        'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+        'SERVSCOL_ROLES_CHOICES': SERVSCOL_ROLES_CHOICES, 
+        'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+        'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
+        'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+        'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
+        'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+        'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
+        'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
+        'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+        'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
+        'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
     else:
         cu = customUserForm()
         return render(request, 'user_update.html', {
@@ -302,19 +290,6 @@ def user_updateNew(request, pk):
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
-
-
-# in the user creation/edit view if submitted = True then this function gets called
-def user_update(request):
-  print ("USER UPDATE")
-  cu = customUserForm()
-  if request.method == "POST":
-    cu = customUserForm(request.POST) 
-    if cu.is_valid():
-      cu.save()
-      return HttpResponseRedirect('user_overview')
-    else:
-      return HttpResponse("your form is wrong")
 """ 
 def user_add(request):
   cu = customUserForm()
@@ -338,7 +313,6 @@ def profile(request, pk):
   #custom css for avatar
   cssPage = "w-100 border-radius-lg shadow-sm"
   u = customUser.objects.get(id=pk)
-  #MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
   return render(request, 'profile.html', {'u': u,  'cssPage':cssPage, 'MY_CONST': MY_CONST, 
   'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
 
@@ -347,9 +321,6 @@ def adweb(request):
   #custom css for avatar
   cssPage = 'avatar me-3'
   u = customUser.objects.all()
-  #u_filter = customUserFilter(request.GET, queryset=u)
-  MY_MODEL_CONST = {'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
-  #return render(request, 'adweb.html', {'userList': u, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'filter': u_filter })
   return render(request, 'adweb.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES })
 
 @api_view(['GET'])
@@ -357,5 +328,4 @@ def iteratti(request):
   #custom css for avatar
   cssPage = 'avatar me-3'
   u = customUser.objects.all()
-  #MY_MODEL_CONST = {'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES}
   return render(request, 'iteratti.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
