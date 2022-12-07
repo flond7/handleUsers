@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load split_list %}
 {% block title %} Sdi {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
@@ -13,6 +14,14 @@
 
       <div class="row">
         <div class="col-12">
+          <div class="col-12 d-flex justify-content-end">
+            {% comment %} <a class="nav-link" href="/api/sdi_edit">
+              <div class="btn btn-sm bg-warning">Modifica</div>
+            </a> {% endcomment %}
+          
+          </div>
+
+
           {% comment %} SDI OFFICE {% endcomment %}
           {% for office in SDI_OFFICE_CHOICES %}
           {% if office.1 != "--"%}
@@ -26,8 +35,9 @@
                       <div class="d-flex my-0 mx-3">
                         <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Utente</div>
                         <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-1">Attivo</div>
-                        <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Ruolo</div>
-                        <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-4">Note</div>
+                        <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-2">Ufficio</div>
+                        <div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-3">Ruolo</div>
+                        <div class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-md-3">Note</div>
                       </div>
                         {% for u in userList %} 
                           {% if office.1 in u.get_sdiOffice_display %}
@@ -49,15 +59,25 @@
                               </div>
 
                               <div class="align-middle text-center my-auto col-md-2 text-sm">
-                                <span class="badge badge-sm {% if u.sdiRole == 'Utente'%} bg-gradient-primary {% else %} bg-gradient-secondary {% endif %}">
-                                  {{ u.get_sdiRole_display}}
+                                {% for element in u.get_sdiOffice_display|split %}
+                                <span class="d-block badge badge-sm bg-warning mb-1 mx-auto w-fit">
+                                  {{ element }}</br>
                                 </span>
+                                {% endfor %}
                               </div>
 
-                              <div class="align-middle text-center my-auto col-md-4 text-sm">
+                              <div class="align-middle text-center my-auto col-md-3 text-sm">
+                                {% for element in u.get_sdiRole_display|split %}
+                                <span class="badge badge-sm bg-gradient-secondary d-block mb-1 w-fit">
+                                  {{ element}}
+                                </span>
+                                {% endfor %}
+                              </div>
+
+                              <div class="align-middle my-auto col-md-3 text-sm">
                                 <span> {{ u.sdiNote}} </span>
                               </div>
-        
+
                             </div>
 
                           {% endif %}

@@ -4,6 +4,9 @@
 .min-height-150 {
   min-height: 150px;
 }
+.w-fit {
+  width: fit-content;
+}
 
 .avatar-border {
   background-image: none !important;
@@ -93,12 +96,6 @@
 .icon-bg {
   font-size: 1.1rem !important;
 }
-/* fox allignment in bigger icons*/
-/* .fa-bg:before {
-  margin: -1.7rem 1.5rem;
-  font-size: 2rem;
-}
- */
 .form-input {
   background-color: #fff;;
   border: #eaeaea 1px solid !important;
