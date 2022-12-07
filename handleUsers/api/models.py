@@ -84,8 +84,9 @@ class customUser(models.Model):
   ascotNote = models.CharField("Note per ascot", max_length = 150, default='', blank=True)
 
   #SDI
-  sdiOffice = MultiSelectField("Uffici SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
-  sdiRole = models.CharField("Ruolo in SDI", max_length = 4, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
+  sdiOffice = MultiSelectField("Ruoli in SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
+  sdiRole = MultiSelectField("Ruoli in SDI", max_length = 100, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
+  #sdiRole = models.CharField("Ruolo in SDI", max_length = 4, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
   sdiNote = models.CharField("Note per SDI", max_length = 150, default='', blank=True)
 
   #GIFRA - ITERATTI
@@ -142,8 +143,8 @@ class customUser(models.Model):
   adwebDeleted = models.BooleanField("Adweb disattivato", default=False)
   ascotDeleted = models.BooleanField("Ascot disattivato", default=False)
   sdiDeleted = models.BooleanField("SDI disattivato", default=False)
-  iterattiDeleted = models.BooleanField("SDI disattivato", default=False)
-  boxAppsDeleted = models.BooleanField("SDI disattivato", default=False)
+  iterattiDeleted = models.BooleanField("Iteratti disattivato", default=False)
+  boxAppsDeleted = models.BooleanField("Boxapp disattivato", default=False)
   websiteDeleted = models.BooleanField("Sito disattivato", default=False)
   crmDeleted = models.BooleanField("CRM disattivato", default=False)
   avcpDeleted = models.BooleanField("AVCP disattivato", default=False)
