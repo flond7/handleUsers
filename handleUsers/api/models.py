@@ -135,7 +135,7 @@ class customUser(models.Model):
   ammTraspRole = models.CharField(max_length = 4, choices = AMMTRASP_ROLES_CHOICES, default = 'at0', blank=False)
 
   note = models.TextField(default="", blank=True)
-  active = models.BooleanField(default=True)
+  employed = models.BooleanField(default=True)
 
   #DISATTIVAZIONI
   mailDeleted = models.BooleanField("Mail disattivata", default=False)
