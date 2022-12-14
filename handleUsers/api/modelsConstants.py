@@ -213,8 +213,8 @@ SERVSCOL_ROLES_CHOICES = [
 ]
 CRM_ROLES_CHOICES = [
   ('c0', '--'),
-  ('c1', 'Utente'),
-  ('c2', 'Amministratore'),
+  #('c1', 'Utente'),
+  ('c2', 'Inserisce richieste'),
 ]
 SUE_ROLES_CHOICES = [
   ('s0', '--'),
