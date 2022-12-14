@@ -1,11 +1,26 @@
 .h6 {
   color: #d63384
 }
+.min-height-40 {
+  min-height: 40px !important;
+}
 .min-height-150 {
   min-height: 150px;
 }
+.min-height-450 {
+  min-height: 450px;
+}
 .w-fit {
   width: fit-content;
+}
+.opacity-25 {
+  opacity: 50%;
+}
+.grayed {
+  filter: grayscale(1)
+}
+.border-danger {
+  border-color: #e21a1e !important;
 }
 
 .avatar-border {
@@ -98,7 +113,7 @@
 }
 .form-input {
   background-color: #fff;;
-  border: #eaeaea 1px solid !important;
+  border: #eaeaea 1px solid;
   height: 2.2rem;
   padding: 0 1rem;
 }
