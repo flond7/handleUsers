@@ -19,6 +19,30 @@ from .forms import customUserForm
 from .filters import customUserFilter
 
 
+generic_context = {
+  'MY_CONST': MY_CONST, 
+  'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
+  'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES,
+  'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
+  'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 
+  'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':SDI_OFFICE_CHOICES,
+  'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':ITERATTI_OFFICE_CHOICES,
+  'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES,
+  'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 
+  'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
+  'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 
+  'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
+  'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
+  'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+  'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
+  'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
+  'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
+  'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
+  'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
+  'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
+  'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES
+}
+
 
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
@@ -60,43 +84,16 @@ def user_create(request):
             cu.save()
             return HttpResponseRedirect('user_create?submitted=True')
         else:
-            render(request, 'user_create.html', {'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
-    'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
-    'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
-    'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 
-    'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':SDI_OFFICE_CHOICES,
-    'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':ITERATTI_OFFICE_CHOICES,
-    'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES,
-    'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES, 'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES,
-    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
-    'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
-    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
-    'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
-        # if user is new then set active to true
-        # if the user is modified check if it's still active 
-
-
+            generic_context['form'] = cu
+            generic_context['submitted'] = submitted
+            render(request, 'user_create.html', generic_context)
     else:
         cu = customUserForm()
         if 'submitted' in request.GET:
             submitted = True
-            
-    return render(request, 'user_create.html', {'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
-    'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
-    'LAN_OFFICE_CHOICES':LAN_OFFICE_CHOICES, 'LAN_ROLES_CHOICES':LAN_ROLES_CHOICES, 
-    'ADWEB_ROLES_CHOICES':ADWEB_ROLES_CHOICES,'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 
-    'SDI_ROLES_CHOICES': SDI_ROLES_CHOICES,'SDI_OFFICE_CHOICES':SDI_OFFICE_CHOICES,
-    'ITERATTI_ROLES_CHOICES':ITERATTI_ROLES_CHOICES, 'ITERATTI_OFFICE_CHOICES':ITERATTI_OFFICE_CHOICES,
-    'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES,
-    'ASCOT_OFFICE_CHOICES':ASCOT_OFFICE_CHOICES, 'ASCOT_ROLES_CHOICES':ASCOT_ROLES_CHOICES, 'MAIL_OFFICE_CHOICES': MAIL_OFFICE_CHOICES,
-    'BOXAPP_ROLES_CHOICES':BOXAPP_ROLES_CHOICES, 'WEBSITE_ROLES_CHOICES':WEBSITE_ROLES_CHOICES, 
-    'SERVSCOL_ROLES_CHOICES':SERVSCOL_ROLES_CHOICES, 'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
-    'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
-    'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
-    'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
-    'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
+    generic_context['form'] = cu
+    generic_context['submitted'] = submitted        
+    return render(request, 'user_create.html', generic_context)
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
@@ -222,7 +219,18 @@ def user_update(request, pk):
     checked_sdi_offices = iterateOffices(u.sdiOffice, SDI_OFFICE_CHOICES)
     checked_iteratti_offices = iterateOffices(u.iterattiOffice, ITERATTI_OFFICE_CHOICES)
 
-    # if I'm sending a post request it means I want to save, otherwise I'm sending a GET request and it means I want to see the page
+    # prepare the new generic_context
+    generic_context['u'] = u
+    generic_context['form'] = cu
+    generic_context['submitted'] = submitted
+    generic_context['LAN_OFFICE_CHOICES'] = checked_lan_offices
+    generic_context['ADWEB_OFFICE_CHOICES'] = checked_adweb_offices
+    generic_context['SDI_OFFICE_CHOICES'] = checked_sdi_offices
+    generic_context['ITERATTI_OFFICE_CHOICES'] = checked_iteratti_offices
+    generic_context['ASCOT_OFFICE_CHOICES'] = checked_ascot_offices
+    generic_context['MAIL_OFFICE_CHOICES'] = checked_mail_offices
+
+    # if I'm sending a post request it means I want to save
     if request.method == "POST":
         cu = customUserForm(request.POST)
         print("POST")
@@ -232,7 +240,6 @@ def user_update(request, pk):
         # pass the object as instance in form
         cu = customUserForm(request.POST or None, instance = obj)
         if cu.is_valid():
-          
             print('form VALID')
             cu.save()
             u = customUser.objects.get(id=pk)
@@ -243,6 +250,9 @@ def user_update(request, pk):
         else:
           print('form is not valid')
           print(cu.errors)
+          return render(request, 'user_update.html', generic_context)
+
+
           return render(request, 'user_update.html', {
         'u':u, 'form': cu, 'submitted': submitted, 'MY_CONST': MY_CONST, 
         'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
@@ -265,8 +275,12 @@ def user_update(request, pk):
         'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
+    
+    # if I just want to visualize the page with a GET request
     else:
         cu = customUserForm()
+        return render(request, 'user_update.html', generic_context)
+
         return render(request, 'user_update.html', {
         'u':u, 'submitted': submitted, 'MY_CONST': MY_CONST, 
         'MAIN_OFFICE_CHOICES': MAIN_OFFICE_CHOICES, 
@@ -289,6 +303,22 @@ def user_update(request, pk):
         'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
+
+def user_ask(request):
+    # if I want to send the request
+    if request.method == "POST":
+        cu = customUserForm(request.POST)
+        if cu.is_valid():
+            cu.save()
+            return HttpResponseRedirect('user_create?submitted=True')
+        else:
+            generic_context['form'] = cu
+            render(request, 'user_create.html', generic_context)
+
+    # if I just want to see the form
+    else:
+        return render(request, 'user_ask.html', generic_context)
+
 
 def index(request):
     userList = customUser.objects.all()
@@ -325,3 +355,4 @@ def sdi(request):
   cssPage = 'avatar me-3'
   u = customUser.objects.all()
   return render(request, 'sdi.html', {'userList': u, 'cssPage':cssPage, 'MY_CONST': MY_CONST, 'SDI_OFFICE_CHOICES': SDI_OFFICE_CHOICES })
+

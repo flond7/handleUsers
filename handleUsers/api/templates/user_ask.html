@@ -1,0 +1,390 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Create user {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-body p-3 pb-2">
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  {{ form.errors }}
+                </div>
+              {% endif %}
+
+              <form method="POST" action='user_ask' enctype="multipart/form-data">
+              
+                {% csrf_token %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Informazioni generali</h6>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="name">Nome</label>
+                      <input class="form-input rounded w-100" type="text" id="name" name="name" value={{u.name}}>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="surname">Cognome</label>
+                      <input class="form-input rounded w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="cf">Ufficio</label></br>
+                      <select class="form-input rounded border-none w-100" name="office">
+                        {% for office in MAIN_OFFICE_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.office %} selected {% endif %}> {{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {% comment %} MAIL {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Mail</h6>
+                  <div class="row">
+                    <p class="">La mail viene creata automaticamente da insiel come nome.cognome@comune.aviano.pn.it </br> E' necessaria una mail personale per poter avere la delega e visualizzare le caselle mail degli uffici</p>
+                    <p class="">Se la mail personale non è necessaria lasciare il campo vuoto cancellando anche @comune.pn.it e se non sono necessarie deleghe a mail di uffici selezionare la prima voce "--"</p>
+                    <div class="col-md-12">
+                      <label for="name">Mail personale</label>
+                      <input class="form-input rounded w-100 px-2" type="text" id="mail" name="mail" value={% if u %} {{u.mail}} {% else %} '@comune.aviano.pn.it' {% endif %}>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                      <label for="surname">Deleghe mail uffici <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in MAIL_OFFICE_CHOICES %}
+                        <div class="col-md-4">
+                          <input class="" type="checkbox" id="" name='mailOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              
+                {% comment %} LAN {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">LAN</h6>
+                  <div class="row">
+                    <p class="">Indicare le cartelle di Archivio che l'utente deve visualizzare</p>
+                    <div class="col-md-12">
+                      <label>Cartelle visualizzate <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in LAN_OFFICE_CHOICES %}
+                        <div class="col-md-4">
+                          <input class="" type="checkbox" id="" name='lanOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {% comment %} ADWEB {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ADWEB</h6>
+                  <div class="row">
+                    <p class="">Indicare il ruolo e le aree per cui l'utente deve essere abilitato in adweb</p>
+                    <p class="">Se non è necessario attivare un account adweb selezionare la prima voce "--" sia nel ruolo che negli uffici</p>
+                    <div class="col-md-4">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="adwebRole">
+                        {% for office in ADWEB_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.lanRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                      <label>Uffici adweb</label></br>
+                      <div class="row">
+                        {% for office in ADWEB_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='adwebOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                      <label for="name">Note</label>
+                      <textarea rows="4" class="form-input rounded w-100 px-2" type="text" name="adwebNote" value={{u.adwebNote}}></textarea>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ASCOT {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">ASCOT</h6>
+                  <div class="row">
+                    <p class="">Indicare il ruolo e le aree per cui l'utente deve essere abilitato su ascot</p>
+                    <p class="">Se non è necessario attivare un account selezionare la prima voce "--" sia nel ruolo che negli uffici</p>
+                    <div class="col-md-4">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="ascotRole">
+                        {% for office in ASCOT_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.ascotRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="surname">Uffici ascot <span class="danger">**</span></label></br>
+                      <div class="row">
+                        {% for office in ASCOT_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='ascotOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} SDI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">SDI</h6>
+                  <div class="row">
+                    <p class="">Indicare il ruolo e le aree per cui l'utente deve essere abilitato per lo SDI</p>
+                    <p class="">Se non è necessario attivare un account selezionare la prima voce "--" sia nel ruolo che negli uffici</p>
+                    <div class="col-md-4">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="sdiRole">
+                        {% for office in SDI_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.sdiRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="surname">Uffici SDI</label></br>
+                      <div class="row">
+                        {% for office in SDI_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='sdiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} ITERATTI {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Iteratti</h6>
+                  <div class="row">
+                    <p class="">Indicare il ruolo e le aree per cui l'utente deve essere abilitato in iteratti</p>
+                    <p class="">Se non è necessario attivare un account selezionare la prima voce "--" sia nel ruolo che negli uffici</p>
+                    <div class="col-md-4">
+                      <label>Ruolo</label></br>
+                      <select class="form-input rounded border-none w-100" name="iterattiRole">
+                        {% for office in ITERATTI_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.iterattiRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="surname">Uffici iteratti</label></br>
+                      <div class="row">
+                        {% for office in ITERATTI_OFFICE_CHOICES %}
+                        <div class="col-md-6">
+                          <input class="" type="checkbox" id="" name='iterattiOffice' value={{office.0}} {% if office.2 == 'checked' %} checked {% endif %}><span class="pl-3"> {{office.1}}</span></br>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} SERVIZI VARI {% endcomment %}
+                <div class="py-3">
+                  <div class="row">
+                    
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Boxapp</h6>
+                      <div class="badge badge-sm text-white bg-danger">Si ricorda che per seguire i corsi online deve essere abilitato come "Utente"</div></br>
+                      <p class="">Indicare se l'utente ha necessità di accedere alla piattaforma. <span class="text-danger"></span>. Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo Boxapp</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="boxAppsRole">
+                        {% for office in BOXAPP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.boxAppsRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Sito internet</h6>
+                      <p class="">Indicare se l'utente ha necessità di pubblicare sul sito internet (Editor) o se deve amministrarlo (amministratore).</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo Website</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="websiteRole">
+                        {% for office in WEBSITE_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.websiteRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Avcp</h6>
+                      <p class="">Indicare se l'utente ha necessità di essere abilitato all'inserimento dati AVCP.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo Avcp</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="avcpRole">
+                        {% for office in AVCP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.avcpRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">FVGpay</h6>
+                      <p class="">Indicare se l'utente ha necessità di utilizzare il portale FVGPay.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo FVGpay</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="fvgPayRole">
+                        {% for office in FVGPAY_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.fvgPayRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">CRM</h6>
+                      <p class="">Indicare se l'utente ha necessità di inviare richieste sul CRM.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo CRM</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="crmRole">
+                        {% for office in CRM_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.crmRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                      </br>
+                    </div>  
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Master data</h6>
+                      <p class="">Indicare se l'utente ha necessità di pubblicare dati sul Masterdata (amministratore) o se deve essere inserito come voce, ad esempio negli uffici.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo Masterdata</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="masterDataRole">
+                        {% for office in MASTERDATA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.masterDataRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Albo pretorio</h6>
+                      <p class="">Indicare se l'utente ha necessità di pubblicare sul sito internet (Editor) o se deve amministrarlo (amministratore).</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo Albo Pretorio</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="alboPretRole">
+                        {% for office in ALBOPRET_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.alboPretRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Amministrazione trasparente</h6>
+                      <p class="">Indicare se l'utente ha necessità di pubblicare nella sezione amministrazione trasparente al di là delle pubblicazioni automatiche di adweb.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Amministrazione trasparente</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="ammTraspRole">
+                        {% for office in AMMTRASP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.ammTraspRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Mepa</h6>
+                      <div class="badge badge-sm text-white bg-secondary">L'abilitazione deve essere fatta sul portale dal singolo responsabile, NON VIENE FATTA DALL'UFFICIO INFORMATICO. </div></br>
+                      <p class="">Indicare se l'utente verrà abilitato sul mepa e con che ruolo.</br>Se non verrà abilitato selezionare la prima voce "--".</br>L'informazione viene raccolta per tenere traccia di tutte le abilitazioni e provvedere alla corretta cancellazione in caso l'utente lasci l'Ente </p>
+                      <label>Mepa</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="mepaRole">
+                        {% for office in MEPA_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.mepaRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Agenzia delle entrate</h6>
+                      <div class="badge badge-sm text-white bg-secondary">L'abilitazione deve essere fatta sul portale dal singolo responsabile, NON VIENE FATTA DALL'UFFICIO INFORMATICO. </div></br>
+                      <p class="">Indicare se l'utente verrà abilitato sul sito dell'Agenzia delle entrate e con che ruolo.</br>Se non verrà abilitato selezionare la prima voce "--".</br>L'informazione viene raccolta per tenere traccia di tutte le abilitazioni e provvedere alla corretta cancellazione in caso l'utente lasci l'Ente </p>
+                      <label>Agenzia delle entrate</label></br>
+                    <select class="form-input rounded border-none col-md-2" name="agEntrRole">
+                      {% for office in AGENTR_ROLES_CHOICES %}
+                      <option value={{office.0}} {% if office.0 == u.agEntrRole %} selected {% endif %}>{{office.1}}</option>
+                      {% endfor %}
+                    </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Portale SUAP</h6>
+                      <div class="badge badge-sm text-white bg-secondary">L'abilitazione deve essere fatta sul portale dal singolo responsabile, NON VIENE FATTA DALL'UFFICIO INFORMATICO. </div>
+                      <p class="">Indicare se l'utente verrà abilitato al portale SUAP e con che ruolo.</br>Se non verrà abilitato selezionare la prima voce "--".</br>L'informazione viene raccolta per tenere traccia di tutte le abilitazioni e provvedere alla corretta cancellazione in caso l'utente lasci l'Ente </p>
+                      <label>Ruolo SUAP</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="suapRole">
+                        {% for office in SUAP_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.suapRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Portale SUE</h6>
+                      <div class="badge badge-sm text-white bg-secondary">L'abilitazione deve essere fatta sul portale dal singolo responsabile, NON VIENE FATTA DALL'UFFICIO INFORMATICO. </div>
+                      <p class="">Indicare se l'utente verrà abilitato al portale SUE e con che ruolo.</br>Se non verrà abilitato selezionare la prima voce "--".</br>L'informazione viene raccolta per tenere traccia di tutte le abilitazioni e provvedere alla corretta cancellazione in caso l'utente lasci l'Ente </p>
+                      <label>Ruolo SUE</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="sueRole">
+                        {% for office in SUE_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.sueRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Servizi scolastici</h6>
+                      <p class="">Indicare se l'utente deve essere abilitato al portale dei servizi scolastici. Se non verrà abilitato selezionare la prima voce "--".</p>
+                      <label>Ruolo Servizi scolastici</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="servScolRole">
+                        {% for office in SERVSCOL_ROLES_CHOICES %}
+                        <option value={{office.0}} {% if office.0 == u.servScolRole %} selected {% endif %}>{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {% comment %} NOTE {% endcomment %}
+                <div class="py-3">
+                  <h6 class="h6 w-100 pb-2">Note</h6>
+                  <div class="col-md-12">
+                    <input class="form-input rounded w-100 px-2" type="textarea" row="" id="note" name="note" value="">
+                  </div>
+                </div>
+
+                <div class="row justify-content-end py-2">
+                  <input class="rounded border-none bg-primary text-white col-md-1 mx-3" type="submit" value="Submit">
+                </div>
+
+              </form> 
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      {% include "includes/footer.html" %}
+
+    </div>
+    
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
