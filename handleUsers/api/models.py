@@ -63,19 +63,19 @@ class customUser(models.Model):
   jobCategory = models.CharField("Categoria",max_length = 5, default = '', blank=True) #C1, C2, D1, D2... per eventuale recupero gesnet
 
   #MAIL
-  mail = models.CharField("Mail personale", max_length=120, blank=False, default="@comune.aviano.pn.it")
+  mail = models.CharField("Mail personale", max_length=120, default="@comune.aviano.pn.it", blank=True)
   mailOffice = MultiSelectField(max_length = 100, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
   
   #LAN
   #lan = models.ForeignKey(userLan, default=DEFAULT_LAN_ID, on_delete=models.CASCADE)
-  lan = models.CharField("ID personale", max_length=120, blank=False, default="A516-")
-  lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=False)
-  lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=False)
+  lan = models.CharField("ID personale", max_length=120, default="A516-", blank=True)
+  lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=True)
+  lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=True)
   lanNote = models.CharField("Note per lan", max_length = 150, default='', blank=True)
   
   #ADWEB
   adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
-  adwebRole = models.CharField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=False)
+  adwebRole = models.CharField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=True)
   adwebNote = models.CharField("Note per adweb", max_length = 150, default='', blank=True)
     
   #ASCOT
@@ -136,6 +136,7 @@ class customUser(models.Model):
 
   note = models.TextField(default="", blank=True)
   employed = models.BooleanField(default=True)
+  active = models.BooleanField(default=True)
 
   #DISATTIVAZIONI
   mailDeleted = models.BooleanField("Mail disattivata", default=False)
