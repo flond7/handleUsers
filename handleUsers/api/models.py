@@ -160,3 +160,79 @@ class customUser(models.Model):
     return self.name + ' ' + self.surname
 
 
+class askUser(models.Model):
+  authorId = models.UUIDField(primary_key=False, unique=True, default=uuid.uuid4, editable=False)
+  name = models.CharField("Nome", max_length=100, blank=True, default='')
+  surname = models.CharField("Cognome", max_length=100, blank=True, default='')
+  office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'o0', blank=False) #assegnazione a un ufficio principale, per capirsi
+  
+  #MAIL
+  mail = models.BooleanField("Mail personale", default=False)
+  mailOffice = MultiSelectField(max_length = 100, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
+  
+  #LAN
+  lanOffice = MultiSelectField(max_length = 100, choices = LAN_OFFICE_CHOICES, default = 'mo0', blank=True)
+  lanRole = models.CharField("Ruolo in LAN", max_length = 2, choices = LAN_ROLES_CHOICES, default = 'l1', blank=True)
+  
+  #ADWEB
+  adwebOffice = MultiSelectField(max_length = 100, choices = ADWEB_OFFICE_CHOICES, default = 'mo0', blank=False)
+  adwebRole = models.CharField("Ruolo in adweb", max_length = 4, choices = ADWEB_ROLES_CHOICES, default = 'a0', blank=True)
+    
+  #ASCOT
+  ascotOffice = MultiSelectField("Uffici ascot", max_length = 100, choices = ASCOT_OFFICE_CHOICES, default = 'a0', blank=False)
+  ascotRole = models.CharField("Ruolo ascot", max_length = 4, choices = ASCOT_ROLES_CHOICES, default = 'a0', blank=False)
+
+  #SDI
+  sdiOffice = MultiSelectField("Ruoli in SDI", max_length = 100, choices = SDI_OFFICE_CHOICES, default = 'sdi0', blank=False)
+  sdiRole = MultiSelectField("Ruoli in SDI", max_length = 100, choices = SDI_ROLES_CHOICES, default = 'sdi0', blank=False)
+
+  #GIFRA - ITERATTI
+  iterattiOffice = MultiSelectField("Uffici iteratti", max_length = 100, choices = ITERATTI_OFFICE_CHOICES, default = 'i0', blank=False)
+  iterattiRole = models.CharField(max_length = 2, choices = ITERATTI_ROLES_CHOICES, default = 'i0', blank=False)
+
+  #BOXAPPS
+  boxAppsRole = models.CharField(max_length = 4, choices = BOXAPP_ROLES_CHOICES, default = 'b1', blank=False)
+
+  #MASTERDATA
+  masterDataRole = models.CharField(max_length = 4, choices = MASTERDATA_ROLES_CHOICES, default = 'm1', blank=False)
+
+  #WEBSITE
+  websiteRole = models.CharField(max_length = 2, choices = WEBSITE_ROLES_CHOICES, default = 'w0', blank=False)
+
+  #CRM
+  crmRole = models.CharField(max_length = 2, choices = CRM_ROLES_CHOICES, default = 'c0', blank=False)
+
+  #AVCP
+  avcpRole = models.CharField(max_length = 2, choices = AVCP_ROLES_CHOICES, default = 'a0', blank=False)
+
+  #FVG pay
+  fvgPayRole = models.CharField(max_length = 2, choices = FVGPAY_ROLES_CHOICES, default = 's0', blank=False)
+
+  #MEPA
+  mepaRole = models.CharField(max_length = 4, choices = MEPA_ROLES_CHOICES, default = 'm0', blank=False)
+
+  #AGENZIA DELLE ENTRATE
+  agEntrRole = models.CharField(max_length = 4, choices = AGENTR_ROLES_CHOICES, default = 'a0', blank=False)
+
+  #SUE
+  sueRole = models.CharField(max_length = 2, choices = SUE_ROLES_CHOICES, default = 's0', blank=False)
+
+  #SUAP
+  suapRole = models.CharField(max_length = 2, choices = SUAP_ROLES_CHOICES, default = 's0', blank=False)
+
+  #SERVIZI SCOLASTICI - Portale Kpax
+  servScolRole = models.CharField(max_length = 4, choices = SERVSCOL_ROLES_CHOICES, default = 'ss0', blank=False)
+
+  #ALBO PRETORIO
+  alboPretRole = models.CharField(max_length = 4, choices = ALBOPRET_ROLES_CHOICES, default = 'ap0', blank=False)
+
+  #AMMINISTRAZIONE TRASPARENTE
+  ammTraspRole = models.CharField(max_length = 4, choices = AMMTRASP_ROLES_CHOICES, default = 'at0', blank=False)
+
+  note = models.TextField(default="", blank=True)
+
+  class Meta:
+    ordering = []
+
+  def __str__(self):
+    return self.name + ' ' + self.surname

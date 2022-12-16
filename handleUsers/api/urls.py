@@ -11,6 +11,7 @@ urlpatterns = [
   path('user_update/<str:pk>', views.user_update, name="user_update"),
   #path('user_add', views.user_add, name='user_add'),
   path('index', views.index, name="index"),
+  path('login', views.login, name="login"),
   path('info', views.info, name="info"),
   path('profile/<str:pk>', views.profile, name="profile"),
   path('adweb', views.adweb, name="adweb"),

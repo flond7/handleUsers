@@ -10,12 +10,16 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.core.exceptions import ValidationError
 
+# LOGIN
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
+# MY VARS
 from .constants import MY_CONST
 from .modelsConstants import *
-from .models import customUser
-from .serializer import customUserSerializer
-from .forms import customUserForm
+from .models import customUser, askUser
+from .forms import customUserForm, askUserForm
 from .filters import customUserFilter
 
 
@@ -43,6 +47,40 @@ generic_context = {
   'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES
 }
 
+
+@api_view(['GET', 'POST'])
+def login(request):
+    # If I'm trying to login
+    print('LOGIN')
+    if request.method == "POST":
+        print('POST')
+        form = AuthenticationForm(request, data=request.POST)
+        print(form)
+        if form.is_valid():
+          username = form.cleaned_data.get('username')
+          password = form.cleaned_data.get('password')
+          user = authenticate(username=username, password=password)
+          if user is not None:
+            login(request, user)
+            messages.info(request, f"You are now logged in as {username}.")
+            return render(request, 'user_overview.html')
+          else:
+            messages.error(request,"Nome utente o password non corretti")
+    # If I just want to see the page
+    else:
+        #messages.error(request,"Nome utente o password non corretti")
+        form = AuthenticationForm()
+        return render(request, "login.html", {"form":form})
+
+
+
+
+
+
+
+
+
+  
 
 #@login_required
 #@permission_required('polls.add_choice', raise_exception=True)
@@ -78,7 +116,17 @@ def user_overview(request):
 @permission_required('customuser.add_choice', raise_exception=True)
 def user_create(request):
     submitted = False
+    cu = customUserForm()
+    generic_context['form'] = cu
+    generic_context['submitted'] = submitted     
     if request.method == "POST":
+        cu = customUserForm(request.POST)
+        if cu.is_valid():
+            cu.save()
+            return HttpResponseRedirect('user_profile/'+cu.id)           
+    return render(request, 'user_create.html', generic_context)
+
+    """ if request.method == "POST":
         cu = customUserForm(request.POST)
         if cu.is_valid():
             cu.save()
@@ -93,7 +141,7 @@ def user_create(request):
             submitted = True
     generic_context['form'] = cu
     generic_context['submitted'] = submitted        
-    return render(request, 'user_create.html', generic_context)
+    return render(request, 'user_create.html', generic_context) """
 
 @login_required
 @permission_required('customuser.add_choice', raise_exception=True)
@@ -211,6 +259,7 @@ def checkOffices(request, selectedField, officeList):
 def user_update(request, pk):
     submitted = request.GET.get('submitted')
     u = customUser.objects.get(id=pk)
+    cssPage = "w-100 border-radius-lg shadow-sm"
 
     checked_mail_offices = iterateOffices(u.mailOffice, MAIL_OFFICE_CHOICES)
     checked_lan_offices = iterateOffices(u.lanOffice, LAN_OFFICE_CHOICES)
@@ -221,8 +270,9 @@ def user_update(request, pk):
 
     # prepare the new generic_context
     generic_context['u'] = u
-    generic_context['form'] = cu
+    #generic_context['form'] = cu
     generic_context['submitted'] = submitted
+    generic_context['cssPage'] = cssPage
     generic_context['LAN_OFFICE_CHOICES'] = checked_lan_offices
     generic_context['ADWEB_OFFICE_CHOICES'] = checked_adweb_offices
     generic_context['SDI_OFFICE_CHOICES'] = checked_sdi_offices
@@ -237,15 +287,16 @@ def user_update(request, pk):
         submitted = True
         # fetch the object related to passed id
         obj = get_object_or_404(customUser, id = pk)
+        
         # pass the object as instance in form
         cu = customUserForm(request.POST or None, instance = obj)
+        generic_context['form'] = cu
+
         if cu.is_valid():
             print('form VALID')
             cu.save()
             u = customUser.objects.get(id=pk)
-            cssPage = "w-100 border-radius-lg shadow-sm"
-            return render(request, 'profile.html', {'u': u,  'cssPage':cssPage, 'MY_CONST': MY_CONST, 
-            'ADWEB_OFFICE_CHOICES': ADWEB_OFFICE_CHOICES, 'ITERATTI_OFFICE_CHOICES': ITERATTI_OFFICE_CHOICES })
+            return render(request, 'profile.html', generic_context)
             
         else:
           print('form is not valid')
@@ -304,19 +355,25 @@ def user_update(request, pk):
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
+
 def user_ask(request):
+    #cu = customUser
+    au = askUserForm()
     # if I want to send the request
     if request.method == "POST":
-        cu = customUserForm(request.POST)
-        if cu.is_valid():
-            cu.save()
-            return HttpResponseRedirect('user_create?submitted=True')
+        au = askUserForm(request.POST)
+        if au.is_valid():
+            au.save()
+            return render(request,'user_ask.html')
         else:
-            generic_context['form'] = cu
-            render(request, 'user_create.html', generic_context)
+            generic_context['form'] = au
+            print('FORM INVALID')
+            return render(request, 'user_ask.html', generic_context)
 
     # if I just want to see the form
     else:
+        #generic_context['u'] = cu
+        generic_context['form'] = au
         return render(request, 'user_ask.html', generic_context)
 
 
@@ -324,6 +381,7 @@ def index(request):
     userList = customUser.objects.all()
     return render(request, 'index.html', {'userList': userList, 'MY_CONST': MY_CONST})
 
+@api_view(['GET'])
 def info(request):
     return render(request, 'account_info.html', {'MY_CONST': MY_CONST})
 
