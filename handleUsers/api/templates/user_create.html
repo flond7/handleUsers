@@ -34,20 +34,19 @@
               <form method="POST" action='user_update' enctype="multipart/form-data">
               {% else %}
               <form method="POST" action='user_create' enctype="multipart/form-data">
-              
               {% endif %}
-              {% comment %} <form method="POST" action='user_create' enctype="multipart/form-data"> {% endcomment %}
+              
                 {% csrf_token %}
                 <div class="py-3">
                   <h6 class="h6 border-bottom w-100 pb-2">Informazioni generali</h6>
                   <div class="row">
                     <div class="col-md-3">
-                      <label for="name">Nome</label>
-                      <input class="form-input w-100" type="text" id="name" name="name" value={{u.name}}>
+                      <label for="name">Nome **</label>
+                      <input class="form-input rounded w-100" type="text" id="name" name="name" value={{u.name}}>
                     </div>
                     <div class="col-md-3">
                       <label for="surname">Cognome</label>
-                      <input class="form-input w-100" type="text" id="surname" name="surname" value={{u.surname}}>
+                      <input class="form-input rounded w-100" type="text" id="surname" name="surname" value={{u.surname}}>
                     </div>
                     <div class="col-md-3">
                       <label for="cf">Codice fiscale</label>
