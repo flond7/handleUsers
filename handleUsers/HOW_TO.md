@@ -24,6 +24,15 @@
 ### Creare una nuova pagina
 - In handleUsers/api/templates creare la nuova pagina nomePagina.html
 
+### Impostare l'invio di email quando viene richiesto un nuovo utente
+- In handleUsers/api/modelConstants e modificare i dati in NOTIFICATION
+- in handleusers/handleusers creare un file .env all'interno del quale copiare
+EMAIL_HOST=smtp.gmail.com
+EMAIL_HOST_USER=YourEmail@address
+EMAIL_HOST_PASSWORD=YourAppPassword
+RECIPIENT_ADDRESS=TheRecieverOfTheMails
+
+
 ## AMMINISTRATORE NON SMANETTONE
 - interfaccia da backend
 
