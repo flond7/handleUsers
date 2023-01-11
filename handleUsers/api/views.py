@@ -12,6 +12,7 @@ from django.core.exceptions import ValidationError
 
 #MAIL
 from django.core.mail import send_mail
+from django.conf import settings
 
 # LOGIN
 from django.contrib.auth import login, authenticate
@@ -367,8 +368,13 @@ def user_ask(request):
         au = askUserForm(request.POST)
         if au.is_valid():
             
-            send_mail(NOTIFICATION['oggetto'], au, NOTIFICATION['mittente'], [NOTIFICATION['destinatario']] )
+            send_mail(
+            subject='Richiesta nuovo utente',
+            message = '',
+            from_email = settings.EMAIL_HOST_USER,
+            recipient_list= [settings.RECIPIENT_ADDRESS] )
             au.save()
+            print('mail sent')
             return render(request,'user_ask.html')
         else:
             generic_context['form'] = au
