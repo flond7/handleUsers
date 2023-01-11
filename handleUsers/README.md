@@ -387,3 +387,8 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 - Add the following line to the file so sudo will use the environment variables you just created
   Defaults    env_keep+="http_proxy https_proxy no_proxy"
 - reboot
+
+
+
+## EMAIL da django
+- https://www.sitepoint.com/django-send-email/
