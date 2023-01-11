@@ -10,6 +10,9 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.core.exceptions import ValidationError
 
+#MAIL
+from django.core.mail import send_mail
+
 # LOGIN
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -363,6 +366,8 @@ def user_ask(request):
     if request.method == "POST":
         au = askUserForm(request.POST)
         if au.is_valid():
+            
+            send_mail(NOTIFICATION['oggetto'], au, NOTIFICATION['mittente'], [NOTIFICATION['destinatario']] )
             au.save()
             return render(request,'user_ask.html')
         else:
@@ -372,7 +377,6 @@ def user_ask(request):
 
     # if I just want to see the form
     else:
-        #generic_context['u'] = cu
         generic_context['form'] = au
         return render(request, 'user_ask.html', generic_context)
 

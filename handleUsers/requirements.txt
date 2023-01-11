@@ -12,7 +12,8 @@ django-environ==0.8.1
 django-multiselectfield==0.1.12
 djangorestframework==3.14.0
 django-filter==22.1
-
+django-extensions==3.2.1
+pandas==1.5.1
 
 #libsass 
 #django-compressor 

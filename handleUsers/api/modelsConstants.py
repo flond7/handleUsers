@@ -291,3 +291,12 @@ AMMTRASP_ROLES_CHOICES = [
   ('at1', 'Utente'),
   ('at2', 'Amministratore'),
 ]
+
+
+
+NOTIFICATION = {
+  'oggetto': 'Nuova richiesta utente dal gestionale',
+  'mittente': 'Gestionale utenti Aviano',
+  'destinatario': 'informatica@comune.aviano.pn.it',
+}
+
