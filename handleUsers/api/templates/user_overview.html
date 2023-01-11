@@ -52,7 +52,7 @@
                       </td>
 
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm {% if u.mailDeleted or u.mailOffice == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
+                        <span class="badge badge-sm {% if u.mailDeleted or u.mailOffice_display == '--'%} bg-gradient-danger {% else %} bg-gradient-success {% endif %}">
                           {% if u.mailDeleted or u.mailOffice == '--'%}  No {% else %} Ok {% endif %}
                         </span>
                       </td>
