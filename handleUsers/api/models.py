@@ -162,10 +162,13 @@ class customUser(models.Model):
 
 class askUser(models.Model):
   authorId = models.UUIDField(primary_key=False, unique=True, default=uuid.uuid4, editable=False)
+  po = models.CharField("Po che fa la richiesta", max_length=100, blank=False, default='')
+
+  # GENERIC
   name = models.CharField("Nome", max_length=100, blank=True, default='')
   surname = models.CharField("Cognome", max_length=100, blank=True, default='')
   office = models.CharField("Ufficio principale",max_length = 4, choices = MAIN_OFFICE_CHOICES, default = 'o0', blank=False) #assegnazione a un ufficio principale, per capirsi
-  
+
   #MAIL
   mail = models.BooleanField("Mail personale", default=False)
   mailOffice = MultiSelectField(max_length = 100, choices = MAIL_OFFICE_CHOICES, default = 'mo0', blank=False)
