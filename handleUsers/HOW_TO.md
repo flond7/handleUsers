@@ -11,6 +11,14 @@
 - aggiungere la funzione per visualizzare la pagina in api/view.py (ricordarsi sdi passare eventuali parametri nella funzione)
 
 
+# CREARE GLI ACCOUNT PER L'ACCESSO
+- Creare almeno un account amministratore
+- Creare un gruppo (es: P.O.) a cui dare i permessi per visualizzare customUser, aggiungere e visualizzare askUser
+- Creare tanti utenti quante sono le PO dell'ente e assegnarle al gruppo PO
+Il gestionale è pensato perchè le PO inviino la richiesta di attivazione quando una nuova persona arriva nel loro ufficio. Possono visualizzare le pagine:
+---- Chiedi utenze (create askUser)
+---- Elenco utenti di tutto l'ente
+
 # INSTALLAZIONE
 
 ## AMMINISTRATORE SMANETTONE
