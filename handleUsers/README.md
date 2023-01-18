@@ -24,7 +24,6 @@ How CORS works https://www.stackhawk.com/blog/angular-cors-guide-examples-and-ho
 Install trough requirements (not mandatory step, requirements now are for frontend dashboard template)
 - pip install --proxy=http://proxy-bc-el.regione.fvg.it:801 -r requirements.txt
 
-
 Create the project
 -  django-admin startproject project_name
 
@@ -45,7 +44,6 @@ Create superuser
 - python manage.py createsuperuser (administrator - administrator@localhost.com - com04***) http://127.0.0.1:8000/admin/
 
 Delete django key (if product has to go on production, otherwise if it runs locally it can stay there)
-
 
 Run server from cdm (inside project folder)
 - python manage.py runserver
@@ -70,7 +68,7 @@ Register the models in the admin interface
 
 Create a model and migrate it so the table is created in the db
 - Create a model (table structure) in api/models.py
-- python manage.py makemigrations                                  (it creates a mainProject/api/migrations/0001_initial.py file and eventually a mainProject/db.sqlite3 if not present)
+- python manage.py makemigrations (it creates a mainProject/api/migrations/0001_initial.py file and eventually a mainProject/db.sqlite3 if not present)
   to peak at the db see the section below
 - python manage.py migrate
 
@@ -86,13 +84,49 @@ Create a serializer
       depth = 1
 - for linked (aka related) data, the detault option is to show just the id of the object, adding a depth allows to specify how many nested informations should be returned (eg: depth = 1  returns one nested object inside a key, depth 2 returns a nested object inside a nested object in a key...)
 
+# Create a view
 
-Create a view
 
-Add the tables to the admin view
+
+# Add the tables to the admin view
 - in admin.py (es: project_name/api/admin.py) import the models and add to register
   from .models import User, Railway, Question, Video, Result
   admin.site.register(User)
+
+# CREATE A LOGIN PAGE
+- Check that in settings.py in INSTALLED APPS is included 
+  'django.contrib.auth'
+- in the main url.py file add 
+  path("accounts/", include("django.contrib.auth.urls")),  # to use django.auth and implement login page
+- The URLs provided by auth are: 
+    accounts/login/ [name='login']
+    accounts/logout/ [name='logout']
+    accounts/password_change/ [name='password_change']
+    accounts/password_change/done/ [name='password_change_done']
+    accounts/password_reset/ [name='password_reset']
+    accounts/password_reset/done/ [name='password_reset_done']
+    accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
+    accounts/reset/done/ [name='password_reset_complete']
+- django.contrib.auth will look for templates inside templates/registration, so create that folder if it's not there. To know where django will look for the templates folder
+  go to settings.py and search for TEMPLATE_DIR (or TEMPATES[DIR] in some projects)
+  TEMPLATE_DIR = os.path.join(CORE_DIR, "api/templates")  # ROOT dir for templates (es: api/templates/registration)
+- create a login.html for a login page, remember to use the simplest <form> (just method and button type). Also remember the csrf token
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log In</button>
+  </form>
+
+## ALLOW TO SEE PAGES BASED ON PERMISSIONS
+- Every time you add a model django creates some basic permissions
+  applabel.add_modelname
+  applabel.view_modelname
+  applabel.change_modelname
+  applabel.delete_modelname (es: api.delete_customuser)
+- Above the page function add a decorator to decide who should see that page
+  @permission_required('api.add_askuser', raise_exception=True)
+
+
 
 # Create an authentication tool - https://www.jetbrains.com/pycharm/guide/tutorials/django-aws/rest-api-jwt/
 
@@ -157,31 +191,11 @@ https://thetldr.tech/how-to-query-reverse-foreign-key-relationship-in-django-que
 python manage.py makemigrations
 
 
-# USER AUTHENTICATION AND PERMISSIONS https://spapas.github.io/2021/08/25/django-token-rest-auth/
-- install dj-rest-auth
-  pip install dj-rest-auth
-- in the main urls.py add  (if you want to see the specific urls go to the generic url 127.0.0.1:8000 and move from there)
-  path('auth/', include('dj_rest_auth.urls')),
-- in settings.py add
-  INSTALLED_APPS = [
-    . . .
-    'rest_framework',
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    . . . 
-  ]
-- in the specific views.py (api/views.py)
-  from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-  from rest_framework.permissions import IsAuthenticated
-- in views.py add in each view the requirement for authentication and permissions
-  class TestAuthView(APIView):
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
-## login
-- from the front end call http://127.0.0.1:8000/auth/login/ passing as data a JSON as {"username": "foo", "password": "myPassword"}. It will return a JSON as { "key": "xxxx"}
-## access protected views
-- from the front end call the view url and pass the key in the header as 
-  Authorization:Token xxxxx
+
+
+
+
+
 
 
 ## ADD A NEW FILED TO DB
@@ -241,6 +255,10 @@ https://realpython.com/django-migrations-a-primer/
 *** NESTED MODELS ***
 - add _id = models.ObjectIdField() to the model fields of the nested model in order to have nested models
 
+
+
+# ERRORS
+
 *** WITH ERROR NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None ***
 - pymongo version might be wrong, use 3.12.1
   pip uninstall pymongo
@@ -261,10 +279,6 @@ https://realpython.com/django-migrations-a-primer/
 - https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-## CONSTANTS FILE
-To use constants for models,
-- Create a separate file (es modelsConstat)
-- Import it on the main models in the form of: from my-app-name.modelConstants import *
 
 
 reset DB
@@ -348,6 +362,31 @@ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git (change rep
 ## REST
 https://www.bezkoder.com/django-angular-crud-rest-framework/
 
+# REST - USER AUTHENTICATION AND PERMISSIONS https://spapas.github.io/2021/08/25/django-token-rest-auth/
+- install dj-rest-auth
+  pip install dj-rest-auth
+- in the main urls.py add  (if you want to see the specific urls go to the generic url 127.0.0.1:8000 and move from there)
+  path('auth/', include('dj_rest_auth.urls')),
+- in settings.py add
+  INSTALLED_APPS = [
+    . . .
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    . . . 
+  ]
+- in the specific views.py (api/views.py)
+  from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+  from rest_framework.permissions import IsAuthenticated
+- in views.py add in each view the requirement for authentication and permissions
+  class TestAuthView(APIView):
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+## login
+- from the front end call http://127.0.0.1:8000/auth/login/ passing as data a JSON as {"username": "foo", "password": "myPassword"}. It will return a JSON as { "key": "xxxx"}
+## access protected views
+- from the front end call the view url and pass the key in the header as 
+  Authorization:Token xxxxx
 
 
 
