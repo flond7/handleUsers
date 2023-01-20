@@ -232,6 +232,9 @@ class askUser(models.Model):
   #AMMINISTRAZIONE TRASPARENTE
   ammTraspRole = models.CharField(max_length = 4, choices = AMMTRASP_ROLES_CHOICES, default = 'at0', blank=False)
 
+  #OSSERVATORIO URBANISTICA
+  aosservatorioRole = models.CharField(max_length = 4, choices = OSSERVATORIO_ROLES_CHOICES, default = 'at0', blank=False)
+
   note = models.TextField(default="", blank=True)
 
   class Meta:

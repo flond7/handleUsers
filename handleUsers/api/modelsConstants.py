@@ -291,6 +291,11 @@ AMMTRASP_ROLES_CHOICES = [
   ('at1', 'Utente'),
   ('at2', 'Amministratore'),
 ]
+OSSERVATORIO_ROLES_CHOICES = [
+  ('o0', '--'),
+  ('o1', 'Polizia'),
+  ('o2', 'Segretario'),
+]
 
 
 
