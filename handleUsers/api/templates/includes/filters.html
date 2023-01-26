@@ -1,24 +1,43 @@
       <form method="get" class="w-100">
         <div class="row justify-content-end">
-          <div class="col-md-1">
+          <div class="col-md-2">
             <div class="d-flex">
               <div class="col">
+                <label class="mx-0 w-100 text-center">Impiegati {{employed}}</label>
+                {% comment %} <button class="rounded button-active border-none"><i class="fa fa-users mx-1"></i> </button> {% endcomment %}
+                <a class="btn d-flex justify-content-center rounded {% if employed == 'True' %} button-active {% else %} button-inactive {% endif %} border-none" href="/api/user_overview?name=&surname=&office=&active=&employed=True"
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Persone attualmente impiegate nell'ente">
+                  <i class="fa fa-users mx-1"></i>
+                </a>
+              </div>
+
+              <div class="col mx-2">
                 <label class="mx-0 w-100 text-center">Attivi</label>
                 {% comment %} <button class="rounded button-active border-none"><i class="fa fa-users mx-1"></i> </button> {% endcomment %}
-                <a class="btn d-flex justify-content-center rounded button-active border-none" href="/api/user_overview?name=&surname=&office=&active=True">
-                  <i class="fa fa-users mx-1"></i>
+                <a class="btn d-flex justify-content-center rounded {% if active == True %} button-active {% else %} button-inactive {% endif %} border-none" href="/api/user_overview?name=&surname=&office=&active=True&employed="
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Persone con un account attivo nell'ente (impiegati e non, in convenzione, esterni...)">
+                  <i class="fa fa-desktop mx-1"></i> <i class="fa-solid fa-camera"></i>
                 </a>
               </div>
               
               <div class="col mx-2">
-                <label class="mx-0 w-100 text-center">Inattivi</label>
-                <a class="btn d-flex justify-content-center rounded button-inactive border-none" href="/api/user_overview?name=&surname=&office=&active=False">
-                  <i class="fa fa-users mx-1"></i>
+                <label class="mx-0 w-100 text-center">Extra</label>
+                <a class="btn d-flex justify-content-center rounded {% if active == False and employed == False %} button-active {% else %} button-inactive {% endif %} border-none" href="/api/user_overview?name=&surname=&office=&active=True&employed=False"
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Persone non impiegate ma attive">
+                  <i class="fa fa-ufo"></i> <i class="fa fa-alien"></i>
+                </a>
+              </div>
+
+              <div class="col mx-2">
+                <label class="mx-0 w-100 text-center">Ex</label>
+                <a class="btn d-flex justify-content-center rounded {% if active == False and employed == False %} button-active {% else %} button-inactive {% endif %} border-none" href="/api/user_overview?name=&surname=&office=&active=False&employed=False"
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Persone non attive e non impiegate">
+                  <i class="fa fa-ghost"></i>
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-md-3"></div>
+          <div class="col-md-2"></div>
           {% comment %} <div class="col-md-1">
             <label for="name">Nome</label>
             <input class="form-input rounded border-none w-100" type="text" id="name" name="name" value={{name}}>
