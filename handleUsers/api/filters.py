@@ -12,4 +12,4 @@ class customUserFilter(django_filters.FilterSet):
 
   class Meta:
     model = customUser
-    fields = {'name': ['exact'], 'surname': ['exact'], 'office': ['exact']}
+    fields = {'name': ['exact'], 'surname': ['exact'], 'office': ['exact'], 'active':['exact'], 'employed': ['exact']}
