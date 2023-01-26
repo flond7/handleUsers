@@ -26,7 +26,8 @@
             <span class="nav-link-text ms-1">Utenti overview</span>
           </a>
         </li>
-
+       
+        {% comment %}  {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link {% if 'user-create' in segment %} active {% endif %}" href="/api/user_create">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -35,10 +36,11 @@
             <span class="nav-link-text ms-1">Crea utente</span>
           </a>
         </li>
+        {% endif %} {% endcomment %}
 
-        <li class="nav-item mt-3">
+        {% comment %} <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Richiesta</h6>
-        </li>
+        </li> {% endcomment %}
         <li class="nav-item">
           <a class="nav-link {% if 'user_ask' in segment %} active {% endif %}" href="user_ask">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -47,6 +49,7 @@
             <span class="nav-link-text ms-1">Nuovo utente</span>
           </a>
         </li>
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Applicazioni</h6>
         </li>
@@ -66,14 +69,15 @@
             <span class="nav-link-text ms-1">Iteratti</span>
           </a>
         </li>
-        <li class="nav-item">
+
+        {% comment %} <li class="nav-item">
           <a class="nav-link {% if 'iteratti' in segment %} active {% endif %}" href="/api/sdi">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-wallet text-black icon-bg" aria-hidden="true"></i>
             </div>
             <span class="nav-link-text ms-1">Sdi</span>
           </a>
-        </li>
+        </li> {% endcomment %}
 
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Info</h6>
@@ -86,14 +90,14 @@
             <span class="nav-link-text ms-1">Abilitazioni</span>
           </a>
         </li>
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link {% if 'howto' in segment %} active {% endif %}" href="howto">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-user-graduate text-black icon-bg" aria-hidden="true"></i>
             </div>
             <span class="nav-link-text ms-1">How to</span>
           </a>
-        </li>
+        </li> {% endcomment %}
 
 
         
