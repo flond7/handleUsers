@@ -52,3 +52,5 @@ RECIPIENT_ADDRESS=TheRecieverOfTheMails
 Indica se l'utente è ancora dipendente dell'ente (o legato all'ente comunque). Se ho una dipendente della Comunità montana che deve agire su aviano questa è un utente paragonabile a una dipendente fino a che deve operare sui nostri sistemi. 
 E' un parametro manuale, nel senso che bisogna manualmente segnare che il dipendente è o non è ancora impiegato. Quando non lo è più compare in grigio e semitrasparente.
 In caso non sia più dipendente ma certi account risultino ancora attivi (non disabilitati o non "mai assegnati") compare un warning con fantasmino (sarebbe meglio zombie però...)
+# Active (in models)
+Indica se l'utente ha ancora account attivi o se è completamente disabilitato. Se disabilitato non deve comparire più
