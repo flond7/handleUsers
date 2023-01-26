@@ -394,6 +394,53 @@ https://www.bezkoder.com/django-angular-crud-rest-framework/
 https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 
 
+# SU LINUX MINT
+## set proxy
+- sudo nano /etc/environment
+- add config proxy insiel
+  export proxy_http="http://172.25.10.10:801"
+  export proxy_https="https://172.25.10.10:801"
+  export proxy_ftp="http://172.25.10.10:801"
+  export no_proxyp="localhost,172.0.0.1"
+## install apache
+- sudo apt-get install apache2 (then check with http://localhost to see if everything is ok)
+## set permissions
+- cd /var/www
+- change the html folder owner and set it as the administrator user. If you put : after the user name it will choos authomatically the right group
+  chown NOMEUTENTE: html
+- cd html
+- mkdir NOME_CARTELLA_PROGETTO (es: utenti) 
+- check if the new folder has the right owner (ls -la) and eventually change them
+  sudo chown NOMEUTENTE: NOME_CARTELLA_PROGETTO (es sudo chown nodeweaver: utenti)
+## copy files
+- use something like bitwise/filezilla to transfer the files to the new server
+- ** don't copy the venv folder, it will have to be created and populated from scratch ** 
+## install php8
+- sudo apt update
+- sudo apt upgrade
+- sudo apt install software-properties-common
+- sudo add-apt-repository ppa:ondrej/php 
+If there is an error try
+- sudo -E add-apt-repository ppa:ondrej/php
+- sudo apt update
+- sudo apt install php8.0
+## activate for the first time the venv environment
+You have to create the venv environment
+- python -m venv venv (if it doesn't work try "python3 -m venv venv" if it still doesn't work see next line then try again this one or the python3 version)
+--- sudo apt install python3.8-venv
+- source venv/bin/activate (activate the venv)
+## install django and libraries
+- cd PROJECTFOLDER
+- pip install -r requirements.txt
+## start django server and check
+- python manage.py runserver
+- check on linux with a browser localhost (apache webpage) and 127.0.0.1:8080/api/user_overview
+## make the page visible from the same LAN
+
+
+
+
+
 # SU RASBBERRY
 - Make sure you have the proxy configured (see below)
 - Create project folder in var/www/html/projectFolder
