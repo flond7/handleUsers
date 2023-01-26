@@ -52,46 +52,13 @@ generic_context = {
 }
 
 
-@api_view(['GET', 'POST'])
-def login(request):
-    # If I'm trying to login
-    print('LOGIN')
-    if request.method == "POST":
-        print('POST')
-        form = AuthenticationForm(request, data=request.POST)
-        print(form)
-        if form.is_valid():
-          username = form.cleaned_data.get('username')
-          password = form.cleaned_data.get('password')
-          user = authenticate(username=username, password=password)
-          if user is not None:
-            login(request, user)
-            messages.info(request, f"You are now logged in as {username}.")
-            return render(request, 'user_overview.html')
-          else:
-            messages.error(request,"Nome utente o password non corretti")
-    # If I just want to see the page
-    else:
-        #messages.error(request,"Nome utente o password non corretti")
-        form = AuthenticationForm()
-        return render(request, "login.html", {"form":form})
-
-
-
-
-
-
-
-
-
-  
-
-#@login_required
-#@permission_required('polls.add_choice', raise_exception=True)
+@login_required
+@permission_required('api.view_customuser', raise_exception=True)
 def user_overview(request):
     #custom css for avatar
     cssPage = 'avatar me-3'
     userList = customUser.objects.all().order_by('name')
+
     # if the dictionary has some values the boolean is true, otherwise false
     if bool(request.GET):
       user_filter = customUserFilter(request.GET, queryset=userList)
@@ -100,12 +67,8 @@ def user_overview(request):
       surname = request.GET.get('surname')
       office = request.GET.get('office')
       active = request.GET.get('active')
-      # if the search is for active/inactive users check user params
-      if active == 'True':
-        print('active')
-      elif active == 'False':
-        print('inactive')
-      
+      employed = request.GET.get('employed')
+
       # ATTENTION: django-filters puts the result inside a qs so you have to pass user_filter.qs
       return render(request, 'user_overview.html', {
         'userList': user_filter.qs, 
@@ -359,15 +322,13 @@ def user_update(request, pk):
         'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
         'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES})
 
-
+@permission_required('api.add_askuser', raise_exception=True)
 def user_ask(request):
-    #cu = customUser
     au = askUserForm()
     # if I want to send the request
     if request.method == "POST":
         au = askUserForm(request.POST)
         if au.is_valid():
-            
             send_mail(
             subject='Richiesta nuovo utente',
             message = '',
