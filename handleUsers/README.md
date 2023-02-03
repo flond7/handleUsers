@@ -403,7 +403,49 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
   export proxy_ftp="http://172.25.10.10:801"
   export no_proxyp="localhost,172.0.0.1"
 ## install apache
-- sudo apt-get install apache2 (then check with http://localhost to see if everything is ok)
+- sudo apt-get install apache2 apache2-utils libexpat1 ssl-cert python (then check with http://localhost to see if everything is ok)
+## install mod_wsgi (needed to deploy django in apache)
+- sudo apt-get install libapache2-mod-wsgi
+- sudo service apache2 restart
+- sudo nano /var/www/html/test-wsgi.py
+  create a test file to see if the module is working
+  
+  def application(environ,start_response):
+    status = '200 OK'
+    html = '<html>\n' \
+           '<body>\n' \
+           '<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">\n' \
+           'Welcome to Apache with mod_wsgi \n' \
+           '</div>\n' \
+           '</body>\n' \
+           '</html>\n'
+    response_header = [('Content-type','text/html')]
+    start_response(status,response_header)
+    return [html]
+
+- sudo nano /etc/apache2/conf-available/mod-wsgi.conf
+  add this content to check if the mod is working
+  WSGIScriptAlias /test-wsgi /var/www/html/test-wsgi.py
+- a2enconf mod-wsgi
+- sudo service apache2 restart
+- open browser and check  http://your-server-ip/test-wsgi
+## configure apache2 for django
+- sudo nano /etc/apache2/apache2.conf (this is for ubuntu related OS, for others it might be an httpd.conf file, if OS is different check on https://cwiki.apache.org/confluence/display/HTTPD/DistrosDefaultLayout)
+- at the end of the file add
+
+  WSGIScriptAlias /var/www/html/utenti/handleUsers/handleUsers/wsgi.py
+  WSGIPythonHome /var/www/html/utenti/venv
+  WSGIPythonPath /var/www/html/utenti
+
+  <Directory /var/www/html/utenti/handleUsers>
+  <Files wsgi.py>
+  Require all granted
+  </Files>
+  </Directory>
+
+- for details about commands meaning see https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/
+
+
 ## set permissions
 - cd /var/www
 - change the html folder owner and set it as the administrator user. If you put : after the user name it will choos authomatically the right group
@@ -436,7 +478,7 @@ You have to create the venv environment
 - python manage.py runserver
 - check on linux with a browser localhost (apache webpage) and 127.0.0.1:8080/api/user_overview
 ## make the page visible from the same LAN
-
+https://guide.debianizzati.org/index.php/Apache_e_Virtual_Hosts:_configurare_Apache2_per_ospitare_pi%C3%B9_siti_web
 
 
 
