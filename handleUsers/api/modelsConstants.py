@@ -68,6 +68,7 @@ MAIL_OFFICE_CHOICES = [
   ('mo19', 'casa.riposo@'),
   ('mo20', 'vicesindaco@'),
   ('mo21', 'anagrafe@'),
+  ('mo21', 'protocollo@'),
 ]
 ADWEB_OFFICE_CHOICES = [
   ('ao0', '--'),
