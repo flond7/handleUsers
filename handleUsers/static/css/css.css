@@ -127,3 +127,6 @@
 .text-black {
   color: var(--bs-heading-color) !important;
 }
+.smaller {
+  font-size: 0.5rem;
+}
