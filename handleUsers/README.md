@@ -493,18 +493,21 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 - cd where the db is
   cd /var/www/html/utenti/handleUsers
 - sudo chown www-data:www-data db.sqlite3
+- sudo chmod +rwx db.sqlite3
 - cd to the enclosing folder and change owner there too
   cd ..
   sudo chown www-data:www-data handleUsers
+  sudo chmod +rwx handleUsers
 - service apache2 restart
+### WARNING !
+### changing the owner to www-data gives an error when you try to move files with ftp that uses another user (es: nodeweaver)
+### upload everything, then change the owner, then use just the copy on the server and remember to use VScode on the server copy
+### ENJOY :)
 
 ## ERROR attempt to write a readonly database (SQLITE)
 - permission might be setted wrong, check both the sqlite db and the folder enclosing it, they have to have all permissions with the right user
 - cd /var/www/html/utenti/handleUsers
 - chmod +rwx db.sqlite3
-
-
-
 
 
 https://www.google.com/search?client=firefox-b-d&q=django+on+apache+2#fpstate=ive&scso=_ZsHkY4mGJfCFxc8PsP-kSA_32:872&vld=cid:5cca81a2,vid:UY_UIH89elA,st:2232
