@@ -446,6 +446,71 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 - for details about commands meaning see https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/
 
 
+
+
+## install mod_wsgi (needed to deploy django in apache)
+- sudo apt-get install libapache2-mod-wsgi-py3  
+- sudo nano /etc/apache2/sites-available/000-default.conf
+  (substitute the default config with this one)
+
+  <VirtualHost *:80>
+
+    # where to save error logs
+    # folder has to exist so check or create it
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combine
+
+    # to correctly serve static files specify where to go when apache sees /static pointing to the static directory with absolute path
+    # and grant all permissions for that directory
+    alias /static /var/www/html/utenti/handleUsers/static
+    <Directory /var/www/html/utenti/handleUsers/static>
+      Require all granted
+    </Directory>
+
+    # directory points to where wsgi.py is
+    <Directory /var/www/html/utenti/handleUsers/handleUsers>
+      Require all granted
+    </Directory>
+
+    # first param is the process name, it can be whatever you want, es "handleUsers"
+    # python-home points to /venv
+    # python-path point to where manage.py is
+    WSGIDaemonProcess handleUsers python-home=/var/www/html/utenti/venv python-path=/var/www/html/utenti/handleUsers
+    # processGroup just has to have the same name as the process above
+    WSGIProcessGroup handleUsers
+    # when apache sees root I want it to see the django app (points to wsgi.py)
+    WSGIScriptAlias / /var/www/html/utenti/handleUsers/handleUsers/wsgi.py
+  </VirtualHost>
+- apachectl configtest (check if syntax is ok, don't worry about eventual server name error)
+- service apache2 restart
+# correctly serve static files
+- create a STATIC_ROOT in settings.py with the absolute url from apache pointing to the static folder
+  STATIC_ROOT = '/var/www/html/handleUsers'
+- test the application
+# make sure the correct user is running the files
+- nano /etc/apache2/envars
+  look for APACHE_RUN_USER and APACHE_RUN_GROUP to know which user and group you need to abilitate as owners (probably www-data)
+- cd where the db is
+  cd /var/www/html/utenti/handleUsers
+- sudo chown www-data:www-data db.sqlite3
+- cd to the enclosing folder and change owner there too
+  cd ..
+  sudo chown www-data:www-data handleUsers
+- service apache2 restart
+
+## ERROR attempt to write a readonly database (SQLITE)
+- permission might be setted wrong, check both the sqlite db and the folder enclosing it, they have to have all permissions with the right user
+- cd /var/www/html/utenti/handleUsers
+- chmod +rwx db.sqlite3
+
+
+
+
+
+https://www.google.com/search?client=firefox-b-d&q=django+on+apache+2#fpstate=ive&scso=_ZsHkY4mGJfCFxc8PsP-kSA_32:872&vld=cid:5cca81a2,vid:UY_UIH89elA,st:2232
+
+
+
 ## set permissions
 - cd /var/www
 - change the html folder owner and set it as the administrator user. If you put : after the user name it will choos authomatically the right group
