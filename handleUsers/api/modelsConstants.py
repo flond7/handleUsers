@@ -238,6 +238,11 @@ FVGPAY_ROLES_CHOICES = [
   ('f1', 'Utente'),
   ('f2', 'Amministratore'),
 ]
+PMPAY_ROLES_CHOICES = [
+  ('p0', '--'),
+  ('p1', 'Utente'),
+  ('p2', 'Amministratore'),
+]
 MEPA_ROLES_CHOICES = [
   ('m0', '--'),
   ('m1', 'Istruttore'),

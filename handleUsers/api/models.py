@@ -211,6 +211,9 @@ class askUser(models.Model):
   #FVG pay
   fvgPayRole = models.CharField(max_length = 2, choices = FVGPAY_ROLES_CHOICES, default = 's0', blank=False)
 
+  #PM-pay
+  pmPayRole = models.CharField(max_length = 2, choices = PMPAY_ROLES_CHOICES, default = 's0', blank=False)
+
   #MEPA
   mepaRole = models.CharField(max_length = 4, choices = MEPA_ROLES_CHOICES, default = 'm0', blank=False)
 
