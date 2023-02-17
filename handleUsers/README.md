@@ -393,6 +393,8 @@ https://www.bezkoder.com/django-angular-crud-rest-framework/
 ## CSV
 https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 
+# SU UBUNTU
+- dopo aver settato i proxy fare
 
 # SU LINUX MINT
 ## set proxy
@@ -403,6 +405,8 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
   export proxy_ftp="http://172.25.10.10:801"
   export no_proxyp="localhost,172.0.0.1"
 ## install apache
+- sudo apt-get update (repository update)
+  if something doesn't work change the server for updated to main server Software and udpates > Download from main server (UBUNTU TRICK)
 - sudo apt-get install apache2 apache2-utils libexpat1 ssl-cert python (then check with http://localhost to see if everything is ok)
 ## install mod_wsgi (needed to deploy django in apache)
 - sudo apt-get install libapache2-mod-wsgi
@@ -466,6 +470,14 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
     <Directory /var/www/html/utenti/handleUsers/static>
       Require all granted
     </Directory>
+
+    # to correctly serve static adnub files specify where to go when apache sees /static pointing to the static directory with absolute path
+    # and grant all permissions for that directory
+    alias /admin/static /var/www/html/utenti/venv/Lib/site-packages/django/contrib/admin/static
+    <Directory /var/www/html/utenti/venv/Lib/site-packages/django/contrib/admin/static>
+      Require all granted
+    </Directory>
+
 
     # directory points to where wsgi.py is
     <Directory /var/www/html/utenti/handleUsers/handleUsers>
