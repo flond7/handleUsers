@@ -406,7 +406,7 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
   export no_proxyp="localhost,172.0.0.1"
 ## install apache
 - sudo apt-get update (repository update)
-  if something doesn't work change the server for updated to main server Software and udpates > Download from main server (UBUNTU TRICK)
+  for update problems see section below
 - sudo apt-get install apache2 apache2-utils libexpat1 ssl-cert python (then check with http://localhost to see if everything is ok)
 ## install mod_wsgi (needed to deploy django in apache)
 - sudo apt-get install libapache2-mod-wsgi
@@ -449,8 +449,19 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 
 - for details about commands meaning see https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/
 
-
-
+### SUDO UPDATE ERRORS
+- check the date is correct
+  -- timedatectl status (check status)
+  -- sudo timedatectl set-ntp true (abilitate ntp synch)
+  - per modificare manualmente data e ora disabilitare il synch ntp e poi impostare manualmente: 
+  -- sudo timedatectl set-ntp false
+  -- sudo timedatectl set-time 'Y:M:D HH:mm:ss'
+- Software and udpates > Download from main server (change the server for updates)
+- set proxy for apt-get (different than general proxy - UBUNTU VERSION)
+  -- sudo nano /etc/apt/apt.conf.d/80proxy
+     Acquire::http::proxy "http://10.10.1.10:8080/";
+     Acquire::https::proxy "https://10.10.1.10:8080/";
+     Acquire::ftp::proxy "ftp://10.10.1.10:8080/";
 
 ## install mod_wsgi (needed to deploy django in apache)
 - sudo apt-get install libapache2-mod-wsgi-py3  
