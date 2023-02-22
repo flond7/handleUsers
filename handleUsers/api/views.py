@@ -10,6 +10,9 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.core.exceptions import ValidationError
 
+# USER ASK
+from django.contrib.auth import get_user_model
+
 #MAIL
 from django.core.mail import send_mail
 from django.conf import settings
@@ -42,13 +45,15 @@ generic_context = {
   'CRM_ROLES_CHOICES':CRM_ROLES_CHOICES,
   'AVCP_ROLES_CHOICES':AVCP_ROLES_CHOICES, 
   'FVGPAY_ROLES_CHOICES':FVGPAY_ROLES_CHOICES,
+  'PMPAY_ROLES_CHOICES':PMPAY_ROLES_CHOICES,
   'SUE_ROLES_CHOICES':SUE_ROLES_CHOICES, 
   'SUAP_ROLES_CHOICES':SUAP_ROLES_CHOICES,
   'MASTERDATA_ROLES_CHOICES':MASTERDATA_ROLES_CHOICES, 
   'ALBOPRET_ROLES_CHOICES': ALBOPRET_ROLES_CHOICES, 
   'AMMTRASP_ROLES_CHOICES':AMMTRASP_ROLES_CHOICES,
   'MEPA_ROLES_CHOICES':MEPA_ROLES_CHOICES, 
-  'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES
+  'AGENTR_ROLES_CHOICES':AGENTR_ROLES_CHOICES,
+  'OSSERVATORIO_ROLES_CHOICES':OSSERVATORIO_ROLES_CHOICES,
 }
 
 
@@ -325,6 +330,9 @@ def user_update(request, pk):
 @permission_required('api.add_askuser', raise_exception=True)
 def user_ask(request):
     au = askUserForm()
+    user = request.user
+    # find and use the username
+    generic_context['username'] = user.get_username()
     # if I want to send the request
     if request.method == "POST":
         au = askUserForm(request.POST)

@@ -212,7 +212,7 @@ class askUser(models.Model):
   fvgPayRole = models.CharField(max_length = 2, choices = FVGPAY_ROLES_CHOICES, default = 's0', blank=False)
 
   #PM-pay
-  pmPayRole = models.CharField(max_length = 2, choices = PMPAY_ROLES_CHOICES, default = 's0', blank=False)
+  pmPayRole = models.CharField(max_length = 2, choices = PMPAY_ROLES_CHOICES, default = 'p0', blank=False)
 
   #MEPA
   mepaRole = models.CharField(max_length = 4, choices = MEPA_ROLES_CHOICES, default = 'm0', blank=False)
@@ -236,7 +236,7 @@ class askUser(models.Model):
   ammTraspRole = models.CharField(max_length = 4, choices = AMMTRASP_ROLES_CHOICES, default = 'at0', blank=False)
 
   #OSSERVATORIO URBANISTICA
-  aosservatorioRole = models.CharField(max_length = 4, choices = OSSERVATORIO_ROLES_CHOICES, default = 'at0', blank=False)
+  osservatorioRole = models.CharField(max_length = 4, choices = OSSERVATORIO_ROLES_CHOICES, default = 'o0', blank=False)
 
   note = models.TextField(default="", blank=True)
 

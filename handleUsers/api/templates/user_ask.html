@@ -25,6 +25,10 @@
 
                 {% comment %} {{ form.as_p }} {% endcomment %}
 
+                <div class="py-3">
+                  <h6 class="h6 border-bottom w-100 pb-2">Richiesta creazione utenze - {{username}} </h6>
+                    <input class="" type="hidden" id="" name='po' value={{username}}>
+                </div>
 
                 <div class="py-3">
                   <h6 class="h6 border-bottom w-100 pb-2">Informazioni generali</h6>
@@ -258,6 +262,17 @@
                     </div>
 
                     <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">PM-pay</h6>
+                      <p class="">Indicare se l'utente ha necessità di utilizzare il portale PM-pay.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo PM-pay</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="pmPayRole">
+                        {% for office in PMPAY_ROLES_CHOICES %}
+                        <option value={{office.0}} >{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
                       <h6 class="text-primary">CRM</h6>
                       <p class="">Indicare se l'utente ha necessità di inviare richieste sul CRM.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
                       <label>Ruolo CRM</label></br>
@@ -360,6 +375,18 @@
                         {% endfor %}
                       </select>
                     </div>
+
+                    <div class="col-md-12 pb-3 mb-3">
+                      <h6 class="text-primary">Osservatorio urbanistica edilizia</h6>
+                      <p class="">Indicare se l'utente ha necessità di utilizzare il portale Osservatorio.</br>Se non è necessario attivare un account selezionare la prima voce "--"</p>
+                      <label>Ruolo PM-pay</label></br>
+                      <select class="form-input rounded border-none col-md-2" name="osservatorioRole">
+                        {% for office in OSSERVATORIO_ROLES_CHOICES %}
+                        <option value={{office.0}} >{{office.1}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
                     
                   </div>
                 </div>
