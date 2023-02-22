@@ -331,10 +331,6 @@ def pageOneFunction(request):
     sample/templates/pageOne.html
 
 
-## DJANGO ADMIN CUSTOM
-- The files are in venv/django/contrib/admin/templates
-
-
 
 ## GITHUB
 git init
@@ -409,61 +405,6 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
   for update problems see section below
 - sudo apt-get install apache2 apache2-utils libexpat1 ssl-cert python (then check with http://localhost to see if everything is ok)
 ## install mod_wsgi (needed to deploy django in apache)
-- sudo apt-get install libapache2-mod-wsgi
-- sudo service apache2 restart
-- sudo nano /var/www/html/test-wsgi.py
-  create a test file to see if the module is working
-  
-  def application(environ,start_response):
-    status = '200 OK'
-    html = '<html>\n' \
-           '<body>\n' \
-           '<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">\n' \
-           'Welcome to Apache with mod_wsgi \n' \
-           '</div>\n' \
-           '</body>\n' \
-           '</html>\n'
-    response_header = [('Content-type','text/html')]
-    start_response(status,response_header)
-    return [html]
-
-- sudo nano /etc/apache2/conf-available/mod-wsgi.conf
-  add this content to check if the mod is working
-  WSGIScriptAlias /test-wsgi /var/www/html/test-wsgi.py
-- a2enconf mod-wsgi
-- sudo service apache2 restart
-- open browser and check  http://your-server-ip/test-wsgi
-## configure apache2 for django
-- sudo nano /etc/apache2/apache2.conf (this is for ubuntu related OS, for others it might be an httpd.conf file, if OS is different check on https://cwiki.apache.org/confluence/display/HTTPD/DistrosDefaultLayout)
-- at the end of the file add
-
-  WSGIScriptAlias /var/www/html/utenti/handleUsers/handleUsers/wsgi.py
-  WSGIPythonHome /var/www/html/utenti/venv
-  WSGIPythonPath /var/www/html/utenti
-
-  <Directory /var/www/html/utenti/handleUsers>
-  <Files wsgi.py>
-  Require all granted
-  </Files>
-  </Directory>
-
-- for details about commands meaning see https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/
-
-### SUDO UPDATE ERRORS
-- check the date is correct
-  -- timedatectl status (check status)
-  -- sudo timedatectl set-ntp true (abilitate ntp synch)
-  - per modificare manualmente data e ora disabilitare il synch ntp e poi impostare manualmente: 
-  -- sudo timedatectl set-ntp false
-  -- sudo timedatectl set-time 'Y:M:D HH:mm:ss'
-- Software and udpates > Download from main server (change the server for updates)
-- set proxy for apt-get (different than general proxy - UBUNTU VERSION)
-  -- sudo nano /etc/apt/apt.conf.d/80proxy
-     Acquire::http::proxy "http://10.10.1.10:8080/";
-     Acquire::https::proxy "https://10.10.1.10:8080/";
-     Acquire::ftp::proxy "ftp://10.10.1.10:8080/";
-
-## install mod_wsgi (needed to deploy django in apache)
 - sudo apt-get install libapache2-mod-wsgi-py3  
 - sudo nano /etc/apache2/sites-available/000-default.conf
   (substitute the default config with this one)
@@ -536,6 +477,139 @@ https://blog.logrocket.com/filtering-querysets-dynamically-in-django/
 https://www.google.com/search?client=firefox-b-d&q=django+on+apache+2#fpstate=ive&scso=_ZsHkY4mGJfCFxc8PsP-kSA_32:872&vld=cid:5cca81a2,vid:UY_UIH89elA,st:2232
 
 
+
+
+## configure apache2 for django
+- sudo nano /etc/apache2/apache2.conf (this is for ubuntu related OS, for others it might be an httpd.conf file, if OS is different check on https://cwiki.apache.org/confluence/display/HTTPD/DistrosDefaultLayout)
+- at the end of the file add
+
+  WSGIScriptAlias /var/www/html/utenti/handleUsers/handleUsers/wsgi.py
+  WSGIPythonHome /var/www/html/utenti/venv
+  WSGIPythonPath /var/www/html/utenti
+
+  <Directory /var/www/html/utenti/handleUsers>
+  <Files wsgi.py>
+  Require all granted
+  </Files>
+  </Directory>
+
+- for details about commands meaning see https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/
+
+### SUDO UPDATE ERRORS
+- check the date is correct
+  -- timedatectl status (check status)
+  -- sudo timedatectl set-ntp true (abilitate ntp synch)
+  - per modificare manualmente data e ora disabilitare il synch ntp e poi impostare manualmente: 
+  -- sudo timedatectl set-ntp false
+  -- sudo timedatectl set-time 'Y:M:D HH:mm:ss'
+- Software and udpates > Download from main server (change the server for updates)
+- ** IF INTERNET NAVIGATION WORKS BUT YOU CAN'T UPDATE** 
+  set proxy for apt-get (different than general proxy - UBUNTU VERSION)
+  -- sudo nano /etc/apt/apt.conf.d/80proxy
+     Acquire::http::proxy "http://10.10.1.10:8080/";
+     Acquire::https::proxy "https://10.10.1.10:8080/";
+     Acquire::ftp::proxy "ftp://10.10.1.10:8080/";
+
+https://computingforgeeks.com/how-to-set-system-wide-proxy-on-ubuntu-debian/ 
+
+
+## install mod_wsgi (needed to deploy django in apache)
+- sudo apt-get install libapache2-mod-wsgi-py3  
+- sudo nano /etc/apache2/sites-available/000-default.conf
+  (substitute the default config with this one)
+
+  <VirtualHost *:80>
+
+    # where to save error logs
+    # folder has to exist so check or create it
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combine
+
+    # to correctly serve static files specify where to go when apache sees /static pointing to the static directory with absolute path
+    # and grant all permissions for that directory
+    alias /static /var/www/html/utenti/handleUsers/static
+    <Directory /var/www/html/utenti/handleUsers/static>
+      Require all granted
+    </Directory>
+
+    # to correctly serve static admin files use a trick, copy the admin folder you find in 
+    # venv/Lib/site-packages/django/contrib/admin/static to the server where you put the custom front end static files
+    # /var/www/html/utenti/handleUsers/static
+
+    # directory points to where wsgi.py is
+    <Directory /var/www/html/utenti/handleUsers/handleUsers>
+      Require all granted
+    </Directory>
+
+    # first param is the process name, it can be whatever you want, es "handleUsers"
+    # python-home points to /venv
+    # python-path point to where manage.py is
+    WSGIDaemonProcess handleUsers python-home=/var/www/html/utenti/venv python-path=/var/www/html/utenti/handleUsers
+    # processGroup just has to have the same name as the process above
+    WSGIProcessGroup handleUsers
+    # when apache sees root I want it to see the django app (points to wsgi.py)
+    WSGIScriptAlias / /var/www/html/utenti/handleUsers/handleUsers/wsgi.py
+  </VirtualHost>
+- apachectl configtest (check if syntax is ok, don't worry about eventual server name error)
+- service apache2 restart
+# correctly serve static files
+- create a STATIC_ROOT in settings.py with the absolute url from apache pointing to the static folder
+  STATIC_ROOT = '/var/www/html/handleUsers'
+- test the application
+# make sure the correct user is running the files
+- nano /etc/apache2/envars
+  look for APACHE_RUN_USER and APACHE_RUN_GROUP to know which user and group you need to abilitate as owners (probably www-data)
+- cd where the db is
+  cd /var/www/html/utenti/handleUsers
+- sudo chown www-data:www-data db.sqlite3
+- sudo chmod +rwx db.sqlite3
+- cd to the enclosing folder and change owner there too
+  cd ..
+  sudo chown www-data:www-data handleUsers
+  sudo chmod +rwx handleUsers
+- service apache2 restart
+### WARNING !
+### changing the owner to www-data gives an error when you try to move files with ftp that uses another user (es: nodeweaver)
+### upload everything, then change the owner, then use just the copy on the server and remember to use VScode on the server copy
+### ENJOY :)
+
+## ERROR attempt to write a readonly database (SQLITE)
+- permission might be setted wrong, check both the sqlite db and the folder enclosing it, they have to have all permissions with the right user
+- cd /var/www/html/utenti/handleUsers
+- chmod +rwx db.sqlite3
+
+
+https://www.google.com/search?client=firefox-b-d&q=django+on+apache+2#fpstate=ive&scso=_ZsHkY4mGJfCFxc8PsP-kSA_32:872&vld=cid:5cca81a2,vid:UY_UIH89elA,st:2232
+
+
+
+
+
+## install mod_wsgi (needed to deploy django in apache)
+- sudo apt-get install libapache2-mod-wsgi
+- sudo service apache2 restart
+- sudo nano /var/www/html/test-wsgi.py
+  create a test file to see if the module is working
+  
+  def application(environ,start_response):
+    status = '200 OK'
+    html = '<html>\n' \
+           '<body>\n' \
+           '<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">\n' \
+           'Welcome to Apache with mod_wsgi \n' \
+           '</div>\n' \
+           '</body>\n' \
+           '</html>\n'
+    response_header = [('Content-type','text/html')]
+    start_response(status,response_header)
+    return [html]
+
+- sudo nano /etc/apache2/conf-available/mod-wsgi.conf
+  add this content to check if the mod is working
+  WSGIScriptAlias /test-wsgi /var/www/html/test-wsgi.py
+- a2enconf mod-wsgi
+- sudo service apache2 restart
+- open browser and check  http://your-server-ip/test-wsgi
 
 ## set permissions
 - cd /var/www
